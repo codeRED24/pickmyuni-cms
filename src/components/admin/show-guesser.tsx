@@ -39,7 +39,8 @@ const ShowViewGuesser = (props: { enableLog?: boolean }) => {
 
   const { record } = useShowContext();
   const [child, setChild] = useState<ReactNode>(null);
-  const { enableLog = process.env.NODE_ENV === "development", ...rest } = props;
+  const { enableLog = import.meta.env.NODE_ENV === "development", ...rest } =
+    props;
 
   useEffect(() => {
     setChild(null);
@@ -51,7 +52,7 @@ const ShowViewGuesser = (props: { enableLog?: boolean }) => {
       const inferredChild = new InferredElement(
         showFieldTypes.show,
         null,
-        inferredElements,
+        inferredElements
       );
       setChild(inferredChild.getElement());
 
@@ -65,10 +66,10 @@ const ShowViewGuesser = (props: { enableLog?: boolean }) => {
               Array.from(representation.matchAll(/<([^/\s>]+)/g))
                 .map((match) => match[1])
                 .filter(
-                  (component) => component !== "span" && component !== "div",
-                ),
-            ),
-          ),
+                  (component) => component !== "span" && component !== "div"
+                )
+            )
+          )
         )
         .sort();
 
@@ -80,8 +81,8 @@ ${components
   .map(
     (component) =>
       `import { ${component} } from "@/components/admin/${kebabCase(
-        component,
-      )}";`,
+        component
+      )}";`
   )
   .join("\n")}
 
@@ -89,7 +90,7 @@ export const ${capitalize(singularize(resource))}Show = () => (
     <Show>
 ${inferredChild.getRepresentation()}
     </Show>
-);`,
+);`
       );
     }
   }, [record, child, resource, enableLog]);
@@ -104,7 +105,7 @@ const showFieldTypes: InferredTypeMap = {
     ),
     representation: (
       _props: any,
-      children: { getRepresentation: () => string }[],
+      children: { getRepresentation: () => string }[]
     ) => `        <div className="flex flex-col gap-4">
 ${children
   .map((child) => `            ${child.getRepresentation()}`)

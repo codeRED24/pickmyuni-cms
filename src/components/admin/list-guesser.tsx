@@ -20,7 +20,7 @@ import { SingleFieldList } from "@/components/admin/single-field-list";
 import { ReferenceArrayField } from "@/components/admin/reference-array-field";
 
 export const ListGuesser = <RecordType extends RaRecord = RaRecord>(
-  props: Omit<ListProps, "children"> & { enableLog?: boolean },
+  props: Omit<ListProps, "children"> & { enableLog?: boolean }
 ) => {
   const {
     debounce,
@@ -64,12 +64,13 @@ export const ListGuesser = <RecordType extends RaRecord = RaRecord>(
 };
 
 const ListViewGuesser = (
-  props: Omit<ListViewProps, "children"> & { enableLog?: boolean },
+  props: Omit<ListViewProps, "children"> & { enableLog?: boolean }
 ) => {
   const { data } = useListContext();
   const resource = useResourceContext();
   const [child, setChild] = useState<React.ReactElement | null>(null);
-  const { enableLog = process.env.NODE_ENV === "development", ...rest } = props;
+  const { enableLog = import.meta.env.NODE_ENV === "development", ...rest } =
+    props;
 
   useEffect(() => {
     setChild(null);
@@ -81,13 +82,13 @@ const ListViewGuesser = (
       const inferredChild = new InferredElement(
         listFieldTypes.table,
         null,
-        inferredElements,
+        inferredElements
       );
       const inferredChildElement = inferredChild.getElement();
       const representation = inferredChild.getRepresentation();
       if (!resource) {
         throw new Error(
-          "Cannot use <ListGuesser> outside of a ResourceContext",
+          "Cannot use <ListGuesser> outside of a ResourceContext"
         );
       }
       if (!inferredChildElement || !representation) {
@@ -102,9 +103,9 @@ const ListViewGuesser = (
             new Set(
               Array.from(representation.matchAll(/<([^/\s\\.>]+)/g))
                 .map((match) => match[1])
-                .filter((component) => component !== "span"),
-            ),
-          ),
+                .filter((component) => component !== "span")
+            )
+          )
         )
         .sort();
 
@@ -117,8 +118,8 @@ ${components
   .map(
     (component) =>
       `import { ${component} } from "@/components/admin/${kebabCase(
-        component,
-      )}";`,
+        component
+      )}";`
   )
   .join("\n")}
 
@@ -126,7 +127,7 @@ export const ${capitalize(singularize(resource))}List = () => (
     <List>
 ${inferredChild.getRepresentation()}
     </List>
-);`,
+);`
         );
       }
     }
@@ -142,7 +143,7 @@ const listFieldTypes = {
     },
     representation: (
       _props: any,
-      children: { getRepresentation: () => string }[],
+      children: { getRepresentation: () => string }[]
     ) =>
       `        <DataTable>
 ${children

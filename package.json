@@ -37,6 +37,7 @@
     "query-string": "^9.3.1",
     "ra-core": "^5.11.4",
     "ra-data-fakerest": "^5.11.4",
+    "ra-data-simple-rest": "^5.11.4",
     "ra-i18n-polyglot": "^5.11.4",
     "ra-language-english": "^5.11.4",
     "react": "^19.1.1",
@@ -52,7 +53,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "@types/node": "^24.5.2",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.6.2",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.3",

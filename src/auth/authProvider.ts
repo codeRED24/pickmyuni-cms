@@ -6,7 +6,7 @@ const refreshAccessToken = async (): Promise<boolean> => {
   try {
     const res = await fetch(`${BACKEND_URL}/api/v1/cms/validate/tokens`, {
       method: "PUT",
-      credentials: "include", // cookies sent automatically
+      credentials: "include",
     });
     return res.ok;
   } catch {
@@ -15,7 +15,6 @@ const refreshAccessToken = async (): Promise<boolean> => {
 };
 
 const authProvider: AuthProvider = {
-  // Login: credentials sent to backend, cookies set automatically
   login: async ({ email, password }) => {
     const res = await fetch(`${BACKEND_URL}/api/v1/cms/user/login`, {
       method: "POST",
@@ -33,9 +32,10 @@ const authProvider: AuthProvider = {
   // Logout: clear cookies on backend
   logout: async () => {
     await fetch(`${BACKEND_URL}/api/v1/cms/user/logout`, {
-      method: "POST",
+      method: "GET",
       credentials: "include",
     });
+    return "/login";
   },
 
   // Check authentication: called by ra-core before protected routes
@@ -55,18 +55,29 @@ const authProvider: AuthProvider = {
 
   // Get current user identity
   getIdentity: async () => {
-    return { id: 1 };
+    const res = await fetch(`${BACKEND_URL}/api/v1/cms/user/me`, {
+      credentials: "include",
+    });
+    if (!res.ok) throw new Error("Cannot fetch identity");
+    const data = await res.json();
+    return {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      role: data.role,
+    };
   },
 
   // Get current permissions
   getPermissions: async () => {
-    const res = await fetch(`${BACKEND_URL}/api/v1/cms/permissions`, {
-      method: "GET",
-      credentials: "include", // cookies sent automatically
-    });
-    if (!res.ok) throw new Error("Cannot fetch permissions");
-    const data = await res.json();
-    return data.permissions; // e.g., ['user.create', 'user.edit']
+    // const res = await fetch(`${BACKEND_URL}/api/v1/cms/user/permissions`, {
+    //   method: "GET",
+    //   credentials: "include",
+    // });
+    // if (!res.ok) throw new Error("Cannot fetch permissions");
+    // const data = await res.json();
+    // return data.permissions;
+    return;
   },
 };
 
