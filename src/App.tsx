@@ -1,4 +1,4 @@
-import { Admin, EditGuesser } from "@/components/admin";
+import { Admin, EditGuesser, ListGuesser } from "@/components/admin";
 import authProvider from "./auth/authProvider";
 import { fetchUtils, Resource } from "ra-core";
 import { Card, CardContent } from "./components/ui/card";
@@ -49,6 +49,11 @@ export default function App() {
         name="colleges-courses"
         list={CollegesCourseList}
         edit={EditGuesser}
+      />
+      <Resource
+        name="collegeswise-content"
+        list={ListGuesser}
+        // edit={EditGuesser}
       />
     </Admin>
   );

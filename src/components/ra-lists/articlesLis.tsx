@@ -7,7 +7,7 @@ export const ArticleList = () => (
     <DataTable>
       <DataTable.Col source="id" />
       <DataTable.Col source="title" />
-      <DataTable.Col source="content" />
+      {/* <DataTable.Col source="content" /> */}
       <DataTable.Col source="silos" />
       {/* <DataTable.Col source="meta_desc" /> */}
       {/* <DataTable.Col source="og_img" /> */}
@@ -18,7 +18,12 @@ export const ArticleList = () => (
       <DataTable.Col source="img1" />
       <DataTable.Col source="img2" /> */}
       <DataTable.Col source="slug" />
-      <DataTable.Col source="is_active" />
+      <DataTable.Col
+        source="is_active"
+        render={(r) => {
+          return String(r.is_active);
+        }}
+      />
       {/* <DataTable.Col source="keywords" />
       <DataTable.Col source="metatitle" /> */}
       <DataTable.Col source="author_id">
