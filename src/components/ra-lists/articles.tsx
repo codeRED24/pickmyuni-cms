@@ -20,54 +20,27 @@ import { Create, SelectInput } from "../admin";
 import ArticleContent from "../shared/ArticleContent";
 import dayjs from "dayjs";
 import JoditInput from "../admin/JoditInput";
+import { PreviewButton } from "../shared/PreviewButton";
 
 export const ArticleList = () => (
   <List>
     <DataTable>
       <DataTable.Col source="id" />
       <DataTable.Col source="title" />
-      {/* <DataTable.Col source="content" /> */}
       <DataTable.Col source="silos" />
-      {/* <DataTable.Col source="meta_desc" /> */}
-      {/* <DataTable.Col source="og_img" /> */}
-      {/* <DataTable.Col source="createdAt" />
-      <DataTable.Col source="updatedAt" /> */}
       <DataTable.Col source="score" />
-      {/* <DataTable.Col source="banner_img" />
-      <DataTable.Col source="img1" />
-      <DataTable.Col source="img2" /> */}
-      {/* <DataTable.Col source="slug" /> */}
       <DataTable.Col
         source="is_active"
         render={(r) => {
           return String(r.is_active);
         }}
       />
-      {/* <DataTable.Col source="keywords" />
-      <DataTable.Col source="metatitle" /> */}
       <DataTable.Col source="author_id">
         <ReferenceField source="author_id" reference="authors" />
       </DataTable.Col>
-      {/* <DataTable.Col source="author.name" /> */}
     </DataTable>
   </List>
 );
-
-const PreviewButton = () => {
-  const record = useRecordContext();
-  if (!record) return null;
-
-  return (
-    <a
-      href={`#/articles/${record.id}/preview`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-blue-600 underline mb-4 block"
-    >
-      Open Preview in new tab
-    </a>
-  );
-};
 
 export const ArticleShow = () => (
   <Show>
@@ -106,13 +79,15 @@ export const ArticleShow = () => (
           </RecordField>
         </div>
       </div>
-      <div className="w-2/3">
-        <div className="flex justify-between">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
+      <div className="w-2/3 flex flex-col">
+        <div className="flex items-center justify-between mb-4 flex-shrink-0">
+          <h2 className="text-xl font-bold">Preview</h2>
           <PreviewButton />
         </div>
-        <div className="border rounded-lg p-4 bg-white">
-          <ArticlePreview />
+        <div className="sticky top-24 self-start">
+          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
+            <ArticlePreview />
+          </div>
         </div>
       </div>
     </div>
@@ -226,9 +201,11 @@ export const ArticleEdit = () => (
             <AutocompleteInput />
           </ReferenceInput>
         </div>
-        <div className="w-1/2">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 bg-white">
+        <div className="w-1/2 flex flex-col sticky top-24 self-start">
+          <div className="flex items-center justify-between mb-4 flex-shrink-0">
+            <h2 className="text-xl font-bold">Preview</h2>
+          </div>
+          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
             <LiveArticlePreview />
           </div>
         </div>
