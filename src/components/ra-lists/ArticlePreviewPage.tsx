@@ -1,7 +1,7 @@
 import { RecordContextProvider, useGetOne } from "ra-core";
 import { Link, useParams } from "react-router-dom";
-import { ArticlePreview } from "./articles";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbPage } from "../admin";
+import { ArticlePreview } from "../articles/Articles";
 
 const ArticlePreviewPage = () => {
   const { id } = useParams();
