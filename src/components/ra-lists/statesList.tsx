@@ -12,7 +12,7 @@ export const StateList = () => (
       <DataTable.Col source="updatedAt" />
       <DataTable.Col source="score" />
       <DataTable.Col source="is_active" />
-      <DataTable.Col source="content" />
+      {/* <DataTable.Col source="content" /> */}
       <DataTable.Col source="author_id">
         <ReferenceField source="author_id" reference="authors" />
       </DataTable.Col>

@@ -11,7 +11,7 @@ export const CityList = () => (
       <DataTable.Col source="createdAt" />
       <DataTable.Col source="updatedAt" />
       <DataTable.Col source="score" />
-      <DataTable.Col source="content" />
+      {/* <DataTable.Col source="content" /> */}
       <DataTable.Col source="state_id">
         <ReferenceField source="state_id" reference="states" />
       </DataTable.Col>

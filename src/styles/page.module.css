@@ -1,0 +1,146 @@
+.styledContent h1,
+.styledContent h2,
+.styledContent h3,
+.styledContent h4,
+.styledContent h5,
+.styledContent h6 {
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  color: #2c5680;
+  font-size: 36px;
+}
+
+.styledContent h2 {
+  font-size: 32px;
+  color: #2c5680;
+}
+
+.styledContent h3 {
+  font-size: 26px;
+}
+
+.styledContent h4 {
+  font-size: 20px;
+}
+
+.styledContent h5 {
+  font-size: 18px;
+}
+
+.styledContent h6 {
+  font-size: 16px;
+}
+
+/* .styledContent span {
+  color: #ff882e;
+} */
+
+.styledContent p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.styledContent ul,
+.styledContent ol {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.styledContent li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.styledContent a {
+  color: #ff882e;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.styledContent a:hover {
+  color: #1e40af;
+}
+
+.styledContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.styledContent th {
+  background: #eaf0f5;
+  color: #2c5680;
+  padding: 15px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.styledContent td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.styledContent tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.styledContent tr:hover {
+  background: #e8f4fc;
+}
+
+.styledContent img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.styledContent .italic {
+  font-style: italic;
+}
+
+.styledContent strong {
+  font-weight: 700;
+}
+
+.styledContent em {
+  color: #f59e0b;
+  font-style: italic;
+}
+
+.styledContent hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 30px 0;
+}
+
+.styledContent section {
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* background: #f8fafc;
+  border-radius: 10px; */
+}
+
+.styledContent .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.styledContent .unordered-list {
+  list-style: none;
+}
+
+.styledContent .unordered-list li {
+  background: white;
+  margin-bottom: 10px;
+}

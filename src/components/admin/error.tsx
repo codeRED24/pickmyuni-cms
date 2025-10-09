@@ -26,7 +26,7 @@ export const Error = (props: InternalErrorProps & {}) => {
       <div>
         <Translate i18nKey="ra.message.error" />
       </div>
-      {import.meta.env.NODE_ENV !== "production" && (
+      {import.meta.env.VITE_NODE_ENV !== "production" && (
         <>
           <Accordion
             type="multiple"
