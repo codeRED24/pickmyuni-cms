@@ -5,7 +5,7 @@ import {
   // ShowGuesser,
 } from "@/components/admin";
 import authProvider from "./auth/authProvider";
-import { fetchUtils, Resource } from "ra-core";
+import { fetchUtils, Resource, CustomRoutes } from "ra-core";
 import { Card, CardContent } from "./components/ui/card";
 import simpleRestProvider from "ra-data-simple-rest";
 import { StreamList } from "./components/ra-lists/stream";
@@ -23,6 +23,8 @@ import { CourseList } from "./components/ra-lists/coursesList";
 import { CollegesCourseList } from "./components/ra-lists/collegesCoursesList";
 import { TaskCreate, TaskEdit, TaskList } from "./components/ra-lists/tasks";
 import { MediaLibraryList } from "./components/ra-lists/media";
+import { Route } from "react-router-dom";
+import ArticlePreviewPage from "./components/ra-lists/ArticlePreviewPage";
 
 const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
 
@@ -54,6 +56,9 @@ export default function App() {
       authProvider={authProvider}
       dataProvider={dataProvider}
     >
+      <CustomRoutes>
+        <Route path="/articles/:id/preview" element={<ArticlePreviewPage />} />
+      </CustomRoutes>
       <Resource
         name="articles"
         list={ArticleList}

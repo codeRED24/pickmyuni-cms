@@ -41,9 +41,9 @@ export default function ArticleContent({
   };
 
   return (
-    <div className={cn("", className)}>
+    <div className={cn(styles.fontRoboto, className)}>
       <div
-        className={`styledContent ${styles.styledContent} prose prose-lg max-w-none`}
+        className={styles.styledContent}
       >
         {faqs && faqs.length > 0 && generateFAQSchema(faqs)}
         {cleanedHTML && (

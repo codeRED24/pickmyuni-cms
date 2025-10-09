@@ -8,7 +8,8 @@ import {
   ReferenceField,
   RecordField,
 } from "@/components/admin";
-import { useRecordContext, required } from "ra-core";
+import { useRecordContext, required, RecordContextProvider } from "ra-core";
+import { useWatch } from "react-hook-form";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";
 import { BooleanInput } from "@/components/admin/boolean-input";
 import { Edit } from "@/components/admin/edit";
@@ -18,6 +19,7 @@ import { TextInput } from "@/components/admin/text-input";
 import { Create, SelectInput } from "../admin";
 import ArticleContent from "../shared/ArticleContent";
 import dayjs from "dayjs";
+import JoditInput from "../admin/JoditInput";
 
 export const ArticleList = () => (
   <List>
@@ -51,10 +53,26 @@ export const ArticleList = () => (
   </List>
 );
 
+const PreviewButton = () => {
+  const record = useRecordContext();
+  if (!record) return null;
+
+  return (
+    <a
+      href={`#/articles/${record.id}/preview`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-blue-600 underline mb-4 block"
+    >
+      Open Preview in new tab
+    </a>
+  );
+};
+
 export const ArticleShow = () => (
   <Show>
     <div className="flex gap-4">
-      <div className="flex-1">
+      <div className="w-1/3">
         <div className="flex flex-col gap-4">
           <RecordField source="id" />
           <RecordField source="title" />
@@ -89,7 +107,10 @@ export const ArticleShow = () => (
         </div>
       </div>
       <div className="w-2/3">
-        <h2 className="text-xl font-bold mb-4">Preview</h2>
+        <div className="flex justify-between">
+          <h2 className="text-xl font-bold mb-4">Preview</h2>
+          <PreviewButton />
+        </div>
         <div className="border rounded-lg p-4 bg-white">
           <ArticlePreview />
         </div>
@@ -98,19 +119,18 @@ export const ArticleShow = () => (
   </Show>
 );
 
-const ArticlePreview = () => {
+export const ArticlePreview = () => {
   const record = useRecordContext();
   if (!record) return null;
 
   return (
-    <div className="bg-white font-sans">
+    <div className="bg-white font-sans text-black">
       {/* Hero Section */}
       <section className="relative h-[336px] w-full text-white">
         <img
           src={record.img1}
           alt="University campus background"
-          className="object-cover"
-          sizes="100vw"
+          className="object-cover w-full h-full"
         />
         <div className="absolute inset-0 bg-black/70" />
         <div className="absolute inset-0 flex items-center justify-center">
@@ -169,32 +189,51 @@ const ArticlePreview = () => {
   );
 };
 
+const LiveArticlePreview = () => {
+  const record = useRecordContext();
+  const data = useWatch();
+  const liveRecord = { ...record, ...data };
+
+  return (
+    <RecordContextProvider value={liveRecord}>
+      <ArticlePreview />
+    </RecordContextProvider>
+  );
+};
+
 export const ArticleEdit = () => (
-  <Edit className="flex gap-4">
-    <div className="flex-1">
-      <SimpleForm>
-        <TextInput disabled source="id" />
-        <TextInput multiline source="title" />
-        <TextInput source="content" />
-        <TextInput source="silos" />
-        <TextInput multiline source="meta_desc" />
-        <TextInput multiline source="og_img" />
-        <TextInput disabled source="createdAt" />
-        <TextInput disabled source="updatedAt" />
-        <TextInput source="score" />
-        <TextInput multiline source="banner_img" />
-        <TextInput multiline source="img1" />
-        <TextInput multiline source="img2" />
-        <TextInput multiline source="slug" />
-        <BooleanInput source="is_active" />
-        <TextInput multiline source="keywords" />
-        <TextInput multiline source="metatitle" />
-        <ReferenceInput source="author_id" reference="authors">
-          <AutocompleteInput />
-        </ReferenceInput>
-      </SimpleForm>
-    </div>
-    <div className=""></div>
+  <Edit>
+    <SimpleForm className="max-w-full">
+      <div className="flex gap-4">
+        <div className="w-1/2 space-y-4">
+          <TextInput disabled source="id" />
+          <TextInput multiline source="title" />
+          <JoditInput source="content" />
+          <TextInput source="silos" />
+          <TextInput multiline source="meta_desc" />
+          <TextInput multiline source="og_img" />
+          <TextInput disabled source="createdAt" />
+          <TextInput disabled source="updatedAt" />
+          <TextInput source="score" />
+          <TextInput multiline source="banner_img" />
+          <TextInput multiline source="img1" />
+          <TextInput multiline source="img2" />
+          <TextInput multiline source="slug" />
+          <BooleanInput source="is_active" />
+          <TextInput multiline source="keywords" />
+          <TextInput multiline source="metatitle" />
+          <ReferenceInput source="author_id" reference="authors">
+            <AutocompleteInput />
+          </ReferenceInput>
+        </div>
+        <div className="w-1/2">
+          <h2 className="text-xl font-bold mb-4">Preview</h2>
+          <div className="border rounded-lg p-4 bg-white">
+            <LiveArticlePreview />
+          </div>
+        </div>
+      </div>
+    </SimpleForm>
   </Edit>
 );
 
