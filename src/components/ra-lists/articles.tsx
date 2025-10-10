@@ -7,6 +7,7 @@ import {
   NumberField,
   ReferenceField,
   RecordField,
+  CreateButton,
 } from "@/components/admin";
 import { required } from "ra-core";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";
@@ -45,6 +46,7 @@ const ArticleListActions = () => (
   <div className="flex items-center gap-2">
     {/* <ColumnsButton /> */}
     <FilterButton disableSaveQuery />
+    <CreateButton />
   </div>
 );
 
