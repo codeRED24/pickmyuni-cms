@@ -29,6 +29,19 @@ import { TaskCreate, TaskEdit, TaskList } from "./components/ra-lists/tasks";
 import { Route } from "react-router-dom";
 import ArticlePreviewPage from "./components/articles/ArticlePreviewPage";
 import { MediaLibraryList } from "./components/media";
+import {
+  University,
+  Newspaper,
+  Users,
+  Building2,
+  Map,
+  GraduationCap,
+  BookMarked,
+  FileStack,
+  Workflow,
+  ListTodo,
+  Image,
+} from "lucide-react";
 
 const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
 
@@ -69,32 +82,47 @@ export default function App() {
         edit={ArticleEdit}
         show={ArticleShow}
         create={ArticleCreate}
+        icon={Newspaper}
       />
-      <Resource name="authors" list={AuthorList} edit={AuthorEdit} />
+      <Resource name="authors" list={AuthorList} edit={AuthorEdit} icon={Users} />
       <Resource
         name="colleges"
         list={CollegeList}
         edit={CollegeEdit}
         create={CollegeCreate}
         show={ShowGuesser}
+        icon={University}
       />
-      <Resource name="cities" list={CityList} edit={EditGuesser} />
-      <Resource name="states" list={StateList} edit={EditGuesser} />
-      <Resource name="courses" list={CourseList} edit={EditGuesser} />
+      <Resource
+        name="cities"
+        list={CityList}
+        edit={EditGuesser}
+        icon={Building2}
+      />
+      <Resource name="states" list={StateList} edit={EditGuesser} icon={Map} />
+      <Resource
+        name="courses"
+        list={CourseList}
+        edit={EditGuesser}
+        icon={GraduationCap}
+      />
       <Resource
         name="colleges-courses"
         list={CollegesCourseList}
         edit={EditGuesser}
+        icon={BookMarked}
       />
       <Resource
         name="collegeswise-content"
         list={ListGuesser}
+        icon={FileStack}
         // edit={EditGuesser}
       />
 
       <Resource
         name="streams"
         list={StreamList}
+        icon={Workflow}
         // edit={EditGuesser}
       />
       <Resource
@@ -102,8 +130,9 @@ export default function App() {
         list={TaskList}
         edit={TaskEdit}
         create={TaskCreate}
+        icon={ListTodo}
       />
-      <Resource name="media" list={MediaLibraryList} />
+      <Resource name="media" list={MediaLibraryList} icon={Image} />
     </Admin>
   );
 }

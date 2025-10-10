@@ -9,6 +9,7 @@ import {
   RecordField,
   CreateButton,
   ExportButton,
+  SearchInput,
 } from "@/components/admin";
 import { required } from "ra-core";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";
@@ -25,6 +26,7 @@ import { ArticlePreview, LiveArticlePreview } from "../articles/Articles";
 import { FilterButton } from "@/components/admin/filter-form";
 
 const articleFilters = [
+  <SearchInput source="q" alwaysOn />,
   <BooleanInput source="is_active" />,
   <SelectInput
     source="silos"
@@ -50,8 +52,8 @@ const ArticleListActions = () => (
   <div className="flex items-center gap-2">
     {/* <ColumnsButton /> */}
     <FilterButton />
-    <CreateButton />
     <ExportButton />
+    <CreateButton />
   </div>
 );
 

@@ -15,11 +15,13 @@ import {
   CreateButton,
   NumberInput,
   ExportButton,
+  SearchInput,
 } from "../admin";
 import { required } from "ra-core";
 import dayjs from "dayjs";
 
 const collegeFilters = [
+  <SearchInput source="q" alwaysOn />,
   <BooleanInput source="is_active" />,
   <BooleanInput source="is_parent" />,
   <BooleanInput source="pr_pathway" />,
@@ -61,8 +63,8 @@ const CollegeListActions = () => (
   <div className="flex items-center gap-2">
     {/* <ColumnsButton /> */}
     <FilterButton />
-    <CreateButton />
     <ExportButton />
+    <CreateButton />
   </div>
 );
 
