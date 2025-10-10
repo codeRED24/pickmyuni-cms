@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Card, CardContent, CardTitle } from "../../../components/ui/card";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
+
 import { Folder, File, Upload, Copy, X, Trash } from "lucide-react";
+import { Button } from "../ui/button";
+import { Card, CardContent, CardTitle } from "../ui/card";
+import { Input } from "../ui/input";
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
 

@@ -26,9 +26,9 @@ import { StateList } from "./components/ra-lists/statesList";
 import { CourseList } from "./components/ra-lists/coursesList";
 import { CollegesCourseList } from "./components/ra-lists/collegesCoursesList";
 import { TaskCreate, TaskEdit, TaskList } from "./components/ra-lists/tasks";
-import { MediaLibraryList } from "./components/ra-lists/media";
 import { Route } from "react-router-dom";
-import ArticlePreviewPage from "./components/ra-lists/ArticlePreviewPage";
+import ArticlePreviewPage from "./components/articles/ArticlePreviewPage";
+import { MediaLibraryList } from "./components/media";
 
 const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
 
