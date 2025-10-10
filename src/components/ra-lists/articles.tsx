@@ -8,6 +8,7 @@ import {
   ReferenceField,
   RecordField,
   CreateButton,
+  ExportButton,
 } from "@/components/admin";
 import { required } from "ra-core";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";
@@ -40,13 +41,17 @@ const articleFilters = [
       "application_admissions_and_compliance",
     ]}
   />,
+  <ReferenceInput source="author_id" reference="authors">
+    <AutocompleteInput />
+  </ReferenceInput>,
 ];
 
 const ArticleListActions = () => (
   <div className="flex items-center gap-2">
     {/* <ColumnsButton /> */}
-    <FilterButton disableSaveQuery />
+    <FilterButton />
     <CreateButton />
+    <ExportButton />
   </div>
 );
 

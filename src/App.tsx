@@ -2,7 +2,7 @@ import {
   Admin,
   EditGuesser,
   ListGuesser,
-  // ShowGuesser,
+  ShowGuesser,
 } from "@/components/admin";
 import authProvider from "./auth/authProvider";
 import { fetchUtils, Resource, CustomRoutes } from "ra-core";
@@ -16,7 +16,11 @@ import {
   ArticleShow,
 } from "./components/ra-lists/articles";
 import { AuthorEdit, AuthorList } from "./components/ra-lists/author";
-import { CollegeList } from "./components/ra-lists/collegesList";
+import {
+  CollegeCreate,
+  CollegeEdit,
+  CollegeList,
+} from "./components/ra-lists/colleges";
 import { CityList } from "./components/ra-lists/citiesList";
 import { StateList } from "./components/ra-lists/statesList";
 import { CourseList } from "./components/ra-lists/coursesList";
@@ -67,7 +71,13 @@ export default function App() {
         create={ArticleCreate}
       />
       <Resource name="authors" list={AuthorList} edit={AuthorEdit} />
-      <Resource name="colleges" list={CollegeList} edit={EditGuesser} />
+      <Resource
+        name="colleges"
+        list={CollegeList}
+        edit={CollegeEdit}
+        create={CollegeCreate}
+        show={ShowGuesser}
+      />
       <Resource name="cities" list={CityList} edit={EditGuesser} />
       <Resource name="states" list={StateList} edit={EditGuesser} />
       <Resource name="courses" list={CourseList} edit={EditGuesser} />
