@@ -13,39 +13,11 @@ export default function ArticleContent({
   content,
   className,
 }: ArticleContentProps) {
-  const { faqs, cleanedHTML } = processContent(content, false); // Enable FAQ processing
-
-  // Generate FAQ Schema for SEO
-  const generateFAQSchema = (faqs: any) => {
-    if (!faqs || faqs.length === 0) return null;
-
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faqs.map((faq: any) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-    };
-
-    return (
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-    );
-  };
+  const { faqs, cleanedHTML } = processContent(content, false);
 
   return (
     <div className={cn(styles.fontRoboto, className)}>
-      <div
-        className={styles.styledContent}
-      >
-        {faqs && faqs.length > 0 && generateFAQSchema(faqs)}
+      <div className={styles.styledContent}>
         {cleanedHTML && (
           <div dangerouslySetInnerHTML={{ __html: cleanedHTML }} />
         )}
