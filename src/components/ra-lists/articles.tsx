@@ -131,6 +131,8 @@ export const ArticleEdit = () => (
           <TextInput multiline source="title" />
           <JoditInput source="content" />
           <TextInput source="silos" />
+          <TextInput multiline source="slug" />
+          <TextInput source="canonical_url" />
           <TextInput multiline source="meta_desc" />
           <TextInput multiline source="og_img" />
           <TextInput disabled source="createdAt" />
@@ -139,7 +141,6 @@ export const ArticleEdit = () => (
           <TextInput multiline source="banner_img" />
           <TextInput multiline source="img1" />
           <TextInput multiline source="img2" />
-          <TextInput multiline source="slug" />
           <BooleanInput source="is_active" />
           <TextInput multiline source="keywords" />
           <TextInput multiline source="metatitle" />
@@ -164,7 +165,7 @@ export const ArticleCreate = () => (
   <Create>
     <SimpleForm>
       <TextInput source="title" validate={required()} multiline />
-      <TextInput source="content" validate={required()} multiline />
+      <JoditInput source="content" />
       <SelectInput
         source="silos"
         choices={[
@@ -182,6 +183,7 @@ export const ArticleCreate = () => (
         validate={required()}
       />
       <TextInput source="slug" validate={required()} multiline />
+      <TextInput source="canonical_url" />
       <TextInput source="meta_desc" multiline />
       <TextInput source="metatitle" multiline />
       <TextInput source="keywords" multiline />
