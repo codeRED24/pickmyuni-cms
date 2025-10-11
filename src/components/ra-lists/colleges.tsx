@@ -19,6 +19,10 @@ import {
 } from "../admin";
 import { required } from "ra-core";
 import dayjs from "dayjs";
+import { DateField } from "@/components/admin/date-field";
+import { NumberField } from "@/components/admin/number-field";
+import { RecordField } from "@/components/admin/record-field";
+import { Show } from "@/components/admin/show";
 
 const collegeFilters = [
   <SearchInput source="q" alwaysOn />,
@@ -256,11 +260,6 @@ export const CollegeCreate = () => (
     </SimpleForm>
   </Create>
 );
-
-import { DateField } from "@/components/admin/date-field";
-import { NumberField } from "@/components/admin/number-field";
-import { RecordField } from "@/components/admin/record-field";
-import { Show } from "@/components/admin/show";
 
 export const CollegeShow = () => (
   <Show>

@@ -1,9 +1,4 @@
-import {
-  Admin,
-  EditGuesser,
-  ListGuesser,
-  ShowGuesser,
-} from "@/components/admin";
+import { Admin, EditGuesser, ShowGuesser } from "@/components/admin";
 import authProvider from "./auth/authProvider";
 import { fetchUtils, Resource, CustomRoutes } from "ra-core";
 import { Card, CardContent } from "./components/ui/card";
@@ -48,6 +43,14 @@ import {
   ListTodo,
   Image,
 } from "lucide-react";
+import {
+  CollegeswiseContentCreate,
+  CollegeswiseContentEdit,
+  CollegeswiseContentList,
+  CollegeswiseContentShow,
+} from "./components/ra-lists/college-content";
+import { CollegeContentPreviewPage } from "./components/college-content/CollegeContentPreviewPage";
+import { QueryClient } from "@tanstack/react-query";
 
 const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
 
@@ -70,6 +73,8 @@ const httpClient = (url: string, options: RequestInit = {}) => {
 
 const dataProvider = simpleRestProvider(API_URL, httpClient);
 
+const queryClient = new QueryClient();
+
 export default function App() {
   return (
     <Admin
@@ -78,10 +83,15 @@ export default function App() {
       dashboard={Dashboard}
       authProvider={authProvider}
       dataProvider={dataProvider}
+      queryClient={queryClient}
     >
       <CustomRoutes>
         <Route path="/articles/:id/preview" element={<ArticlePreviewPage />} />
         <Route path="/cities/:id/preview" element={<CityPreviewPage />} />
+        <Route
+          path="/collegeswise-content/:id/preview"
+          element={<CollegeContentPreviewPage />}
+        />
       </CustomRoutes>
       <Resource
         name="articles"
@@ -128,7 +138,10 @@ export default function App() {
       />
       <Resource
         name="collegeswise-content"
-        list={ListGuesser}
+        list={CollegeswiseContentList}
+        edit={CollegeswiseContentEdit}
+        create={CollegeswiseContentCreate}
+        show={CollegeswiseContentShow}
         icon={FileStack}
         // edit={EditGuesser}
       />
