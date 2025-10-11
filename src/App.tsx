@@ -21,13 +21,19 @@ import {
   CollegeEdit,
   CollegeList,
 } from "./components/ra-lists/colleges";
-import { CityList } from "./components/ra-lists/citiesList";
+import {
+  CityCreate,
+  CityEdit,
+  CityList,
+  CityShow,
+} from "./components/ra-lists/cities";
 import { StateList } from "./components/ra-lists/statesList";
 import { CourseList } from "./components/ra-lists/coursesList";
 import { CollegesCourseList } from "./components/ra-lists/collegesCoursesList";
 import { TaskCreate, TaskEdit, TaskList } from "./components/ra-lists/tasks";
 import { Route } from "react-router-dom";
 import ArticlePreviewPage from "./components/articles/ArticlePreviewPage";
+import CityPreviewPage from "./components/cities/CityPreviewPage";
 import { MediaLibraryList } from "./components/media";
 import {
   University,
@@ -75,6 +81,7 @@ export default function App() {
     >
       <CustomRoutes>
         <Route path="/articles/:id/preview" element={<ArticlePreviewPage />} />
+        <Route path="/cities/:id/preview" element={<CityPreviewPage />} />
       </CustomRoutes>
       <Resource
         name="articles"
@@ -84,7 +91,12 @@ export default function App() {
         create={ArticleCreate}
         icon={Newspaper}
       />
-      <Resource name="authors" list={AuthorList} edit={AuthorEdit} icon={Users} />
+      <Resource
+        name="authors"
+        list={AuthorList}
+        edit={AuthorEdit}
+        icon={Users}
+      />
       <Resource
         name="colleges"
         list={CollegeList}
@@ -96,7 +108,9 @@ export default function App() {
       <Resource
         name="cities"
         list={CityList}
-        edit={EditGuesser}
+        edit={CityEdit}
+        create={CityCreate}
+        show={CityShow}
         icon={Building2}
       />
       <Resource name="states" list={StateList} edit={EditGuesser} icon={Map} />

@@ -117,7 +117,7 @@ export const ArticleShow = () => (
       <div className="w-2/3 flex flex-col">
         <div className="flex items-center justify-between mb-4 flex-shrink-0">
           <h2 className="text-xl font-bold">Preview</h2>
-          <PreviewButton />
+          <PreviewButton resource="articles" />
         </div>
         <div className="sticky top-24 self-start">
           <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
@@ -170,38 +170,48 @@ export const ArticleEdit = () => (
 
 export const ArticleCreate = () => (
   <Create>
-    <SimpleForm>
-      <TextInput source="title" validate={required()} multiline />
-      <JoditInput source="content" />
-      <SelectInput
-        source="silos"
-        choices={[
-          "news",
-          "exam",
-          "course",
-          "blog",
-          "other",
-          "universities",
-          "fees_scholarships_and_costs",
-          "international_student_essentials",
-          "transfers_and_migration_advice",
-          "application_admissions_and_compliance",
-        ]}
-        validate={required()}
-      />
-      <TextInput source="slug" validate={required()} multiline />
-      <TextInput source="canonical_url" />
-      <TextInput source="meta_desc" multiline />
-      <TextInput source="metatitle" multiline />
-      <TextInput source="keywords" multiline />
-      <ReferenceInput source="author_id" reference="authors">
-        <AutocompleteInput optionText="name" validate={required()} />
-      </ReferenceInput>
-      <TextInput source="score" />
-      <TextInput source="og_img" multiline />
-      <TextInput source="banner_img" multiline />
-      <TextInput source="img1" multiline />
-      <TextInput source="img2" multiline />
+    <SimpleForm className="max-w-full">
+      <div className="flex gap-4">
+        <div className="w-1/2 space-y-4">
+          <TextInput source="title" validate={required()} multiline />
+          <JoditInput source="content" />
+          <SelectInput
+            source="silos"
+            choices={[
+              "news",
+              "exam",
+              "course",
+              "blog",
+              "other",
+              "universities",
+              "fees_scholarships_and_costs",
+              "international_student_essentials",
+              "transfers_and_migration_advice",
+              "application_admissions_and_compliance",
+            ]}
+            validate={required()}
+          />
+          <TextInput source="slug" validate={required()} multiline />
+          <TextInput source="canonical_url" />
+          <TextInput source="meta_desc" multiline />
+          <TextInput source="metatitle" multiline />
+          <TextInput source="keywords" multiline />
+          <ReferenceInput source="author_id" reference="authors">
+            <AutocompleteInput optionText="name" validate={required()} />
+          </ReferenceInput>
+          <TextInput source="score" />
+          <TextInput source="og_img" multiline />
+          <TextInput source="banner_img" multiline />
+          <TextInput source="img1" multiline />
+          <TextInput source="img2" multiline />
+        </div>
+        <div className="w-1/2 flex flex-col sticky top-24 self-start">
+          <h2 className="text-xl font-bold mb-4">Preview</h2>
+          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
+            <LiveArticlePreview />
+          </div>
+        </div>
+      </div>
     </SimpleForm>
   </Create>
 );
