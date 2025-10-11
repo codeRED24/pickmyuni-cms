@@ -26,7 +26,7 @@ const CityPreview = ({ record }: { record: any }) => {
         </div>
       </div>
       <div className="container mx-auto my-10">
-        <ArticleContent content={record.content || ""} />
+        <ArticleContent className="text-black" content={record.content || ""} />
       </div>
     </div>
   );

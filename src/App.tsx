@@ -3,7 +3,12 @@ import authProvider from "./auth/authProvider";
 import { fetchUtils, Resource, CustomRoutes } from "ra-core";
 import { Card, CardContent } from "./components/ui/card";
 import simpleRestProvider from "ra-data-simple-rest";
-import { StreamList } from "./components/ra-lists/stream";
+import {
+  StreamCreate,
+  StreamEdit,
+  StreamList,
+  StreamShow,
+} from "./components/ra-lists/stream";
 import {
   ArticleCreate,
   ArticleEdit,
@@ -51,6 +56,7 @@ import {
 } from "./components/ra-lists/college-content";
 import { CollegeContentPreviewPage } from "./components/college-content/CollegeContentPreviewPage";
 import { QueryClient } from "@tanstack/react-query";
+import { StreamPreviewPage } from "./components/streams/StreamPreviewPage";
 
 const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
 
@@ -92,6 +98,7 @@ export default function App() {
           path="/collegeswise-content/:id/preview"
           element={<CollegeContentPreviewPage />}
         />
+        <Route path="/streams/:id/preview" element={<StreamPreviewPage />} />
       </CustomRoutes>
       <Resource
         name="articles"
@@ -143,14 +150,14 @@ export default function App() {
         create={CollegeswiseContentCreate}
         show={CollegeswiseContentShow}
         icon={FileStack}
-        // edit={EditGuesser}
       />
-
       <Resource
         name="streams"
         list={StreamList}
+        edit={StreamEdit}
+        show={StreamShow}
+        create={StreamCreate}
         icon={Workflow}
-        // edit={EditGuesser}
       />
       <Resource
         name="tasks"
