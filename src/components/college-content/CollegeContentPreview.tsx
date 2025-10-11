@@ -2,7 +2,7 @@ import { RecordContextProvider, useRecordContext } from "ra-core";
 import { useWatch } from "react-hook-form";
 import ArticleContent from "../shared/ArticleContent";
 import { useQuery } from "@tanstack/react-query";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "../admin/spinner";
 import { UniLayout } from "./UniLayout";
 
 export const CollegeContentPreview = () => {
@@ -13,9 +13,10 @@ export const CollegeContentPreview = () => {
     data: collegeData,
     isLoading,
     error,
-  } = useQuery({
+  } = useQuery<{ data: any }>({
     queryKey: ["college-content-data", record.college_id],
     queryFn: async () => {
+      if (!record.college_id) return undefined;
       const res = await fetch(
         `${import.meta.env.VITE_APP_API_URL}/api/v1/college/${
           record.college_id
@@ -27,17 +28,17 @@ export const CollegeContentPreview = () => {
     enabled: !!record.college_id,
   });
 
-  if (isLoading) return <Spinner />;
-  if (error) return <div>Error loading college details</div>;
-
-  console.log({ collegeData });
+  if (record?.college_id && isLoading) return <Spinner />;
+  if (record?.college_id && error)
+    return <div>Error loading college details</div>;
 
   const content = record.content;
 
   return (
     <div className="bg-white font-sans text-black">
-      <UniLayout college={collegeData.data} />
-      <ArticleContent content={content} />
+      {record?.college_id && <UniLayout college={collegeData?.data} />}
+      <br />
+      <ArticleContent className="container mx-auto" content={content} />
     </div>
   );
 };

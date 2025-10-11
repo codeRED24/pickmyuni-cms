@@ -48,7 +48,7 @@ export const UniLayout = ({ college }: any) => {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
           {/* University Info */}
           <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-brand-primary text-xl font-bold leading-tight sm:text-2xl md:text-3xl lg:text-4xl">
+            <h1 className="bg-brand-primary text-xl font-bold leading-tight sm:text-2xl md:text-3xl lg:text-4xl">
               {college?.college_name}
             </h1>
             <p className="mt-2 text-sm text-gray-600 sm:text-base md:text-lg">
@@ -58,7 +58,7 @@ export const UniLayout = ({ college }: any) => {
 
           {/* Enquire Button */}
           <div className="flex justify-center sm:justify-end">
-            <Button variant={"secondary"} className="flex items-center">
+            <Button className="flex items-center bg-orange-400 hover:bg-orange-500 text-white">
               <span>Enquire Now</span>
               <img
                 src="/logo-button.svg"

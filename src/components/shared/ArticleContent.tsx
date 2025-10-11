@@ -17,7 +17,9 @@ export default function ArticleContent({
 
   return (
     <div className={cn(styles.fontRoboto, className)}>
-      <div className={styles.styledContent}>
+      <div
+        className={`styledContent ${styles.styledContent} prose prose-lg max-w-none`}
+      >
         {cleanedHTML && (
           <div dangerouslySetInnerHTML={{ __html: cleanedHTML }} />
         )}

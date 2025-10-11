@@ -102,9 +102,9 @@ export const CollegeswiseContentEdit = () => (
             <AutocompleteInput />
           </ReferenceInput>
           <NumberInput source="score" />
-          <TextInput source="banner_img" />
+          {/* <TextInput source="banner_img" />
           <TextInput source="img1" />
-          <TextInput source="img2" />
+          <TextInput source="img2" /> */}
           <BooleanInput source="is_active" />
           <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
@@ -137,9 +137,9 @@ export const CollegeswiseContentCreate = () => (
             <AutocompleteInput optionText={"college_name"} />
           </ReferenceInput>
           <NumberInput source="score" />
-          <TextInput source="banner_img" />
+          {/* <TextInput source="banner_img" />
           <TextInput source="img1" />
-          <TextInput source="img2" />
+          <TextInput source="img2" /> */}
           <BooleanInput source="is_active" />
           <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
