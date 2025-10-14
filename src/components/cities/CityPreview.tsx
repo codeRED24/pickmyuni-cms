@@ -20,7 +20,8 @@ const CityPreview = ({ record }: { record: any }) => {
         <div className="absolute inset-0 flex items-end">
           <div className="container mx-auto pb-8">
             <h1 className="max-w-[850px] text-3xl font-bold text-white md:text-4xl mx-4">
-              Get Enrolled in the Best Universities in {record.name}
+              Get Enrolled in the Best Universities in{" "}
+              {record.name || record.course_name}
             </h1>
           </div>
         </div>

@@ -16,7 +16,7 @@ const refreshAccessToken = async (): Promise<boolean> => {
 
 const authProvider: AuthProvider = {
   login: async ({ email, password }) => {
-    const res = await fetch(`${BACKEND_URL}/api/v1/cms/user/login`, {
+    const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -31,7 +31,7 @@ const authProvider: AuthProvider = {
 
   // Logout: clear cookies on backend
   logout: async () => {
-    await fetch(`${BACKEND_URL}/api/v1/cms/user/logout`, {
+    await fetch(`${BACKEND_URL}/api/v1/cms/authors/logout`, {
       method: "GET",
       credentials: "include",
     });
@@ -55,7 +55,7 @@ const authProvider: AuthProvider = {
 
   // Get current user identity
   getIdentity: async () => {
-    const res = await fetch(`${BACKEND_URL}/api/v1/cms/user/me`, {
+    const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/me`, {
       credentials: "include",
     });
     if (!res.ok) throw new Error("Cannot fetch identity");
@@ -70,7 +70,7 @@ const authProvider: AuthProvider = {
 
   // Get current permissions
   getPermissions: async () => {
-    // const res = await fetch(`${BACKEND_URL}/api/v1/cms/user/permissions`, {
+    // const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/permissions`, {
     //   method: "GET",
     //   credentials: "include",
     // });

@@ -1,4 +1,4 @@
-import { Admin, EditGuesser, ShowGuesser } from "@/components/admin";
+import { Admin, ShowGuesser } from "@/components/admin";
 import authProvider from "./auth/authProvider";
 import { fetchUtils, Resource, CustomRoutes } from "ra-core";
 import { Card, CardContent } from "./components/ui/card";
@@ -15,7 +15,12 @@ import {
   ArticleList,
   ArticleShow,
 } from "./components/ra-lists/articles";
-import { AuthorEdit, AuthorList } from "./components/ra-lists/author";
+import {
+  AuthorCreate,
+  AuthorEdit,
+  AuthorList,
+  AuthorShow,
+} from "./components/ra-lists/author";
 import {
   CollegeCreate,
   CollegeEdit,
@@ -27,9 +32,24 @@ import {
   CityList,
   CityShow,
 } from "./components/ra-lists/cities";
-import { StateList } from "./components/ra-lists/statesList";
-import { CourseList } from "./components/ra-lists/coursesList";
-import { CollegesCourseList } from "./components/ra-lists/collegesCoursesList";
+import {
+  StateCreate,
+  StateEdit,
+  StateList,
+  StateShow,
+} from "./components/ra-lists/states";
+import {
+  CourseCreate,
+  CourseEdit,
+  CourseList,
+  CourseShow,
+} from "./components/ra-lists/courses";
+import {
+  CollegesCourseCreate,
+  CollegesCourseEdit,
+  CollegesCourseList,
+  CollegesCourseShow,
+} from "./components/ra-lists/collegesCourses";
 import { TaskCreate, TaskEdit, TaskList } from "./components/ra-lists/tasks";
 import { Route } from "react-router-dom";
 import ArticlePreviewPage from "./components/articles/ArticlePreviewPage";
@@ -57,6 +77,8 @@ import {
 import { CollegeContentPreviewPage } from "./components/college-content/CollegeContentPreviewPage";
 import { QueryClient } from "@tanstack/react-query";
 import { StreamPreviewPage } from "./components/streams/StreamPreviewPage";
+import { CollegeCoursePreviewPage } from "./components/collegeCourse/CollegeCoursePreviewPage";
+import { CoursePreviewPage } from "./components/course/CoursePreviewPage";
 
 const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
 
@@ -98,7 +120,15 @@ export default function App() {
           path="/collegeswise-content/:id/preview"
           element={<CollegeContentPreviewPage />}
         />
-        <Route path="/streams/:id/preview" element={<StreamPreviewPage />} />
+        <Route path="/courses/:id/preview" element={<StreamPreviewPage />} />
+        <Route
+          path="/courses/:id/preview"
+          element={<CoursePreviewPage />}
+        />{" "}
+        <Route
+          path="/colleges-courses/:id/preview"
+          element={<CollegeCoursePreviewPage />}
+        />
       </CustomRoutes>
       <Resource
         name="articles"
@@ -112,6 +142,8 @@ export default function App() {
         name="authors"
         list={AuthorList}
         edit={AuthorEdit}
+        show={AuthorShow}
+        create={AuthorCreate}
         icon={Users}
       />
       <Resource
@@ -130,17 +162,28 @@ export default function App() {
         show={CityShow}
         icon={Building2}
       />
-      <Resource name="states" list={StateList} edit={EditGuesser} icon={Map} />
+      <Resource
+        name="states"
+        list={StateList}
+        edit={StateEdit}
+        show={StateShow}
+        create={StateCreate}
+        icon={Map}
+      />
       <Resource
         name="courses"
         list={CourseList}
-        edit={EditGuesser}
+        edit={CourseEdit}
+        show={CourseShow}
+        create={CourseCreate}
         icon={GraduationCap}
       />
       <Resource
         name="colleges-courses"
         list={CollegesCourseList}
-        edit={EditGuesser}
+        edit={CollegesCourseEdit}
+        create={CollegesCourseCreate}
+        show={CollegesCourseShow}
         icon={BookMarked}
       />
       <Resource
