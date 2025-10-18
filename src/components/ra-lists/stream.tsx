@@ -21,6 +21,7 @@ import { ReferenceInput } from "@/components/admin/reference-input";
 import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
 import JoditInput from "../admin/JoditInput";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
 import { PreviewButton } from "../shared/PreviewButton";
 
@@ -125,13 +126,10 @@ export const StreamEdit = () => (
           <TextInput source="createdAt" disabled />
           <TextInput source="updatedAt" disabled />
           <NumberInput source="score" />
-          <TextInput source="banner_img" />
-          <TextInput source="img1" />
-          <TextInput source="img2" />
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <BooleanInput source="is_active" />
-          <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput>
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
         </div>
@@ -159,9 +157,6 @@ export const StreamCreate = () => (
           <TextInput source="img1" />
           <TextInput source="img2" /> */}
           <BooleanInput source="is_active" />
-          <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput>
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
         </div>

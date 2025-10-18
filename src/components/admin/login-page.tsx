@@ -8,6 +8,7 @@ import { Notification } from "@/components/admin/notification";
 export const LoginPage = (props: { redirectTo?: string }) => {
   const { redirectTo } = props;
   const [loading, setLoading] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const login = useLogin();
   const notify = useNotify();
 
@@ -44,7 +45,30 @@ export const LoginPage = (props: { redirectTo?: string }) => {
     <div className="min-h-screen flex">
       <div className="container relative grid flex-col items-center justify-center sm:max-w-none lg:grid-cols-2 lg:px-0">
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-zinc-900" />
+          <div className="absolute inset-0 bg-zinc-900">
+            <img
+              src="/login.jpg"
+              alt="PickMyUni Logo"
+              className={`h-full w-full absolute object-cover transition-opacity duration-500 ${
+                videoLoaded ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              onLoadedData={() => setVideoLoaded(true)}
+              className={`h-full w-full absolute object-cover transition-opacity duration-500 ${
+                videoLoaded ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <source
+                src="https://www.pexels.com/download/video/3255275/"
+                type="video/mp4"
+              />
+            </video>
+          </div>
           <div className="relative z-20 flex items-center text-lg font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +84,7 @@ export const LoginPage = (props: { redirectTo?: string }) => {
             </svg>
             PickMyUni
           </div>
-          <div className="relative z-20 mt-auto">
+          {/* <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
                 &ldquo;Shadcn Admin Kit has allowed us to quickly create and
@@ -69,7 +93,7 @@ export const LoginPage = (props: { redirectTo?: string }) => {
               </p>
               <footer className="text-sm">John Doe</footer>
             </blockquote>
-          </div>
+          </div> */}
         </div>
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">

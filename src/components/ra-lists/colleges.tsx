@@ -17,6 +17,7 @@ import {
   ExportButton,
   SearchInput,
 } from "../admin";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import { required } from "ra-core";
 import dayjs from "dayjs";
 import { DateField } from "@/components/admin/date-field";
@@ -120,13 +121,13 @@ export const CollegeEdit = () => (
       <TextInput source="canonical_url" multiline />
       <TextInput source="email" multiline />
       <TextInput source="contact" multiline />
-      <TextInput source="logo_url" multiline />
-      <TextInput source="bg_url" multiline />
-      <TextInput source="media_url" multiline />
+      <ImageSelectorInput source="logo_url" />
+      <ImageSelectorInput source="bg_url" />
+      <ImageSelectorInput source="media_url" />
       <TextInput source="rating" />
       <TextInput source="score" />
       <TextInput source="meta_desc" multiline />
-      <TextInput source="og_img" multiline />
+      <ImageSelectorInput source="og_img" />
       <TextInput source="createdAt" disabled />
       <TextInput source="updatedAt" disabled />
       <TextInput source="acceptance_rate" />
@@ -169,7 +170,7 @@ export const CollegeEdit = () => (
         ]}
       />
       <NumberInput source="avg_fees_in_aud" />
-      <TextInput source="brochure_url" />
+      <ImageSelectorInput source="brochure_url" />
       <TextInput source="search_names" />
       <TextInput source="address" />
       <NumberInput source="established" label="Established (YYYY)" />
@@ -196,13 +197,13 @@ export const CollegeCreate = () => (
       <TextInput source="slug" multiline validate={required()} />
       <TextInput source="email" multiline />
       <TextInput source="contact" multiline />
-      <TextInput source="logo_url" multiline />
-      <TextInput source="bg_url" multiline />
-      <TextInput source="media_url" multiline />
+      <ImageSelectorInput source="logo_url" />
+      <ImageSelectorInput source="bg_url" />
+      <ImageSelectorInput source="media_url" />
       <NumberInput min={0} max={5} step={"any"} source="rating" />
       <NumberInput min={0} max={999} source="score" />
       <TextInput source="meta_desc" multiline />
-      <TextInput source="og_img" multiline />
+      <ImageSelectorInput source="og_img" />
       <NumberInput min={0} max={100} source="acceptance_rate" />
       <TextInput
         type="date"
@@ -221,7 +222,7 @@ export const CollegeCreate = () => (
         <AutocompleteInput />
       </ReferenceInput>
       <NumberInput source="avg_fees_in_aud" />
-      <TextInput source="brochure_url" />
+      <ImageSelectorInput source="brochure_url" />
       <TextInput source="search_names" />
       <TextInput source="address" />
       <ReferenceInput source="parent_college_id" reference="colleges">

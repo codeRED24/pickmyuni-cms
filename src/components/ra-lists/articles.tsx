@@ -24,6 +24,8 @@ import { PreviewButton } from "../shared/PreviewButton";
 import { ArticlePreview, LiveArticlePreview } from "../articles/Articles";
 // import { ColumnsButton } from "@/components/admin/columns-button";
 import { FilterButton } from "@/components/admin/filter-form";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
+import DateTimeInput from "../admin/datetime-input";
 
 const articleFilters = [
   <SearchInput source="q" alwaysOn />,
@@ -141,19 +143,28 @@ export const ArticleEdit = () => (
           <TextInput multiline source="slug" />
           <TextInput source="canonical_url" />
           <TextInput multiline source="meta_desc" />
-          <TextInput multiline source="og_img" />
+          <ImageSelectorInput source="og_img" />
           <TextInput disabled source="createdAt" />
           <TextInput disabled source="updatedAt" />
           <TextInput source="score" />
-          <TextInput multiline source="banner_img" />
-          <TextInput multiline source="img1" />
-          <TextInput multiline source="img2" />
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <BooleanInput source="is_active" />
+          <DateTimeInput source="publishedAt" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
           <TextInput multiline source="keywords" />
           <TextInput multiline source="metatitle" />
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
         </div>
         <div className="w-1/2 flex flex-col sticky top-24 self-start">
           <div className="flex items-center justify-between mb-4 flex-shrink-0">
@@ -196,14 +207,23 @@ export const ArticleCreate = () => (
           <TextInput source="meta_desc" multiline />
           <TextInput source="metatitle" multiline />
           <TextInput source="keywords" multiline />
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput optionText="name" validate={required()} />
-          </ReferenceInput>
+          </ReferenceInput> */}
           <TextInput source="score" />
-          <TextInput source="og_img" multiline />
-          <TextInput source="banner_img" multiline />
-          <TextInput source="img1" multiline />
-          <TextInput source="img2" multiline />
+          <ImageSelectorInput source="og_img" />
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
+          <DateTimeInput source="publishedAt" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
         </div>
         <div className="w-1/2 flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>

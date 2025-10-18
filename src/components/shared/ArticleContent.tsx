@@ -3,6 +3,7 @@ import styles from "../../styles/page.module.css";
 
 import { cn } from "@/lib/utils";
 import FAQAccordion from "./FAQAccordion";
+import TocGenerator from "../admin/TocGenerator";
 
 interface ArticleContentProps {
   content: string;
@@ -17,13 +18,11 @@ export default function ArticleContent({
 
   return (
     <div className={cn(styles.fontRoboto, className)}>
+      <TocGenerator content={cleanedHTML} />
       <div
         className={`styledContent ${styles.styledContent} prose prose-lg max-w-none`}
-      >
-        {cleanedHTML && (
-          <div dangerouslySetInnerHTML={{ __html: cleanedHTML }} />
-        )}
-      </div>
+        dangerouslySetInnerHTML={{ __html: cleanedHTML }}
+      />
       {faqs && faqs.length > 0 && <FAQAccordion faqs={faqs} />}
     </div>
   );

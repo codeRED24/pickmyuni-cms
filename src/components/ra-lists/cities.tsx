@@ -24,6 +24,7 @@ import { required } from "ra-core";
 import JoditInput from "../admin/JoditInput";
 import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
 import { PreviewButton } from "../shared/PreviewButton";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 
 const cityFilters = [
   <SearchInput source="q" alwaysOn />,
@@ -78,12 +79,12 @@ export const CityEdit = () => (
           <ReferenceInput source="state_id" reference="states">
             <AutocompleteInput />
           </ReferenceInput>
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
-          <TextInput source="banner_img" multiline />
-          <TextInput source="img1" multiline />
-          <TextInput source="img2" multiline />
+          </ReferenceInput> */}
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <TextInput source="keywords" multiline />
           <TextInput source="canonical_url" multiline />
           <BooleanInput source="is_active" />
@@ -116,12 +117,12 @@ export const CityCreate = () => (
           <ReferenceInput source="state_id" reference="states">
             <AutocompleteInput />
           </ReferenceInput>
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
-          <TextInput source="banner_img" multiline />
-          <TextInput source="img1" multiline />
-          <TextInput source="img2" multiline />
+          </ReferenceInput> */}
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <TextInput source="keywords" multiline />
           <TextInput source="canonical_url" multiline />
           <BooleanInput source="is_active" defaultValue={true} />

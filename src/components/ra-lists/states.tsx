@@ -8,13 +8,12 @@ import { Show } from "@/components/admin/show";
 import { Create, NumberInput, TextField } from "../admin";
 import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
 import { PreviewButton } from "../shared/PreviewButton";
-import { AutocompleteInput } from "@/components/admin/autocomplete-input";
 import { BooleanInput } from "@/components/admin/boolean-input";
 import { Edit } from "@/components/admin/edit";
-import { ReferenceInput } from "@/components/admin/reference-input";
 import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
 import JoditInput from "../admin/JoditInput";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import { required } from "ra-core";
 
 export const StateList = () => (
@@ -108,12 +107,12 @@ export const StateEdit = () => (
           <TextInput source="slug" validate={required()} />
           <JoditInput source="content" />
           <NumberInput source="score" />
-          <TextInput source="banner_img" />
-          <TextInput source="img1" />
-          <TextInput source="img2" />
-          <ReferenceInput source="author_id" reference="authors">
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
           <BooleanInput source="is_active" />
@@ -138,12 +137,12 @@ export const StateCreate = () => (
           <TextInput source="slug" validate={required()} />
           <JoditInput source="content" />
           <NumberInput source="score" />
-          <TextInput source="banner_img" />
-          <TextInput source="img1" />
-          <TextInput source="img2" />
-          <ReferenceInput source="author_id" reference="authors">
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
           <BooleanInput source="is_active" />

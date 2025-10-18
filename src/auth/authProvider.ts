@@ -69,16 +69,30 @@ const authProvider: AuthProvider = {
   },
 
   // Get current permissions
-  getPermissions: async () => {
-    // const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/permissions`, {
-    //   method: "GET",
-    //   credentials: "include",
-    // });
-    // if (!res.ok) throw new Error("Cannot fetch permissions");
-    // const data = await res.json();
-    // return data.permissions;
-    return;
-  },
+  // getPermissions: async () => {
+  // const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/permissions`, {
+  //   method: "GET",
+  //   credentials: "include",
+  // });
+  // if (!res.ok) throw new Error("Cannot fetch permissions");
+  // const data = await res.json();
+  // return data.permissions;
+  // return;
+  // },
+
+  // canAccess: async ({ resource, action }) => {
+  //   const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/can-access`, {
+  //     method: "POST",
+  //     credentials: "include",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ resource, action }),
+  //   });
+  //   if (!res.ok) {
+  //     return { canAccess: false, reason: "Cannot fetch permissions" };
+  //   }
+  //   const data = await res.json();
+  //   return data;
+  // },
 };
 
 export default authProvider;

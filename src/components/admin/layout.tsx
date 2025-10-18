@@ -11,6 +11,8 @@ import { RefreshButton } from "@/components/admin/refresh-button";
 import { LocalesMenuButton } from "@/components/admin/locales-menu-button";
 import { Error } from "@/components/admin/error";
 import { Loading } from "@/components/admin/loading";
+import { NotificationManager } from "../NotificationManager";
+import { NotificationBell } from "@/components/admin/notification-bell";
 
 export const Layout = (props: CoreLayoutProps) => {
   const [errorInfo, setErrorInfo] = useState<ErrorInfo | undefined>(undefined);
@@ -19,6 +21,7 @@ export const Layout = (props: CoreLayoutProps) => {
   };
   return (
     <SidebarProvider>
+      <NotificationManager />
       <AppSidebar />
       <main
         className={cn(
@@ -28,7 +31,7 @@ export const Layout = (props: CoreLayoutProps) => {
           "sm:transition-[width] sm:duration-200 sm:ease-linear",
           "flex h-svh flex-col",
           "group-data-[scroll-locked=1]/body:h-full",
-          "has-[main.fixed-main]:group-data-[scroll-locked=1]/body:h-svh",
+          "has-[main.fixed-main]:group-data-[scroll-locked=1]/body:h-svh"
         )}
       >
         <header className="flex h-16 md:h-12 shrink-0 items-center gap-2 px-4">
@@ -37,6 +40,7 @@ export const Layout = (props: CoreLayoutProps) => {
           <LocalesMenuButton />
           <ThemeModeToggle />
           <RefreshButton />
+          <NotificationBell />
           <UserMenu />
         </header>
         <ErrorBoundary

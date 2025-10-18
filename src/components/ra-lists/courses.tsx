@@ -16,6 +16,7 @@ import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
 import { required } from "ra-core";
 import JoditInput from "../admin/JoditInput";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 
 export const CourseList = () => (
   <List>
@@ -115,25 +116,22 @@ export const CourseEdit = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           <TextInput source="id" disabled />
-          <TextInput source="course_name" validate={required()} />
-          <JoditInput source="content" />
-          <NumberInput source="duration_in_months" />
           <TextInput source="rating" />
           <NumberInput source="score" validate={required()} />
           <TextInput source="meta_desc" />
-          <TextInput source="og_img" />
+          <ImageSelectorInput source="og_img" />
           <ReferenceInput source="streamId" reference="streams">
             <AutocompleteInput />
           </ReferenceInput>
-          <TextInput source="banner_img" />
-          <TextInput source="img1" />
-          <TextInput source="img2" />
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <TextInput source="slug" />
           <TextInput source="type" />
           <BooleanInput source="is_active" />
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
         </div>
@@ -160,19 +158,19 @@ export const CourseCreate = () => (
           <TextInput source="rating" />
           <NumberInput source="score" validate={required()} />
           <TextInput source="meta_desc" />
-          <TextInput source="og_img" />
+          <ImageSelectorInput source="og_img" />
           <ReferenceInput source="streamId" reference="streams">
             <AutocompleteInput />
           </ReferenceInput>
-          <TextInput source="banner_img" />
-          <TextInput source="img1" />
-          <TextInput source="img2" />
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <TextInput source="slug" />
           <TextInput source="type" />
           <BooleanInput source="is_active" />
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
         </div>

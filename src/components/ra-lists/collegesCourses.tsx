@@ -18,6 +18,7 @@ import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
 import { PreviewButton } from "../shared/PreviewButton";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 
 const collegeCourseLevel = [
   { id: "diploma", name: "diploma" },
@@ -82,7 +83,7 @@ export const CollegesCourseEdit = () => (
           <NumberInput source="one_time_fees" />
           <NumberInput source="other_fees" />
           <TextInput source="meta_desc" />
-          <TextInput source="og_img" />
+          <ImageSelectorInput source="og_img" />
           {/* <TextInput source="createdAt" />
       <TextInput source="updatedAt" /> */}
           <ReferenceInput source="college_id" reference="colleges">
@@ -99,9 +100,9 @@ export const CollegesCourseEdit = () => (
           <NumberInput source="domestic_fees_in_aud" />
           <NumberInput source="domestic_non_tution_fees" />
           <NumberInput source="domestic_total_fees" />
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
           {/* <TextInput source="last_date" /> */}
           {/* <NumberInput source="offered_domestic_fees" />
           <NumberInput source="offered_int_fees" /> */}
@@ -139,7 +140,7 @@ export const CollegesCourseCreate = () => (
           <NumberInput source="one_time_fees" />
           <NumberInput source="other_fees" />
           <TextInput source="meta_desc" />
-          <TextInput source="og_img" />
+          <ImageSelectorInput source="og_img" />
           {/* <TextInput source="createdAt" />
       <TextInput source="updatedAt" /> */}
           <ReferenceInput source="college_id" reference="colleges">
@@ -156,9 +157,9 @@ export const CollegesCourseCreate = () => (
           <NumberInput source="domestic_fees_in_aud" />
           <NumberInput source="domestic_non_tution_fees" />
           <NumberInput source="domestic_total_fees" />
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
           {/* <TextInput source="last_date" /> */}
           {/* <NumberInput source="offered_domestic_fees" />
           <NumberInput source="offered_int_fees" /> */}

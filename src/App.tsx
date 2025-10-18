@@ -1,7 +1,7 @@
 import { Admin, ShowGuesser } from "@/components/admin";
 import authProvider from "./auth/authProvider";
 import { fetchUtils, Resource, CustomRoutes } from "ra-core";
-import { Card, CardContent } from "./components/ui/card";
+import { Dashboard } from "@/components/admin/Dashboard";
 import simpleRestProvider from "ra-data-simple-rest";
 import {
   StreamCreate,
@@ -50,7 +50,12 @@ import {
   CollegesCourseList,
   CollegesCourseShow,
 } from "./components/ra-lists/collegesCourses";
-import { TaskCreate, TaskEdit, TaskList } from "./components/ra-lists/tasks";
+import {
+  TaskCreate,
+  TaskEdit,
+  TaskList,
+  TaskShow,
+} from "./components/ra-lists/tasks";
 import { Route } from "react-router-dom";
 import ArticlePreviewPage from "./components/articles/ArticlePreviewPage";
 import CityPreviewPage from "./components/cities/CityPreviewPage";
@@ -67,6 +72,7 @@ import {
   Workflow,
   ListTodo,
   Image,
+  Calendar,
 } from "lucide-react";
 import {
   CollegeswiseContentCreate,
@@ -79,17 +85,9 @@ import { QueryClient } from "@tanstack/react-query";
 import { StreamPreviewPage } from "./components/streams/StreamPreviewPage";
 import { CollegeCoursePreviewPage } from "./components/collegeCourse/CollegeCoursePreviewPage";
 import { CoursePreviewPage } from "./components/course/CoursePreviewPage";
+import { SchedulerList } from "./components/scheduler/Scheduler";
 
 const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
-
-// Dashboard
-const Dashboard = () => (
-  <Card style={{ margin: "2rem" }}>
-    <CardContent>
-      <h2>Dashboard coming soon</h2>
-    </CardContent>
-  </Card>
-);
 
 const httpClient = (url: string, options: RequestInit = {}) => {
   if (!options.headers) {
@@ -121,15 +119,13 @@ export default function App() {
           element={<CollegeContentPreviewPage />}
         />
         <Route path="/courses/:id/preview" element={<StreamPreviewPage />} />
-        <Route
-          path="/courses/:id/preview"
-          element={<CoursePreviewPage />}
-        />{" "}
+        <Route path="/courses/:id/preview" element={<CoursePreviewPage />} />
         <Route
           path="/colleges-courses/:id/preview"
           element={<CollegeCoursePreviewPage />}
         />
       </CustomRoutes>
+      <Resource name="scheduler" list={SchedulerList} icon={Calendar} />
       <Resource
         name="articles"
         list={ArticleList}
@@ -207,6 +203,7 @@ export default function App() {
         list={TaskList}
         edit={TaskEdit}
         create={TaskCreate}
+        show={TaskShow}
         icon={ListTodo}
       />
       <Resource name="media" list={MediaLibraryList} icon={Image} />

@@ -7,6 +7,7 @@ import { DateField } from "@/components/admin/date-field";
 import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import { Create, SelectInput } from "../admin";
 
 const roles = [
@@ -89,11 +90,11 @@ export const AuthorEdit = () => (
       <TextInput source="preferred_name" />
       <TextInput source="email" disabled />
       <TextInput source="description" />
-      <TextInput source="image" />
+      <ImageSelectorInput source="image" />
       {/* <TextInput source="createdAt" />
       <TextInput source="updatedAt" />
       <TextInput source="deletedAt" /> */}
-      <TextInput source="bg_url" />
+      <ImageSelectorInput source="bg_url" />
       <TextInput source="designation" />
       <SelectInput source="role" choices={roles} />
     </SimpleForm>
@@ -108,8 +109,8 @@ export const AuthorCreate = () => (
       <TextInput source="email" />
       <TextInput source="password" />
       <TextInput source="description" />
-      <TextInput source="image" />
-      <TextInput source="bg_url" />
+      <ImageSelectorInput source="image" />
+      <ImageSelectorInput source="bg_url" />
       <TextInput source="designation" />
       <SelectInput source="role" choices={roles} />
     </SimpleForm>

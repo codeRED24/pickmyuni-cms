@@ -27,6 +27,7 @@ import {
 } from "../college-content/CollegeContentPreview";
 import JoditInput from "../admin/JoditInput";
 import { PreviewButton } from "../shared/PreviewButton";
+import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 
 const silosChoices = [
   { id: "info", name: "info" },
@@ -97,7 +98,7 @@ export const CollegeswiseContentEdit = () => (
           <JoditInput source="content" />
           <SelectInput source="silos" choices={silosChoices} />
           <TextInput source="meta_desc" />
-          <TextInput source="og_img" />
+          <ImageSelectorInput source="og_img" />
           <ReferenceInput source="college_id" reference="colleges">
             <AutocompleteInput />
           </ReferenceInput>
@@ -106,9 +107,9 @@ export const CollegeswiseContentEdit = () => (
           <TextInput source="img1" />
           <TextInput source="img2" /> */}
           <BooleanInput source="is_active" />
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
         </div>
@@ -132,7 +133,7 @@ export const CollegeswiseContentCreate = () => (
           <JoditInput source="content" />
           <SelectInput source="silos" choices={silosChoices} />
           <TextInput source="meta_desc" />
-          <TextInput source="og_img" />
+          <ImageSelectorInput source="og_img" />
           <ReferenceInput source="college_id" reference="colleges">
             <AutocompleteInput optionText={"college_name"} />
           </ReferenceInput>
@@ -141,9 +142,9 @@ export const CollegeswiseContentCreate = () => (
           <TextInput source="img1" />
           <TextInput source="img2" /> */}
           <BooleanInput source="is_active" />
-          <ReferenceInput source="author_id" reference="authors">
+          {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
-          </ReferenceInput>
+          </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
         </div>
