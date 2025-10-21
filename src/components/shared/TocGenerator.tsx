@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+"use client";
 import {
   Dialog,
   DialogClose,
@@ -14,7 +9,14 @@ import {
 import { memo, useState, useEffect } from "react";
 import { load } from "cheerio";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/radix-accordion";
+import { cn } from "@/lib/utils";
 
 interface TOCItem {
   id: string;
@@ -70,14 +72,14 @@ const TOCGenerator: React.FC<TOCGeneratorProps> = ({ content }) => {
         .map((_, index) => (
           <div
             key={index}
-            className="h-4 bg-gray-300 animate-pulse rounded w-3/4 my-2"
+            className="my-2 h-4 w-3/4 animate-pulse rounded bg-gray-300"
           />
         ))
     : tocItems.map((item) => (
         <a
           key={item.id}
           href={`#${item.id}`}
-          className="flex toc-item text-sm md:text-base font-medium"
+          className="toc-item text-orange-500 underline flex text-base font-medium md:text-base"
           aria-label={`Navigate to ${item.text}`}
           onClick={(e) => {
             e.preventDefault();
@@ -93,15 +95,16 @@ const TOCGenerator: React.FC<TOCGeneratorProps> = ({ content }) => {
       <DialogTitle>Section Overview</DialogTitle>
       <DialogTrigger asChild>
         <Button
+          variant={"secondary"}
           aria-label="Open Section Overview"
-          className="fixed bottom-4 inset-x-0 w-1/2 mx-auto z-[101] flex items-center gap-2"
+          className="fixed inset-x-0 bottom-4 z-[101] mx-auto flex w-1/2 items-center gap-2"
           onClick={() => setIsOpen(true)}
         >
           📋 <span className="text-sm font-medium">Section Overview</span>
         </Button>
       </DialogTrigger>
       <DialogContent
-        className="max-w-[340px] sm:max-w-[425px] px-2 focus:outline-none rounded-2xl"
+        className="max-w-[340px] rounded-2xl px-2 focus:outline-none sm:max-w-[425px]"
         aria-labelledby="toc-dialog-title"
         aria-describedby={undefined}
       >
@@ -110,7 +113,7 @@ const TOCGenerator: React.FC<TOCGeneratorProps> = ({ content }) => {
         </DialogTitle>
         <div className="max-h-96 overflow-y-auto">
           <DialogClose
-            className="text-left space-y-2"
+            className="space-y-2 text-left"
             role="navigation"
             aria-label="Section Overview Links"
           >
@@ -120,17 +123,20 @@ const TOCGenerator: React.FC<TOCGeneratorProps> = ({ content }) => {
       </DialogContent>
     </Dialog>
   ) : (
-    <div className="article-content-body">
+    <div className="bg-orange-50 p-4">
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1" className="border-b-0">
           <AccordionTrigger
-            className="font-bold text-sm md:text-lg py-0 hover:no-underline focus:outline-none"
+            className={cn(
+              "border-0 p-0 text-2xl font-bold focus:outline-none text-[#2C5680] cursor-pointer",
+              isOpen ? "border-b-2 pb-0" : ""
+            )}
             aria-label="Toggle Section Overview"
           >
-            Section Overview
+            Table of Contents
           </AccordionTrigger>
           <AccordionContent
-            className="space-y-2 focus:outline-none pt-4"
+            className="space-y-2 pt-0 focus:outline-none p-4"
             role="navigation"
             aria-label="Section Overview Links"
           >

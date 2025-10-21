@@ -45,10 +45,8 @@ export const ArticlePreview = () => {
           </div>
         </div>
       </section>
-      <section className="container mx-auto flex flex-col gap-8 py-8 md:py-12 lg:flex-row lg:py-16">
-        <div className="lg:w-3/4">
-          <ArticleContent content={record.content || ""} />
-        </div>
+      <section className="container mx-auto flex flex-col gap-8 py-8 md:py-12lg:py-16">
+        <ArticleContent content={record.content || ""} />
         {/* <div className="flex h-fit min-h-[200px] w-full min-w-[220px] flex-col space-y-8 lg:w-1/4">
           {article.author && (
             <Link

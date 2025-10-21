@@ -3,7 +3,7 @@ import styles from "../../styles/page.module.css";
 
 import { cn } from "@/lib/utils";
 import FAQAccordion from "./FAQAccordion";
-import TocGenerator from "../admin/TocGenerator";
+import TocGenerator from "./TocGenerator";
 
 interface ArticleContentProps {
   content: string;
