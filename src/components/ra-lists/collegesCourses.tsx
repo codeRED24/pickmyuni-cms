@@ -58,6 +58,7 @@ export const CollegesCourseList = () => (
         source="is_active"
         render={(record) => (record.is_active ? "Yes" : "No")}
       />
+      <DataTable.Col source="status" />
       <DataTable.Col source="deletedAt">
         <DateField source="deletedAt" showTime />
       </DataTable.Col>
@@ -114,6 +115,14 @@ export const CollegesCourseEdit = () => (
           {/* <BooleanInput source="is_promoted" />
           <BooleanInput source="pmu_exclusive" /> */}
           <BooleanInput source="is_active" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
         </div>
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
@@ -171,6 +180,14 @@ export const CollegesCourseCreate = () => (
           {/* <BooleanInput source="is_promoted" />
           <BooleanInput source="pmu_exclusive" /> */}
           <BooleanInput source="is_active" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
         </div>
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>

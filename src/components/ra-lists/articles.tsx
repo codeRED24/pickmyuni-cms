@@ -72,6 +72,7 @@ export const ArticleList = () => (
           return String(r.is_active);
         }}
       />
+      <DataTable.Col source="status" />
       <DataTable.Col source="deletedAt">
         <DateField source="deletedAt" showTime />
       </DataTable.Col>
@@ -101,6 +102,7 @@ export const ArticleShow = () => (
           <RecordField source="updatedAt">
             <DateField source="updatedAt" />
           </RecordField>
+          <RecordField source="status" />
           <RecordField source="deletedAt">
             <DateField source="deletedAt" showTime />
           </RecordField>

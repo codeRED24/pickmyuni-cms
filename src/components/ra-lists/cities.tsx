@@ -17,6 +17,7 @@ import {
   NumberInput,
   RecordField,
   SearchInput,
+  SelectInput,
   Show,
   TextField,
 } from "../../components/admin";
@@ -59,6 +60,7 @@ export const CityList = () => (
         source="is_active"
         render={(record) => (record.is_active ? "Yes" : "No")}
       />
+      <DataTable.Col source="status" />
       <DataTable.Col source="deletedAt">
         <DateField source="deletedAt" showTime />
       </DataTable.Col>
@@ -91,6 +93,14 @@ export const CityEdit = () => (
           <TextInput source="keywords" multiline />
           <TextInput source="canonical_url" multiline />
           <BooleanInput source="is_active" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
           <TextInput source="createdAt" disabled />
           <TextInput source="updatedAt" disabled />
         </div>
@@ -129,6 +139,14 @@ export const CityCreate = () => (
           <TextInput source="keywords" multiline />
           <TextInput source="canonical_url" multiline />
           <BooleanInput source="is_active" defaultValue={true} />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
         </div>
         <div className="w-1/2 flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>

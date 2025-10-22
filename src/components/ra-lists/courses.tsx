@@ -5,7 +5,7 @@ import { DateField } from "@/components/admin/date-field";
 import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
-import { Create, NumberInput, TextField } from "../admin";
+import { Create, NumberInput, SelectInput, TextField } from "../admin";
 import { PreviewButton } from "../shared/PreviewButton";
 import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";
@@ -40,6 +40,7 @@ export const CourseList = () => (
       <DataTable.Col source="slug" /> */}
       <DataTable.Col source="type" />
       <DataTable.Col source="is_active" />
+      <DataTable.Col source="status" />
       <DataTable.Col source="deletedAt">
         <DateField source="deletedAt" showTime />
       </DataTable.Col>
@@ -141,6 +142,14 @@ export const CourseEdit = () => (
           </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
         </div>
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
@@ -180,6 +189,14 @@ export const CourseCreate = () => (
           </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
         </div>
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>

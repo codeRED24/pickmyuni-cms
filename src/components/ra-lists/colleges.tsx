@@ -110,6 +110,7 @@ export const CollegeList = () => (
         source="is_open"
         render={(record) => (record.is_open ? "Yes" : "No")}
       />
+      <DataTable.Col source="status" />
     </DataTable>
   </List>
 );
@@ -188,6 +189,14 @@ export const CollegeEdit = () => (
       <BooleanInput source="is_parent" />
       <BooleanInput source="is_affordable" />
       <BooleanInput source="is_open" />
+      <SelectInput
+        source="status"
+        choices={[
+          { id: "DRAFT", name: "Draft" },
+          { id: "SCHEDULED", name: "Scheduled" },
+          { id: "PUBLISHED", name: "Published" },
+        ]}
+      />
     </SimpleForm>
   </Edit>
 );
@@ -261,6 +270,14 @@ export const CollegeCreate = () => (
       <BooleanInput source="pr_pathway" />
       <BooleanInput source="is_active" />
       <BooleanInput source="international_student_accepted" />
+      <SelectInput
+        source="status"
+        choices={[
+          { id: "DRAFT", name: "Draft" },
+          { id: "SCHEDULED", name: "Scheduled" },
+          { id: "PUBLISHED", name: "Published" },
+        ]}
+      />
     </SimpleForm>
   </Create>
 );

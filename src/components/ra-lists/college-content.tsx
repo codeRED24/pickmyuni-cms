@@ -81,6 +81,7 @@ export const CollegeswiseContentList = () => (
         source="is_active"
         render={(record) => (record.is_active ? "Yes" : "No")}
       />
+      <DataTable.Col source="status" />
       <DataTable.Col source="deletedAt">
         <DateField source="deletedAt" showTime />
       </DataTable.Col>
@@ -115,6 +116,14 @@ export const CollegeswiseContentEdit = () => (
           </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
         </div>
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
@@ -150,6 +159,14 @@ export const CollegeswiseContentCreate = () => (
           </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
+          <SelectInput
+            source="status"
+            choices={[
+              { id: "DRAFT", name: "Draft" },
+              { id: "SCHEDULED", name: "Scheduled" },
+              { id: "PUBLISHED", name: "Published" },
+            ]}
+          />
         </div>
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
