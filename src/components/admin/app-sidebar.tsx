@@ -21,7 +21,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { House, List, Shell } from "lucide-react";
+import { House, List } from "lucide-react";
 
 export function AppSidebar() {
   const hasDashboard = useHasDashboard();
@@ -42,7 +42,7 @@ export function AppSidebar() {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <Link to="/">
-                <Shell className="!size-5" />
+                <img src="/logo.svg" alt="logo" className="h-6 w-auto" />
                 <span className="text-base font-semibold">PickMyUni</span>
               </Link>
             </SidebarMenuButton>

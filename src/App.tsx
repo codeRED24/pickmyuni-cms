@@ -1,8 +1,7 @@
 import { Admin, ShowGuesser } from "@/components/admin";
 import authProvider from "./auth/authProvider";
-import { fetchUtils, Resource, CustomRoutes } from "ra-core";
+import { Resource, CustomRoutes } from "ra-core";
 import { Dashboard } from "@/components/admin/Dashboard";
-import simpleRestProvider from "ra-data-simple-rest";
 import {
   StreamCreate,
   StreamEdit,
@@ -87,17 +86,7 @@ import { CollegeCoursePreviewPage } from "./components/collegeCourse/CollegeCour
 import { CoursePreviewPage } from "./components/course/CoursePreviewPage";
 import { SchedulerList } from "./components/scheduler/Scheduler";
 
-const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
-
-const httpClient = (url: string, options: RequestInit = {}) => {
-  if (!options.headers) {
-    options.headers = new Headers({ Accept: "application/json" });
-  }
-  options.credentials = "include";
-  return fetchUtils.fetchJson(url, options);
-};
-
-const dataProvider = simpleRestProvider(API_URL, httpClient);
+import { dataProvider } from "./dataProvider";
 
 const queryClient = new QueryClient();
 

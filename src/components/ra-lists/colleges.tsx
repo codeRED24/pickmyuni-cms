@@ -94,6 +94,9 @@ export const CollegeList = () => (
         source="is_active"
         render={(record) => (record.is_active ? "Yes" : "No")}
       />
+      <DataTable.Col source="deletedAt">
+        <DateField source="deletedAt" showTime />
+      </DataTable.Col>
       <DataTable.Col source="type" />
       <DataTable.Col
         source="is_parent"
@@ -286,6 +289,9 @@ export const CollegeShow = () => (
       </RecordField>
       <RecordField source="updatedAt">
         <DateField source="updatedAt" />
+      </RecordField>
+      <RecordField source="deletedAt">
+        <DateField source="deletedAt" showTime />
       </RecordField>
       <RecordField source="acceptance_rate" />
       <RecordField source="intake_start_date">

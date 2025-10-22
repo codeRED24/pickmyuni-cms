@@ -40,6 +40,9 @@ export const CourseList = () => (
       <DataTable.Col source="slug" /> */}
       <DataTable.Col source="type" />
       <DataTable.Col source="is_active" />
+      <DataTable.Col source="deletedAt">
+        <DateField source="deletedAt" showTime />
+      </DataTable.Col>
       <DataTable.Col source="author_id">
         <ReferenceField source="author_id" reference="authors" />
       </DataTable.Col>
@@ -76,6 +79,9 @@ export const CourseShow = () => (
         </RecordField>
         <RecordField source="updatedAt">
           <DateField source="updatedAt" />
+        </RecordField>
+        <RecordField source="deletedAt">
+          <DateField source="deletedAt" showTime />
         </RecordField>
         <RecordField source="streamId">
           <ReferenceField source="streamId" reference="streams" />
@@ -116,6 +122,7 @@ export const CourseEdit = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           <TextInput source="id" disabled />
+          <JoditInput source="content" />
           <TextInput source="rating" />
           <NumberInput source="score" validate={required()} />
           <TextInput source="meta_desc" />

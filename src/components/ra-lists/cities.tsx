@@ -59,6 +59,9 @@ export const CityList = () => (
         source="is_active"
         render={(record) => (record.is_active ? "Yes" : "No")}
       />
+      <DataTable.Col source="deletedAt">
+        <DateField source="deletedAt" showTime />
+      </DataTable.Col>
       <DataTable.Col source="author_id">
         <ReferenceField source="author_id" reference="authors" />
       </DataTable.Col>
@@ -153,6 +156,9 @@ export const CityShow = () => (
           </RecordField>
           <RecordField source="updatedAt">
             <DateField source="updatedAt" />
+          </RecordField>
+          <RecordField source="deletedAt">
+            <DateField source="deletedAt" showTime />
           </RecordField>
           <RecordField source="score">
             <NumberField source="score" />

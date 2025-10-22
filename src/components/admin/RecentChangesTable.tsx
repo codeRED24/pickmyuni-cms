@@ -20,7 +20,6 @@ const RecentChangesTable = () => {
       const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
       const resources = [
         { name: "articles", titleField: "title" },
-        { name: "authors", titleField: "name" },
         { name: "colleges", titleField: "college_name" },
         { name: "cities", titleField: "name" },
         { name: "states", titleField: "name" },
