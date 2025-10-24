@@ -39,18 +39,18 @@ const authProvider: AuthProvider = {
   },
 
   // Check authentication: called by ra-core before protected routes
-  checkAuth: async () => {
-    const refreshed = await refreshAccessToken();
-    if (!refreshed) throw new Error("Unauthorized");
-  },
+  checkAuth: () => Promise.resolve(),
 
   // Handle API errors: called automatically by ra-core on request failure
   checkError: async (error: any) => {
     if (error.status === 401 || error.status === 403) {
-      // Try refresh token
       const refreshed = await refreshAccessToken();
-      if (!refreshed) throw new Error("Unauthorized");
+      if (refreshed) {
+        return Promise.resolve();
+      }
+      return Promise.reject();
     }
+    return Promise.reject(error);
   },
 
   // Get current user identity
