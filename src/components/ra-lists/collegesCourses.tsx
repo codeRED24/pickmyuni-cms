@@ -77,7 +77,7 @@ export const CollegesCourseEdit = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           <TextInput source="id" disabled />
-          <TextInput source="name" validate={required()}/>
+          <TextInput source="name" validate={required()} />
           <JoditInput source="content" />
           <NumberInput
             source="duration_in_months"
@@ -101,7 +101,11 @@ export const CollegesCourseEdit = () => (
             <AutocompleteInput />
           </ReferenceInput>
           <NumberInput source="score" />
-          <SelectInput source="level" choices={collegeCourseLevel} />
+          <SelectInput
+            source="level"
+            choices={collegeCourseLevel}
+            validate={required()}
+          />
           <NumberInput source="domestic_fees_in_aud" />
           <NumberInput source="domestic_non_tution_fees" />
           <NumberInput source="domestic_total_fees" />
@@ -142,7 +146,7 @@ export const CollegesCourseCreate = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           {/* <TextInput source="id" disabled /> */}
-          <TextInput source="name" validate={[required()]}/>
+          <TextInput source="name" validate={[required()]} />
           <JoditInput source="content" />
           <NumberInput
             source="duration_in_months"
@@ -156,17 +160,24 @@ export const CollegesCourseCreate = () => (
           <ImageSelectorInput source="og_img" />
           {/* <TextInput source="createdAt" />
       <TextInput source="updatedAt" /> */}
-          <ReferenceInput source="college_id" reference="colleges" >
-            <AutocompleteInput validate={[required()]}/>
+          <ReferenceInput source="college_id" reference="colleges">
+            <AutocompleteInput validate={[required()]} />
           </ReferenceInput>
           <ReferenceInput source="course_id" reference="courses">
-            <AutocompleteInput optionText={"course_name"} validate={[required()]}/>
+            <AutocompleteInput
+              optionText={"course_name"}
+              validate={[required()]}
+            />
           </ReferenceInput>
           <ReferenceInput source="streamId" reference="streams">
-            <AutocompleteInput validate={[required()]}/>
+            <AutocompleteInput validate={[required()]} />
           </ReferenceInput>
           <NumberInput source="score" />
-          <SelectInput source="level" choices={collegeCourseLevel} validate={[required()]}/>
+          <SelectInput
+            source="level"
+            choices={collegeCourseLevel}
+            validate={[required()]}
+          />
           <NumberInput source="domestic_fees_in_aud" />
           <NumberInput source="domestic_non_tution_fees" />
           <NumberInput source="domestic_total_fees" />

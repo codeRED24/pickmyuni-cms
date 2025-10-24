@@ -86,13 +86,13 @@ export const StreamShow = () => (
             <NumberField source="score" />
           </RecordField>
           <RecordField source="banner_img">
-            <DateField source="banner_img" />
+            <TextField source="banner_img" />
           </RecordField>
           <RecordField source="img1">
-            <DateField source="img1" />
+            <TextField source="img1" />
           </RecordField>
           <RecordField source="img2">
-            <DateField source="img2" />
+            <TextField source="img2" />
           </RecordField>
           <RecordField
             source="is_active"

@@ -101,11 +101,15 @@ export const CollegeswiseContentEdit = () => (
           <TextInput source="id" disabled />
           <TextInput source="title" validate={required()} />
           <JoditInput source="content" />
-          <SelectInput source="silos" choices={silosChoices} />
+          <SelectInput
+            source="silos"
+            choices={silosChoices}
+            validate={required()}
+          />
           <TextInput source="meta_desc" />
           <ImageSelectorInput source="og_img" />
           <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput validate={required()}/>
+            <AutocompleteInput validate={required()} />
           </ReferenceInput>
           <NumberInput source="score" />
           <ImageSelectorInput source="banner_img" />
@@ -144,11 +148,18 @@ export const CollegeswiseContentCreate = () => (
         <div className="w-1/2 space-y-4">
           <TextInput source="title" validate={required()} />
           <JoditInput source="content" />
-          <SelectInput source="silos" choices={silosChoices} />
+          <SelectInput
+            source="silos"
+            choices={silosChoices}
+            validate={required()}
+          />
           <TextInput source="meta_desc" />
           <ImageSelectorInput source="og_img" />
           <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput optionText={"college_name"} validate={required()}/>
+            <AutocompleteInput
+              optionText={"college_name"}
+              validate={required()}
+            />
           </ReferenceInput>
           <NumberInput source="score" />
           <ImageSelectorInput source="banner_img" />

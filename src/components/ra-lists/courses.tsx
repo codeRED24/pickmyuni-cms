@@ -131,7 +131,7 @@ export const CourseEdit = () => (
           <TextInput source="meta_desc" />
           <ImageSelectorInput source="og_img" />
           <ReferenceInput source="streamId" reference="streams">
-            <AutocompleteInput />
+            <AutocompleteInput validate={required()} />
           </ReferenceInput>
           <ImageSelectorInput source="banner_img" />
           <ImageSelectorInput source="img1" />
@@ -178,7 +178,7 @@ export const CourseCreate = () => (
           <TextInput source="meta_desc" />
           <ImageSelectorInput source="og_img" />
           <ReferenceInput source="streamId" reference="streams">
-            <AutocompleteInput />
+            <AutocompleteInput validate={required()} />
           </ReferenceInput>
           <ImageSelectorInput source="banner_img" />
           <ImageSelectorInput source="img1" />

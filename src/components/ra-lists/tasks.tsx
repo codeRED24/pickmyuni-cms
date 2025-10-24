@@ -127,7 +127,11 @@ export const TaskEdit = () => (
         choices={contentTypeOptions}
         validate={required()}
       />
-      <SelectInput source="status" choices={taskStatuses} />
+      <SelectInput
+        source="status"
+        choices={taskStatuses}
+        validate={required()}
+      />
       <ReferenceInput source="assigned_to_id" reference="authors">
         <AutocompleteInput />
       </ReferenceInput>
@@ -148,11 +152,15 @@ export const TaskCreate = () => (
         choices={contentTypeOptions}
         source="content_type"
         validate={required()}
-      />{" "}
-      <SelectInput source="status" choices={taskStatuses} />
+      />
+      <SelectInput
+        source="status"
+        choices={taskStatuses}
+        validate={required()}
+      />
       <ReferenceInput source="assigned_to_id" reference="authors">
         <AutocompleteInput />
-      </ReferenceInput>{" "}
+      </ReferenceInput>
       <TextInput source="title" />
       <TextInput multiline source="description" />
       <DateTimeInput source="due_date" />

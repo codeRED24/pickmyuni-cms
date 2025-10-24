@@ -136,14 +136,19 @@ export const CollegeEdit = () => (
       <NumberInput step={"any"} source="international_student_rate" />
       <NumberInput source="total_students" />
       <ReferenceInput source="streamId" reference="streams">
-        <AutocompleteInput />
+        <AutocompleteInput validate={required()} />
       </ReferenceInput>
       <ReferenceInput source="cityId" reference="cities">
-        <AutocompleteInput />
+        <AutocompleteInput validate={required()} />
       </ReferenceInput>
       <ReferenceInput source="stateId" reference="states">
-        <AutocompleteInput />
+        <AutocompleteInput validate={required()} />
       </ReferenceInput>
+      <SelectInput
+        source="countryId"
+        choices={[{ id: "1", name: "Australia" }]}
+        validate={required()}
+      ></SelectInput>
       <ReferenceInput source="parent_college_id" reference="colleges">
         <AutocompleteInput optionText={"college_name"} />
       </ReferenceInput>
@@ -154,6 +159,7 @@ export const CollegeEdit = () => (
           { id: "private", name: "private" },
           { id: "other", name: "other" },
         ]}
+        validate={required()}
       />
       <SelectInput
         source="level"
@@ -210,7 +216,7 @@ export const CollegeCreate = () => (
       <ImageSelectorInput source="logo_url" />
       <ImageSelectorInput source="bg_url" />
       <ImageSelectorInput source="media_url" />
-      <NumberInput min={0} max={5} step={"any"} source="rating" />
+      <NumberInput min={0} max={10} source="rating" />
       <NumberInput min={0} max={999} source="score" />
       <TextInput source="meta_desc" multiline />
       <ImageSelectorInput source="og_img" />
@@ -219,14 +225,19 @@ export const CollegeCreate = () => (
       <NumberInput step={"any"} source="international_student_rate" />
       <NumberInput source="total_students" />
       <ReferenceInput source="streamId" reference="streams">
-        <AutocompleteInput />
+        <AutocompleteInput validate={required()} />
       </ReferenceInput>
       <ReferenceInput source="cityId" reference="cities">
-        <AutocompleteInput />
+        <AutocompleteInput validate={required()} />
       </ReferenceInput>
       <ReferenceInput source="stateId" reference="states">
-        <AutocompleteInput />
+        <AutocompleteInput validate={required()} />
       </ReferenceInput>
+      <SelectInput
+        source="countryId"
+        choices={[{ id: "1", name: "Australia" }]}
+        validate={required()}
+      ></SelectInput>
       <NumberInput source="avg_fees_in_aud" />
       <ImageSelectorInput source="brochure_url" />
       <TextInput source="search_names" />
@@ -252,6 +263,7 @@ export const CollegeCreate = () => (
           { id: "private", name: "private" },
           { id: "other", name: "other" },
         ]}
+        validate={required()}
       />
       <NumberInput source="min_fees_int" />
       <NumberInput source="domestic_fees_in_aud" />

@@ -9,6 +9,7 @@ import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import { Create, SelectInput } from "../admin";
+import { required } from "ra-core";
 
 const roles = [
   { id: "admin", name: "admin" },
@@ -96,7 +97,7 @@ export const AuthorEdit = () => (
       <TextInput source="deletedAt" /> */}
       <ImageSelectorInput source="bg_url" />
       <TextInput source="designation" />
-      <SelectInput source="role" choices={roles} />
+      <SelectInput source="role" choices={roles} validate={required()} />
     </SimpleForm>
   </Edit>
 );
@@ -112,7 +113,7 @@ export const AuthorCreate = () => (
       <ImageSelectorInput source="image" />
       <ImageSelectorInput source="bg_url" />
       <TextInput source="designation" />
-      <SelectInput source="role" choices={roles} />
+      <SelectInput source="role" choices={roles} validate={required()} />
     </SimpleForm>
   </Create>
 );
