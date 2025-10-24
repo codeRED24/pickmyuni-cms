@@ -23,6 +23,7 @@ import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
 import JoditInput from "../admin/JoditInput";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
+import { required } from "ra-core";
 import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
 import { PreviewButton } from "../shared/PreviewButton";
 
@@ -128,8 +129,8 @@ export const StreamEdit = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           <TextInput source="id" disabled />
-          <TextInput source="name" />
-          <TextInput source="slug" />
+          <TextInput source="name" validate={required()} />
+          <TextInput source="slug" validate={required()} />
           <JoditInput source="content" />
           <TextInput source="createdAt" disabled />
           <TextInput source="updatedAt" disabled />
@@ -165,13 +166,13 @@ export const StreamCreate = () => (
     <SimpleForm className="max-w-full">
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
-          <TextInput source="name" />
-          <TextInput source="slug" />
+          <TextInput source="name" validate={required()} />
+          <TextInput source="slug" validate={required()} />
           <JoditInput source="content" />
           <NumberInput source="score" />
-          {/* <TextInput source="banner_img" />
-          <TextInput source="img1" />
-          <TextInput source="img2" /> */}
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <BooleanInput source="is_active" />
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />

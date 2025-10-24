@@ -6,7 +6,7 @@ import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
 import { Create, NumberInput, SelectInput, TextField } from "../admin";
-import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
+import { LiveStatePreview, StaticStatePreview } from "../states/StatePreview";
 import { PreviewButton } from "../shared/PreviewButton";
 import { BooleanInput } from "@/components/admin/boolean-input";
 import { Edit } from "@/components/admin/edit";
@@ -96,7 +96,7 @@ export const StateShow = () => (
         </div>
         <div className="sticky top-24 self-start w-full">
           <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[75vh]">
-            <StaticCityPreview />
+            <StaticStatePreview />
           </div>
         </div>
       </div>
@@ -135,7 +135,7 @@ export const StateEdit = () => (
         <div className="w-1/2 flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
           <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
-            <LiveCityPreview />
+            <LiveStatePreview />
           </div>
         </div>
       </div>
@@ -173,7 +173,7 @@ export const StateCreate = () => (
         <div className="w-1/2 flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
           <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
-            <LiveCityPreview />
+            <LiveStatePreview />
           </div>
         </div>
       </div>

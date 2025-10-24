@@ -18,7 +18,7 @@ import { Edit } from "@/components/admin/edit";
 import { ReferenceInput } from "@/components/admin/reference-input";
 import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
-import { Create, SelectInput } from "../admin";
+import { Create, SelectInput, NumberInput } from "../admin";
 import JoditInput from "../admin/JoditInput";
 import { PreviewButton } from "../shared/PreviewButton";
 import { ArticlePreview, LiveArticlePreview } from "../articles/Articles";
@@ -27,23 +27,25 @@ import { FilterButton } from "@/components/admin/filter-form";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import DateTimeInput from "../admin/datetime-input";
 
+const articleSilos = [
+  "news",
+  "exam",
+  "course",
+  "blog",
+  "other",
+  "universities",
+  "fees_scholarships_and_costs",
+  "international_student_essentials",
+  "transfers_and_migration_advice",
+  "application_admissions_and_compliance",
+];
+
 const articleFilters = [
   <SearchInput source="q" alwaysOn />,
   <BooleanInput source="is_active" />,
   <SelectInput
     source="silos"
-    choices={[
-      "news",
-      "exam",
-      "course",
-      "blog",
-      "other",
-      "universities",
-      "fees_scholarships_and_costs",
-      "international_student_essentials",
-      "transfers_and_migration_advice",
-      "application_admissions_and_compliance",
-    ]}
+    choices={articleSilos}
   />,
   <ReferenceInput source="author_id" reference="authors">
     <AutocompleteInput />
@@ -147,14 +149,17 @@ export const ArticleEdit = () => (
           <TextInput disabled source="id" />
           <TextInput multiline source="title" />
           <JoditInput source="content" />
-          <TextInput source="silos" />
+          <SelectInput
+            source="silos"
+            choices={articleSilos}
+          />
           <TextInput multiline source="slug" />
           <TextInput source="canonical_url" />
           <TextInput multiline source="meta_desc" />
           <ImageSelectorInput source="og_img" />
           <TextInput disabled source="createdAt" />
           <TextInput disabled source="updatedAt" />
-          <TextInput source="score" />
+          <NumberInput source="score" />
           <ImageSelectorInput source="banner_img" />
           <ImageSelectorInput source="img1" />
           <ImageSelectorInput source="img2" />
@@ -196,18 +201,7 @@ export const ArticleCreate = () => (
           <JoditInput source="content" />
           <SelectInput
             source="silos"
-            choices={[
-              "news",
-              "exam",
-              "course",
-              "blog",
-              "other",
-              "universities",
-              "fees_scholarships_and_costs",
-              "international_student_essentials",
-              "transfers_and_migration_advice",
-              "application_admissions_and_compliance",
-            ]}
+            choices={articleSilos}
             validate={required()}
           />
           <TextInput source="slug" validate={required()} multiline />
@@ -218,7 +212,7 @@ export const ArticleCreate = () => (
           {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput optionText="name" validate={required()} />
           </ReferenceInput> */}
-          <TextInput source="score" />
+          <NumberInput source="score" />
           <ImageSelectorInput source="og_img" />
           <ImageSelectorInput source="banner_img" />
           <ImageSelectorInput source="img1" />
@@ -231,6 +225,7 @@ export const ArticleCreate = () => (
               { id: "SCHEDULED", name: "Scheduled" },
               { id: "PUBLISHED", name: "Published" },
             ]}
+            // validate={required()}
           />
         </div>
         <div className="w-1/2 flex flex-col sticky top-24 self-start">

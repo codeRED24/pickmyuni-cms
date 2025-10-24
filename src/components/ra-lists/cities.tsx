@@ -124,9 +124,6 @@ export const CityCreate = () => (
           <TextInput source="slug" validate={required()} />
           <JoditInput source="content" />
           <NumberInput source="score" />
-          <ReferenceInput source="country_id" reference="countries">
-            <AutocompleteInput />
-          </ReferenceInput>
           <ReferenceInput source="state_id" reference="states">
             <AutocompleteInput />
           </ReferenceInput>

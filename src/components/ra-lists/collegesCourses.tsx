@@ -9,10 +9,11 @@ import { ReferenceInput } from "@/components/admin/reference-input";
 import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
 import JoditInput from "../admin/JoditInput";
+import { required } from "ra-core";
 import {
-  CollegeContentPreview,
-  LiveCollegeContentPreview,
-} from "../college-content/CollegeContentPreview";
+  CollegeCoursePreview,
+  LiveCollegeCoursePreview,
+} from "../college-course/CollegeCoursePreview";
 import { DateField } from "@/components/admin/date-field";
 import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
@@ -76,7 +77,7 @@ export const CollegesCourseEdit = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           <TextInput source="id" disabled />
-          <TextInput source="name" />
+          <TextInput source="name" validate={required()}/>
           <JoditInput source="content" />
           <NumberInput
             source="duration_in_months"
@@ -127,7 +128,7 @@ export const CollegesCourseEdit = () => (
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
           <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
-            <LiveCollegeContentPreview />
+            <LiveCollegeCoursePreview />
           </div>
         </div>
       </div>
@@ -141,7 +142,7 @@ export const CollegesCourseCreate = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           {/* <TextInput source="id" disabled /> */}
-          <TextInput source="name" />
+          <TextInput source="name" validate={[required()]}/>
           <JoditInput source="content" />
           <NumberInput
             source="duration_in_months"
@@ -155,17 +156,17 @@ export const CollegesCourseCreate = () => (
           <ImageSelectorInput source="og_img" />
           {/* <TextInput source="createdAt" />
       <TextInput source="updatedAt" /> */}
-          <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput />
+          <ReferenceInput source="college_id" reference="colleges" >
+            <AutocompleteInput validate={[required()]}/>
           </ReferenceInput>
           <ReferenceInput source="course_id" reference="courses">
-            <AutocompleteInput optionText={"course_name"} />
+            <AutocompleteInput optionText={"course_name"} validate={[required()]}/>
           </ReferenceInput>
           <ReferenceInput source="streamId" reference="streams">
-            <AutocompleteInput />
+            <AutocompleteInput validate={[required()]}/>
           </ReferenceInput>
           <NumberInput source="score" />
-          <SelectInput source="level" choices={collegeCourseLevel} />
+          <SelectInput source="level" choices={collegeCourseLevel} validate={[required()]}/>
           <NumberInput source="domestic_fees_in_aud" />
           <NumberInput source="domestic_non_tution_fees" />
           <NumberInput source="domestic_total_fees" />
@@ -192,7 +193,7 @@ export const CollegesCourseCreate = () => (
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
           <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
-            <LiveCollegeContentPreview />
+            <LiveCollegeCoursePreview />
           </div>
         </div>
       </div>
@@ -275,7 +276,7 @@ export const CollegesCourseShow = () => (
         </div>
         <div className="sticky top-24 self-start w-full">
           <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[75vh]">
-            <CollegeContentPreview />
+            <CollegeCoursePreview />
           </div>
         </div>
       </div>

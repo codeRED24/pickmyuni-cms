@@ -123,8 +123,10 @@ export const CourseEdit = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           <TextInput source="id" disabled />
+          <TextInput source="course_name" validate={required()} />
+          <NumberInput source="duration_in_months" />
           <JoditInput source="content" />
-          <TextInput source="rating" />
+          <NumberInput source="rating" />
           <NumberInput source="score" validate={required()} />
           <TextInput source="meta_desc" />
           <ImageSelectorInput source="og_img" />
@@ -171,7 +173,7 @@ export const CourseCreate = () => (
           <TextInput source="course_name" validate={required()} />{" "}
           <JoditInput source="content" />
           <NumberInput source="duration_in_months" />
-          <TextInput source="rating" />
+          <NumberInput source="rating" />
           <NumberInput source="score" validate={required()} />
           <TextInput source="meta_desc" />
           <ImageSelectorInput source="og_img" />

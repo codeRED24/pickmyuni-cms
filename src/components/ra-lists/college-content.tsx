@@ -28,6 +28,7 @@ import {
 import JoditInput from "../admin/JoditInput";
 import { PreviewButton } from "../shared/PreviewButton";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
+import { required } from "ra-core";
 
 const silosChoices = [
   { id: "info", name: "info" },
@@ -98,18 +99,18 @@ export const CollegeswiseContentEdit = () => (
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
           <TextInput source="id" disabled />
-          <TextInput source="title" />
+          <TextInput source="title" validate={required()} />
           <JoditInput source="content" />
           <SelectInput source="silos" choices={silosChoices} />
           <TextInput source="meta_desc" />
           <ImageSelectorInput source="og_img" />
           <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput />
+            <AutocompleteInput validate={required()}/>
           </ReferenceInput>
           <NumberInput source="score" />
-          {/* <TextInput source="banner_img" />
-          <TextInput source="img1" />
-          <TextInput source="img2" /> */}
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <BooleanInput source="is_active" />
           {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />
@@ -141,18 +142,18 @@ export const CollegeswiseContentCreate = () => (
     <SimpleForm className="max-w-full">
       <div className="flex gap-4">
         <div className="w-1/2 space-y-4">
-          <TextInput source="title" />
+          <TextInput source="title" validate={required()} />
           <JoditInput source="content" />
           <SelectInput source="silos" choices={silosChoices} />
           <TextInput source="meta_desc" />
           <ImageSelectorInput source="og_img" />
           <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput optionText={"college_name"} />
+            <AutocompleteInput optionText={"college_name"} validate={required()}/>
           </ReferenceInput>
           <NumberInput source="score" />
-          {/* <TextInput source="banner_img" />
-          <TextInput source="img1" />
-          <TextInput source="img2" /> */}
+          <ImageSelectorInput source="banner_img" />
+          <ImageSelectorInput source="img1" />
+          <ImageSelectorInput source="img2" />
           <BooleanInput source="is_active" />
           {/* <ReferenceInput source="author_id" reference="authors">
             <AutocompleteInput />

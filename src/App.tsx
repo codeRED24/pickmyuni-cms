@@ -1,4 +1,4 @@
-import { Admin, ShowGuesser } from "@/components/admin";
+import { Admin } from "@/components/admin";
 import authProvider from "./auth/authProvider";
 import { Resource, CustomRoutes } from "ra-core";
 import { Dashboard } from "@/components/admin/Dashboard";
@@ -24,6 +24,7 @@ import {
   CollegeCreate,
   CollegeEdit,
   CollegeList,
+  CollegeShow,
 } from "./components/ra-lists/colleges";
 import {
   CityCreate,
@@ -87,6 +88,7 @@ import { CoursePreviewPage } from "./components/course/CoursePreviewPage";
 import { SchedulerList } from "./components/scheduler/Scheduler";
 
 import { dataProvider } from "./dataProvider";
+import { StatePreviewPage } from "./components/states/StatePreviewPage";
 
 const queryClient = new QueryClient();
 
@@ -107,12 +109,14 @@ export default function App() {
           path="/collegeswise-content/:id/preview"
           element={<CollegeContentPreviewPage />}
         />
-        <Route path="/courses/:id/preview" element={<StreamPreviewPage />} />
+        <Route path="/streams/:id/preview" element={<StreamPreviewPage />} />
         <Route path="/courses/:id/preview" element={<CoursePreviewPage />} />
         <Route
           path="/colleges-courses/:id/preview"
           element={<CollegeCoursePreviewPage />}
-        />
+        />        
+        <Route path="/states/:id/preview" element={<StatePreviewPage />} />
+
       </CustomRoutes>
       <Resource name="scheduler" list={SchedulerList} icon={Calendar} />
       <Resource
@@ -136,7 +140,7 @@ export default function App() {
         list={CollegeList}
         edit={CollegeEdit}
         create={CollegeCreate}
-        show={ShowGuesser}
+        show={CollegeShow}
         icon={University}
       />
       <Resource

@@ -19,11 +19,12 @@ import {
 } from "../admin";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import { required } from "ra-core";
-import dayjs from "dayjs";
 import { DateField } from "@/components/admin/date-field";
 import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
+import { Separator } from "../ui/separator";
+import DateTimeInput from "../admin/datetime-input";
 
 const collegeFilters = [
   <SearchInput source="q" alwaysOn />,
@@ -120,29 +121,19 @@ export const CollegeEdit = () => (
     <SimpleForm>
       <TextInput disabled source="id" />
       <TextInput source="college_name" multiline validate={required()} />
-      <TextInput source="slug" multiline validate={required()} />
       <TextInput source="location" multiline validate={required()} />
-      <TextInput source="canonical_url" multiline />
       <TextInput source="email" multiline />
       <TextInput source="contact" multiline />
       <ImageSelectorInput source="logo_url" />
       <ImageSelectorInput source="bg_url" />
       <ImageSelectorInput source="media_url" />
-      <TextInput source="rating" />
-      <TextInput source="score" />
-      <TextInput source="meta_desc" multiline />
-      <ImageSelectorInput source="og_img" />
-      <TextInput source="createdAt" disabled />
-      <TextInput source="updatedAt" disabled />
-      <TextInput source="acceptance_rate" />
-      <TextInput
-        format={(value: Date | string | number | null) =>
-          dayjs(value).format("DD/MM/YYYY")
-        }
-        source="intake_start_date"
-        label="Intake start date (DD/MM/YYYY)"
-      />
-      <TextInput source="international_student_rate" />
+      <NumberInput min={0} max={5} step={"any"} source="rating" />
+      <NumberInput min={0} max={999} source="score" />
+      <DateTimeInput source="createdAt" disabled />
+      <DateTimeInput source="updatedAt" disabled />
+      <NumberInput source="acceptance_rate" />
+      <DateTimeInput source="intake_start_date" />
+      <NumberInput step={"any"} source="international_student_rate" />
       <NumberInput source="total_students" />
       <ReferenceInput source="streamId" reference="streams">
         <AutocompleteInput />
@@ -185,10 +176,10 @@ export const CollegeEdit = () => (
       <TextInput source="streams" label="Streams (,seperated stream ids)" />
       <BooleanInput source="pr_pathway" />
       <BooleanInput source="international_student_accepted" />
-      <BooleanInput source="is_active" />
       <BooleanInput source="is_parent" />
       <BooleanInput source="is_affordable" />
       <BooleanInput source="is_open" />
+      <Separator />
       <SelectInput
         source="status"
         choices={[
@@ -197,6 +188,13 @@ export const CollegeEdit = () => (
           { id: "PUBLISHED", name: "Published" },
         ]}
       />
+      <BooleanInput source="is_active" />
+      <Separator />
+      <h2>SEO Fields</h2>
+      <TextInput source="canonical_url" multiline />
+      <TextInput source="slug" multiline validate={required()} />
+      <TextInput source="meta_desc" multiline />
+      <ImageSelectorInput source="og_img" />
     </SimpleForm>
   </Edit>
 );
@@ -217,11 +215,7 @@ export const CollegeCreate = () => (
       <TextInput source="meta_desc" multiline />
       <ImageSelectorInput source="og_img" />
       <NumberInput min={0} max={100} source="acceptance_rate" />
-      <TextInput
-        type="date"
-        source="intake_start_date"
-        label="Intake start date"
-      />
+      <DateTimeInput source="intake_start_date" label="Intake start date" />
       <NumberInput step={"any"} source="international_student_rate" />
       <NumberInput source="total_students" />
       <ReferenceInput source="streamId" reference="streams">
@@ -299,27 +293,11 @@ export const CollegeShow = () => (
       <RecordField source="score">
         <NumberField source="score" />
       </RecordField>
-      <RecordField source="meta_desc" />
-      <RecordField source="og_img" />
-      <RecordField source="createdAt">
-        <DateField source="createdAt" />
-      </RecordField>
-      <RecordField source="updatedAt">
-        <DateField source="updatedAt" />
-      </RecordField>
-      <RecordField source="deletedAt">
-        <DateField source="deletedAt" showTime />
-      </RecordField>
       <RecordField source="acceptance_rate" />
       <RecordField source="intake_start_date">
         <DateField source="intake_start_date" />
       </RecordField>
       <RecordField source="international_student_rate" />
-      <RecordField
-        source="pr_pathway"
-        render={(record) => (record.pr_pathway ? "Yes" : "No")}
-      />
-      <RecordField source="slug" />
       <RecordField source="streamId">
         <ReferenceField source="streamId" reference="streams" />
       </RecordField>
@@ -327,45 +305,38 @@ export const CollegeShow = () => (
       <RecordField source="cityId">
         <ReferenceField source="cityId" reference="cities" />
       </RecordField>
-      <RecordField source="countryId">
-        <ReferenceField source="countryId" reference="countries" />
-      </RecordField>
       <RecordField source="stateId">
         <ReferenceField source="stateId" reference="states" />
       </RecordField>
       <RecordField source="avg_fees_in_aud" />
       <RecordField source="brochure_url" />
       <RecordField source="search_names" />
-      <RecordField source="address">
-        <DateField source="address" />
-      </RecordField>
+      <RecordField source="address" />
       <RecordField source="parent_college_id">
-        <ReferenceField
-          source="parent_college_id"
-          reference="parent_colleges"
-        />
+        <ReferenceField source="parent_college_id" reference="colleges" />
       </RecordField>
       <RecordField source="established" />
-      <RecordField
-        source="is_active"
-        render={(record) => (record.is_active ? "Yes" : "No")}
-      />
       <RecordField source="intake" />
       <RecordField source="level" />
       <RecordField source="type" />
+      <RecordField source="min_fees_int" />
+      <RecordField source="domestic_fees_in_aud" />
+      <RecordField source="streams" />
+      <RecordField source="rank" />{" "}
+      <RecordField
+        source="pr_pathway"
+        render={(record) => (record.pr_pathway ? "Yes" : "No")}
+      />
       <RecordField
         source="international_student_accepted"
         render={(record) =>
           record.international_student_accepted ? "Yes" : "No"
         }
       />
-      <RecordField source="min_fees_int" />
-      <RecordField source="domestic_fees_in_aud" />
       <RecordField
         source="is_parent"
         render={(record) => (record.is_parent ? "Yes" : "No")}
       />
-      <RecordField source="rank" />
       <RecordField
         source="is_affordable"
         render={(record) => (record.is_affordable ? "Yes" : "No")}
@@ -373,9 +344,26 @@ export const CollegeShow = () => (
       <RecordField
         source="is_open"
         render={(record) => (record.is_open ? "Yes" : "No")}
+      />{" "}
+      <Separator />
+      <RecordField
+        source="is_active"
+        render={(record) => (record.is_active ? "Yes" : "No")}
       />
-      <RecordField source="streams" />
+      <RecordField source="createdAt">
+        <DateField showTime source="createdAt" />
+      </RecordField>
+      <RecordField source="updatedAt">
+        <DateField showTime source="updatedAt" />
+      </RecordField>
+      <RecordField source="deletedAt">
+        <DateField source="deletedAt" showTime />
+      </RecordField>
+      <Separator />
+      <RecordField source="slug" />
       <RecordField source="canonical_url" />
+      <RecordField source="meta_desc" />
+      <RecordField source="og_img" />
     </div>
   </Show>
 );
