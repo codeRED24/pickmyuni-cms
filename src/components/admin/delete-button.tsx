@@ -1,97 +1,70 @@
-import * as React from "react";
-import { Trash } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { humanize, singularize } from "inflection";
+import { useState } from "react";
 import {
-  useDeleteWithUndoController,
-  useGetRecordRepresentation,
-  useResourceTranslation,
+  useDelete,
   useRecordContext,
   useResourceContext,
-  useTranslate,
-  type UseDeleteOptions,
-  type RedirectionSideEffect,
+  useRedirect,
+  useNotify,
 } from "ra-core";
+import { Button } from "@/components/ui/button";
+import { PinConfirmDialog } from "./pin-confirm-dialog";
+import { dataProvider } from "@/dataProvider";
+import { Trash } from "lucide-react";
 
-export type DeleteButtonProps = {
-  label?: string;
-  size?: "default" | "sm" | "lg" | "icon";
-  onClick?: React.ReactEventHandler<HTMLButtonElement>;
-  mutationOptions?: UseDeleteOptions;
-  redirect?: RedirectionSideEffect;
-  resource?: string;
-  successMessage?: string;
-  className?: string;
-  variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
-};
+export const DeleteButton = () => {
+  const resource = useResourceContext();
+  const record = useRecordContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const [deleteOne, { isPending }] = useDelete();
+  const redirect = useRedirect();
+  const notify = useNotify();
+  const [verifying, setVerifying] = useState(false);
 
-export const DeleteButton = (props: DeleteButtonProps) => {
-  const {
-    label: labelProp,
-    onClick,
-    size,
-    mutationOptions,
-    redirect = "list",
-    successMessage,
-    variant = "outline",
-    className = "cursor-pointer hover:bg-destructive/10! text-destructive! border-destructive! focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
-  } = props;
-  const record = useRecordContext(props);
-  const resource = useResourceContext(props);
-
-  const { isPending, handleDelete } = useDeleteWithUndoController({
-    record,
-    resource,
-    redirect,
-    onClick,
-    mutationOptions,
-    successMessage,
-  });
-  const translate = useTranslate();
-  const getRecordRepresentation = useGetRecordRepresentation(resource);
-  let recordRepresentation = getRecordRepresentation(record);
-  const resourceName = translate(`resources.${resource}.forcedCaseName`, {
-    smart_count: 1,
-    _: humanize(
-      translate(`resources.${resource}.name`, {
-        smart_count: 1,
-        _: resource ? singularize(resource) : undefined,
-      }),
-      true,
-    ),
-  });
-  // We don't support React elements for this
-  if (React.isValidElement(recordRepresentation)) {
-    recordRepresentation = `#${record?.id}`;
-  }
-  const label = useResourceTranslation({
-    resourceI18nKey: `resources.${resource}.action.delete`,
-    baseI18nKey: "ra.action.delete",
-    options: {
-      name: resourceName,
-      recordRepresentation,
-    },
-    userText: labelProp,
-  });
+  const handlePinConfirm = async (pin: string) => {
+    setVerifying(true);
+    try {
+      await dataProvider.verifyPin(pin);
+      deleteOne(
+        resource,
+        { id: record?.id, previousData: record },
+        {
+          onSuccess: () => {
+            setIsOpen(false);
+            redirect("list", resource);
+            notify(`Successfully deleted ${resource}`, { type: "success" });
+          },
+          onError: (error: any) => {
+            notify(error.message, { type: "error" });
+          },
+          onSettled: () => {
+            setVerifying(false);
+          },
+        }
+      );
+    } catch (error: any) {
+      notify(error.body?.message || "Invalid PIN", { type: "error" });
+      setVerifying(false);
+    }
+  };
 
   return (
-    <Button
-      variant={variant}
-      type="button"
-      onClick={handleDelete}
-      disabled={isPending}
-      aria-label={typeof label === "string" ? label : undefined}
-      size={size}
-      className={className}
-    >
-      <Trash />
-      {label}
-    </Button>
+    <>
+      <Button
+        variant="destructive"
+        onClick={() => setIsOpen(true)}
+        className="cursor-pointer"
+      >
+        <Trash className="mr-2 h-4 w-4" />
+        Delete
+      </Button>
+      <PinConfirmDialog
+        isOpen={isOpen}
+        title="Are you sure you want to delete this element?"
+        content="This action cannot be undone. Please enter your PIN to confirm."
+        onConfirm={handlePinConfirm}
+        onClose={() => setIsOpen(false)}
+        loading={isPending || verifying}
+      />
+    </>
   );
 };

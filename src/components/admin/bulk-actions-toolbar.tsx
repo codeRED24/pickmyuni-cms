@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { BulkDeleteButton } from "@/components/admin/bulk-delete-button";
 import { X } from "lucide-react";
 import { BulkExportButton } from "./bulk-export-button";
+import { BulkSoftDeleteButton } from "./bulk-soft-delete-button";
 
 export function BulkActionsToolbarChildren() {
   return (
     <>
       <BulkExportButton />
+      <BulkSoftDeleteButton label="Soft Delete" />
       <BulkDeleteButton />
     </>
   );

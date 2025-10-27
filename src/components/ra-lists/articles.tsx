@@ -43,10 +43,7 @@ const articleSilos = [
 const articleFilters = [
   <SearchInput source="q" alwaysOn />,
   <BooleanInput source="is_active" />,
-  <SelectInput
-    source="silos"
-    choices={articleSilos}
-  />,
+  <SelectInput source="silos" choices={articleSilos} />,
   <ReferenceInput source="author_id" reference="authors">
     <AutocompleteInput />
   </ReferenceInput>,
@@ -149,10 +146,7 @@ export const ArticleEdit = () => (
           <TextInput disabled source="id" />
           <TextInput multiline source="title" />
           <JoditInput source="content" />
-          <SelectInput
-            source="silos"
-            choices={articleSilos}
-          />
+          <SelectInput source="silos" choices={articleSilos} />
           <TextInput multiline source="slug" />
           <TextInput source="canonical_url" />
           <TextInput multiline source="meta_desc" />
@@ -218,6 +212,7 @@ export const ArticleCreate = () => (
           <ImageSelectorInput source="img1" />
           <ImageSelectorInput source="img2" />
           <DateTimeInput source="publishedAt" />
+          <BooleanInput source="is_active" />
           <SelectInput
             source="status"
             choices={[

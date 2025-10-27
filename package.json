@@ -36,6 +36,7 @@
     "diacritic": "^0.0.2",
     "firebase": "^12.4.0",
     "inflection": "^3.0.2",
+    "input-otp": "^1.4.2",
     "jodit-react": "^5.2.26",
     "lodash": "^4.17.21",
     "lucide-react": "^0.544.0",

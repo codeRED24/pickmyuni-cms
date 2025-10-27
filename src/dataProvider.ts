@@ -15,14 +15,23 @@ const baseDataProvider = simpleRestProvider(API_URL, httpClient);
 
 export const dataProvider = {
   ...baseDataProvider,
-  delete: (resource: string, params: any) => {
+  verifyPin: (pin: string) => {
+    return httpClient(`${API_URL}/delete-pin`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify({ pin }),
+    });
+  },
+  softDelete: (resource: string, params: any) => {
     return baseDataProvider.update(resource, {
       id: params.id,
       data: { is_active: false, deletedAt: new Date() },
       previousData: params.previousData,
     });
   },
-  deleteMany: (resource: string, params: any) => {
+  softDeleteMany: (resource: string, params: any) => {
     return baseDataProvider.updateMany(resource, {
       ids: params.ids,
       data: { is_active: false, deletedAt: new Date() },

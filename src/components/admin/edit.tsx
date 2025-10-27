@@ -20,6 +20,7 @@ import {
 import { cn } from "@/lib/utils";
 import { ShowButton } from "@/components/admin/show-button";
 import { DeleteButton } from "./delete-button";
+import { SoftDeleteButton } from "./soft-delete-button";
 
 export interface EditProps extends EditViewProps, EditBaseProps {}
 
@@ -104,6 +105,7 @@ export const EditView = ({
           <div className="flex justify-end items-center gap-2">
             {hasShow ? <ShowButton /> : null}
             <DeleteButton />
+            <SoftDeleteButton />
           </div>
         )}
       </div>

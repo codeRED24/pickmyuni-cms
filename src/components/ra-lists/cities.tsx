@@ -135,7 +135,7 @@ export const CityCreate = () => (
           <ImageSelectorInput source="img2" />
           <TextInput source="keywords" multiline />
           <TextInput source="canonical_url" multiline />
-          <BooleanInput source="is_active" defaultValue={true} />
+          <BooleanInput source="is_active" />
           <SelectInput
             source="status"
             choices={[
