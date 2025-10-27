@@ -1,12 +1,16 @@
 import { AuthProvider } from "ra-core";
+import { getDeviceId } from "../utils/deviceId";
 
 const BACKEND_URL = import.meta.env.VITE_APP_API_URL;
 
 const refreshAccessToken = async (): Promise<boolean> => {
   try {
+    const deviceId = getDeviceId();
     const res = await fetch(`${BACKEND_URL}/api/v1/cms/validate/tokens`, {
       method: "PUT",
       credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ deviceId }),
     });
     return res.ok;
   } catch {
@@ -16,11 +20,12 @@ const refreshAccessToken = async (): Promise<boolean> => {
 
 const authProvider: AuthProvider = {
   login: async ({ email, password }) => {
+    const deviceId = getDeviceId();
     const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, deviceId }),
     });
 
     if (!res.ok) {

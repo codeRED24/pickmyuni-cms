@@ -1,24 +1,31 @@
-// pickmyuni-cms/src/components/NotificationManager.tsx
 import { useEffect } from "react";
-import { useGetIdentity, useUpdate } from "ra-core";
+import { useGetIdentity } from "ra-core";
 import { generateToken } from "../firebase.config";
+import { getDeviceId } from "../utils/deviceId";
+
+const BACKEND_URL = import.meta.env.VITE_APP_API_URL;
 
 export const NotificationManager = () => {
   const { data: user } = useGetIdentity();
-  const [update] = useUpdate();
 
   useEffect(() => {
     if (user) {
       generateToken().then((token) => {
         if (token) {
+          const deviceId = getDeviceId();
           // Check if the token is already saved
           if (user.fcmToken !== token) {
-            update("authors", { id: user.id, data: { fcm_token: token } });
+            fetch(`${BACKEND_URL}/api/v1/cms/authors/update-fcm-token`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              body: JSON.stringify({ fcmToken: token, deviceId }),
+            });
           }
         }
       });
     }
-  }, [user, update]);
+  }, [user]);
 
   return null;
 };
