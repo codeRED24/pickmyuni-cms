@@ -62,8 +62,8 @@ export const PinConfirmDialog = ({
           <Button variant="ghost" onClick={handleClose} disabled={loading}>
             Cancel
           </Button>
-          <Button onClick={handleConfirm} disabled={loading || pin.length < 6}>
-            {loading ? "Verifying..." : "Confirm"}
+          <Button onClick={handleConfirm} disabled={loading}>
+            {loading ? "Processing..." : "Confirm"}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -19,8 +19,7 @@ import {
 } from "@/components/admin/breadcrumb";
 import { cn } from "@/lib/utils";
 import { ShowButton } from "@/components/admin/show-button";
-import { DeleteButton } from "./delete-button";
-import { SoftDeleteButton } from "./soft-delete-button";
+import { UnifiedDeleteButton } from "./unified-delete-button";
 
 export interface EditProps extends EditViewProps, EditBaseProps {}
 
@@ -56,7 +55,7 @@ export const EditView = ({
   const resource = useResourceContext();
   if (!resource) {
     throw new Error(
-      "The EditView component must be used within a ResourceContextProvider",
+      "The EditView component must be used within a ResourceContextProvider"
     );
   }
   const getResourceLabel = useGetResourceLabel();
@@ -95,7 +94,7 @@ export const EditView = ({
       <div
         className={cn(
           "flex justify-between items-start flex-wrap gap-2 my-2",
-          className,
+          className
         )}
       >
         <h2 className="text-2xl font-bold tracking-tight">
@@ -104,8 +103,7 @@ export const EditView = ({
         {actions ?? (
           <div className="flex justify-end items-center gap-2">
             {hasShow ? <ShowButton /> : null}
-            <DeleteButton />
-            <SoftDeleteButton />
+            <UnifiedDeleteButton />
           </div>
         )}
       </div>
