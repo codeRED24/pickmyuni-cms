@@ -59,10 +59,19 @@ export const PinConfirmDialog = ({
           </InputOTPGroup>
         </InputOTP>
         <DialogFooter>
-          <Button variant="ghost" onClick={handleClose} disabled={loading}>
+          <Button
+            className="cursor-pointer"
+            variant="ghost"
+            onClick={handleClose}
+            disabled={loading}
+          >
             Cancel
           </Button>
-          <Button onClick={handleConfirm} disabled={loading}>
+          <Button
+            className="cursor-pointer"
+            onClick={handleConfirm}
+            disabled={loading}
+          >
             {loading ? "Processing..." : "Confirm"}
           </Button>
         </DialogFooter>

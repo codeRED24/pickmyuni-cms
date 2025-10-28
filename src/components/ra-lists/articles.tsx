@@ -164,6 +164,7 @@ export const ArticleEdit = () => (
             choices={[
               { id: "DRAFT", name: "Draft" },
               { id: "SCHEDULED", name: "Scheduled" },
+              { id: "Deleted", name: "Deleted" },
               { id: "PUBLISHED", name: "Published" },
             ]}
           />
@@ -217,6 +218,7 @@ export const ArticleCreate = () => (
             source="status"
             choices={[
               { id: "DRAFT", name: "Draft" },
+              { id: "Deleted", name: "Deleted" },
               { id: "SCHEDULED", name: "Scheduled" },
               { id: "PUBLISHED", name: "Published" },
             ]}

@@ -9,35 +9,8 @@ import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import { Create, SelectInput } from "../admin";
-import { required } from "ra-core";
-
-const roles = [
-  { id: "admin", name: "admin" },
-  {
-    id: "content_head",
-    name: "content_head",
-  },
-  {
-    id: "content_tl",
-    name: "content_tl",
-  },
-  {
-    id: "content_writer",
-    name: "content_writer",
-  },
-  {
-    id: "data_head",
-    name: "data_head",
-  },
-  {
-    id: "data_analyst",
-    name: "data_analyst",
-  },
-  {
-    id: "other",
-    name: "other",
-  },
-];
+import { required, useDataProvider } from "ra-core";
+import { useQuery } from "@tanstack/react-query";
 
 export const AuthorList = () => (
   <List>
@@ -45,7 +18,6 @@ export const AuthorList = () => (
       <DataTable.Col source="id" />
       <DataTable.Col source="name" />
       <DataTable.Col source="preferred_name" />
-      <DataTable.Col source="description" />
       <DataTable.Col source="designation" />
       <DataTable.Col source="email" />
       <DataTable.Col source="deletedAt">
@@ -83,37 +55,47 @@ export const AuthorShow = () => (
   </Show>
 );
 
-export const AuthorEdit = () => (
-  <Edit>
+const AuthorForm = ({ isCreate = false }) => {
+  const dataProvider = useDataProvider();
+  const { data: roles, isLoading } = useQuery({
+    queryKey: ["roles"],
+    queryFn: () => dataProvider.getRoles(),
+  });
+
+  const formattedChoices = ((roles as any)?.data || []).map((role: any) => ({
+    id: role.name,
+    name: role.name,
+  }));
+
+  return (
     <SimpleForm>
-      <TextInput source="id" disabled />
+      {!isCreate && <TextInput source="id" disabled />}
       <TextInput source="name" />
       <TextInput source="preferred_name" />
-      <TextInput source="email" disabled />
+      <TextInput source="email" disabled={!isCreate} />
+      {isCreate && <TextInput source="password" />}
       <TextInput source="description" />
       <ImageSelectorInput source="image" />
-      {/* <TextInput source="createdAt" />
-      <TextInput source="updatedAt" />
-      <TextInput source="deletedAt" /> */}
       <ImageSelectorInput source="bg_url" />
       <TextInput source="designation" />
-      <SelectInput source="role" choices={roles} validate={required()} />
+      <SelectInput
+        source="role"
+        choices={formattedChoices}
+        isLoading={isLoading}
+        validate={required()}
+      />
     </SimpleForm>
+  );
+};
+
+export const AuthorEdit = () => (
+  <Edit>
+    <AuthorForm />
   </Edit>
 );
 
 export const AuthorCreate = () => (
   <Create>
-    <SimpleForm>
-      <TextInput source="name" />
-      <TextInput source="preferred_name" />
-      <TextInput source="email" />
-      <TextInput source="password" />
-      <TextInput source="description" />
-      <ImageSelectorInput source="image" />
-      <ImageSelectorInput source="bg_url" />
-      <TextInput source="designation" />
-      <SelectInput source="role" choices={roles} validate={required()} />
-    </SimpleForm>
+    <AuthorForm isCreate />
   </Create>
 );

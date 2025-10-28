@@ -190,6 +190,7 @@ export const CollegeEdit = () => (
         source="status"
         choices={[
           { id: "DRAFT", name: "Draft" },
+          { id: "Deleted", name: "Deleted" },
           { id: "SCHEDULED", name: "Scheduled" },
           { id: "PUBLISHED", name: "Published" },
         ]}
@@ -280,6 +281,7 @@ export const CollegeCreate = () => (
         source="status"
         choices={[
           { id: "DRAFT", name: "Draft" },
+          { id: "Deleted", name: "Deleted" },
           { id: "SCHEDULED", name: "Scheduled" },
           { id: "PUBLISHED", name: "Published" },
         ]}

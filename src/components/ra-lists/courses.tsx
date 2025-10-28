@@ -148,6 +148,7 @@ export const CourseEdit = () => (
             source="status"
             choices={[
               { id: "DRAFT", name: "Draft" },
+              { id: "Deleted", name: "Deleted" },
               { id: "SCHEDULED", name: "Scheduled" },
               { id: "PUBLISHED", name: "Published" },
             ]}
@@ -195,6 +196,7 @@ export const CourseCreate = () => (
             source="status"
             choices={[
               { id: "DRAFT", name: "Draft" },
+              { id: "Deleted", name: "Deleted" },
               { id: "SCHEDULED", name: "Scheduled" },
               { id: "PUBLISHED", name: "Published" },
             ]}

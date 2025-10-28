@@ -66,7 +66,7 @@ export const UnifiedDeleteButton = () => {
         resource,
         {
           id: record.id,
-          data: { is_active: false, deletedAt: new Date() },
+          data: { is_active: false, deletedAt: new Date(), status: "DELETED" },
           previousData: record,
         },
         {

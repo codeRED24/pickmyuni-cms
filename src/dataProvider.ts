@@ -15,6 +15,11 @@ const baseDataProvider = simpleRestProvider(API_URL, httpClient);
 
 export const dataProvider = {
   ...baseDataProvider,
+  getRoles: () => {
+    return httpClient(`${API_URL}/roles`).then(({ json }) => ({
+      data: json.map((role: any) => ({ id: role.name, name: role.name })),
+    }));
+  },
   verifyPin: (pin: string) => {
     return httpClient(`${API_URL}/delete-pin`, {
       method: "POST",
@@ -22,19 +27,6 @@ export const dataProvider = {
         "Content-Type": "application/json",
       }),
       body: JSON.stringify({ pin }),
-    });
-  },
-  softDelete: (resource: string, params: any) => {
-    return baseDataProvider.update(resource, {
-      id: params.id,
-      data: { is_active: false, deletedAt: new Date() },
-      previousData: params.previousData,
-    });
-  },
-  softDeleteMany: (resource: string, params: any) => {
-    return baseDataProvider.updateMany(resource, {
-      ids: params.ids,
-      data: { is_active: false, deletedAt: new Date() },
     });
   },
 };

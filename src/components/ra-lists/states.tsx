@@ -127,6 +127,7 @@ export const StateEdit = () => (
             source="status"
             choices={[
               { id: "DRAFT", name: "Draft" },
+              { id: "Deleted", name: "Deleted" },
               { id: "SCHEDULED", name: "Scheduled" },
               { id: "PUBLISHED", name: "Published" },
             ]}
@@ -165,6 +166,7 @@ export const StateCreate = () => (
             source="status"
             choices={[
               { id: "DRAFT", name: "Draft" },
+              { id: "Deleted", name: "Deleted" },
               { id: "SCHEDULED", name: "Scheduled" },
               { id: "PUBLISHED", name: "Published" },
             ]}

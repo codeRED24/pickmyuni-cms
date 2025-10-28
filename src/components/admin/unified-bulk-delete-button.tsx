@@ -76,7 +76,7 @@ export const UnifiedBulkDeleteButton = (
         resource,
         {
           ids: selectedIds,
-          data: { is_active: false, deletedAt: new Date() },
+          data: { is_active: false, deletedAt: new Date(), status: "DELETED" },
         },
         {
           onSuccess: () => {
