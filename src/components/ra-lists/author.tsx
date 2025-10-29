@@ -14,7 +14,6 @@ import {
   ReferenceField,
   ReferenceInput,
   SelectInput,
-  TextField,
 } from "../admin";
 import { required, useDataProvider } from "ra-core";
 import { useQuery } from "@tanstack/react-query";
