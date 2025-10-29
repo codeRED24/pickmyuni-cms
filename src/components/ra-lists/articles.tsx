@@ -26,6 +26,7 @@ import { ArticlePreview, LiveArticlePreview } from "../articles/Articles";
 import { FilterButton } from "@/components/admin/filter-form";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import DateTimeInput from "../admin/datetime-input";
+import StatusSelect from "../shared/ArticleSTatusSelect";
 
 const articleSilos = [
   "news",
@@ -47,6 +48,7 @@ const articleFilters = [
   <ReferenceInput source="author_id" reference="authors">
     <AutocompleteInput />
   </ReferenceInput>,
+  <StatusSelect />,
 ];
 
 const ArticleListActions = () => (
@@ -159,15 +161,7 @@ export const ArticleEdit = () => (
           <ImageSelectorInput source="img2" />
           <BooleanInput source="is_active" />
           <DateTimeInput source="publishedAt" />
-          <SelectInput
-            source="status"
-            choices={[
-              { id: "DRAFT", name: "Draft" },
-              { id: "SCHEDULED", name: "Scheduled" },
-              { id: "Deleted", name: "Deleted" },
-              { id: "PUBLISHED", name: "Published" },
-            ]}
-          />
+          <StatusSelect />
           <TextInput multiline source="keywords" />
           <TextInput multiline source="metatitle" />
           {/* <ReferenceInput source="author_id" reference="authors">
@@ -214,16 +208,7 @@ export const ArticleCreate = () => (
           <ImageSelectorInput source="img2" />
           <DateTimeInput source="publishedAt" />
           <BooleanInput source="is_active" />
-          <SelectInput
-            source="status"
-            choices={[
-              { id: "DRAFT", name: "Draft" },
-              { id: "Deleted", name: "Deleted" },
-              { id: "SCHEDULED", name: "Scheduled" },
-              { id: "PUBLISHED", name: "Published" },
-            ]}
-            // validate={required()}
-          />
+          <StatusSelect />
         </div>
         <div className="w-1/2 flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>

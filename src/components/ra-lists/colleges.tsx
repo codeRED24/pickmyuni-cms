@@ -25,6 +25,7 @@ import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
 import { Separator } from "../ui/separator";
 import DateTimeInput from "../admin/datetime-input";
+import StatusSelect from "../shared/ArticleSTatusSelect";
 
 const collegeFilters = [
   <SearchInput source="q" alwaysOn />,
@@ -186,15 +187,7 @@ export const CollegeEdit = () => (
       <BooleanInput source="is_affordable" />
       <BooleanInput source="is_open" />
       <Separator />
-      <SelectInput
-        source="status"
-        choices={[
-          { id: "DRAFT", name: "Draft" },
-          { id: "Deleted", name: "Deleted" },
-          { id: "SCHEDULED", name: "Scheduled" },
-          { id: "PUBLISHED", name: "Published" },
-        ]}
-      />
+      <StatusSelect />
       <BooleanInput source="is_active" />
       <Separator />
       <h2>SEO Fields</h2>
@@ -277,15 +270,7 @@ export const CollegeCreate = () => (
       <BooleanInput source="pr_pathway" />
       <BooleanInput source="is_active" />
       <BooleanInput source="international_student_accepted" />
-      <SelectInput
-        source="status"
-        choices={[
-          { id: "DRAFT", name: "Draft" },
-          { id: "Deleted", name: "Deleted" },
-          { id: "SCHEDULED", name: "Scheduled" },
-          { id: "PUBLISHED", name: "Published" },
-        ]}
-      />
+      <StatusSelect />
     </SimpleForm>
   </Create>
 );

@@ -17,6 +17,7 @@ import { TextInput } from "@/components/admin/text-input";
 import { required } from "ra-core";
 import JoditInput from "../admin/JoditInput";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
+import StatusSelect from "../shared/ArticleSTatusSelect";
 
 export const CourseList = () => (
   <List>
@@ -144,15 +145,7 @@ export const CourseEdit = () => (
           </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
-          <SelectInput
-            source="status"
-            choices={[
-              { id: "DRAFT", name: "Draft" },
-              { id: "Deleted", name: "Deleted" },
-              { id: "SCHEDULED", name: "Scheduled" },
-              { id: "PUBLISHED", name: "Published" },
-            ]}
-          />
+          <StatusSelect />
         </div>
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
@@ -192,15 +185,7 @@ export const CourseCreate = () => (
           </ReferenceInput> */}
           <TextInput source="keywords" />
           <TextInput source="canonical_url" />
-          <SelectInput
-            source="status"
-            choices={[
-              { id: "DRAFT", name: "Draft" },
-              { id: "Deleted", name: "Deleted" },
-              { id: "SCHEDULED", name: "Scheduled" },
-              { id: "PUBLISHED", name: "Published" },
-            ]}
-          />
+          <StatusSelect />
         </div>
         <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>

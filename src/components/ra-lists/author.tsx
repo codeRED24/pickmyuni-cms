@@ -8,7 +8,14 @@ import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
-import { Create, SelectInput } from "../admin";
+import {
+  AutocompleteInput,
+  Create,
+  ReferenceField,
+  ReferenceInput,
+  SelectInput,
+  TextField,
+} from "../admin";
 import { required, useDataProvider } from "ra-core";
 import { useQuery } from "@tanstack/react-query";
 
@@ -51,6 +58,9 @@ export const AuthorShow = () => (
       <RecordField source="bg_url" />
       <RecordField source="designation" />
       <RecordField source="role" />
+      <RecordField source="reports_to_id">
+        <ReferenceField source="reports_to_id" reference="authors" />
+      </RecordField>
     </div>
   </Show>
 );
@@ -84,6 +94,9 @@ const AuthorForm = ({ isCreate = false }) => {
         isLoading={isLoading}
         validate={required()}
       />
+      <ReferenceInput source="reports_to_id" reference="authors">
+        <AutocompleteInput />
+      </ReferenceInput>
     </SimpleForm>
   );
 };
