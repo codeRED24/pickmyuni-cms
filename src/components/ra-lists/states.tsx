@@ -5,7 +5,7 @@ import { DateField } from "@/components/admin/date-field";
 import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
-import { Create, NumberInput, SelectInput, TextField } from "../admin";
+import { Create, NumberInput, TextField } from "../admin";
 import { LiveStatePreview, StaticStatePreview } from "../states/StatePreview";
 import { PreviewButton } from "../shared/PreviewButton";
 import { BooleanInput } from "@/components/admin/boolean-input";

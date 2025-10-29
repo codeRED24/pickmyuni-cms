@@ -5,7 +5,7 @@ import { DateField } from "@/components/admin/date-field";
 import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
-import { Create, NumberInput, SelectInput, TextField } from "../admin";
+import { Create, NumberInput, TextField } from "../admin";
 import { PreviewButton } from "../shared/PreviewButton";
 import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";

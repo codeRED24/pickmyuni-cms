@@ -12,7 +12,6 @@ import {
   FilterButton,
   NumberInput,
   SearchInput,
-  SelectInput,
   TextField,
 } from "../admin";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";

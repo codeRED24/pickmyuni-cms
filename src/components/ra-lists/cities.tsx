@@ -17,7 +17,6 @@ import {
   NumberInput,
   RecordField,
   SearchInput,
-  SelectInput,
   Show,
   TextField,
 } from "../../components/admin";
