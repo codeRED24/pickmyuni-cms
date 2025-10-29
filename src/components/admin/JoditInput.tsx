@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { useInput } from "ra-core";
+import { useInput, useGetIdentity } from "ra-core";
 import JoditEditor, { Jodit } from "jodit-react";
 import { useRef, useMemo } from "react";
 
@@ -27,6 +27,16 @@ if (typeof Jodit !== "undefined") {
 
 const JoditInput = (props: any) => {
   const { field } = useInput(props);
+  const { identity, isLoading } = useGetIdentity();
+
+  // allowed roles who can see/edit the content field
+  const allowed = ["admin", "content_writer", "team_lead"];
+
+  // while identity is loading, don't render the editor to avoid flicker
+  if (isLoading) return null;
+
+  // hide the editor for roles not in the allowed list
+  if (!identity || !allowed.includes(identity?.role)) return null;
   const editor = useRef(null);
 
   // Memoize config to prevent unnecessary re-renders

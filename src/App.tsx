@@ -56,7 +56,7 @@ import {
   TaskList,
   TaskShow,
 } from "./components/ra-lists/tasks";
-import { Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import ArticlePreviewPage from "./components/articles/ArticlePreviewPage";
 import CityPreviewPage from "./components/cities/CityPreviewPage";
 import { MediaLibraryList } from "./components/media";
@@ -73,6 +73,7 @@ import {
   ListTodo,
   Image,
   Calendar,
+  AlertTriangle,
 } from "lucide-react";
 import {
   CollegeswiseContentCreate,
@@ -89,6 +90,7 @@ import { SchedulerList } from "./components/scheduler/Scheduler";
 
 import { dataProvider } from "./dataProvider";
 import { StatePreviewPage } from "./components/states/StatePreviewPage";
+import { Button } from "./components/ui/button";
 
 const queryClient = new QueryClient();
 
@@ -114,11 +116,44 @@ export default function App() {
         <Route
           path="/colleges-courses/:id/preview"
           element={<CollegeCoursePreviewPage />}
-        />        
+        />
         <Route path="/states/:id/preview" element={<StatePreviewPage />} />
-
+        <Route
+          path="/access-denied"
+          element={
+            <div className="h-screen w-auto flex items-center justify-center bg-gradient-to-br">
+              <div className="max-w-md w-full mx-4">
+                <div className="rounded-lg shadow-xl p-8 text-center">
+                  <div className="mb-6">
+                    <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center pb-1">
+                      <AlertTriangle className="w-8 h-8 text-red-600" />
+                    </div>
+                  </div>
+                  <h1 className="text-3xl font-bold text-gray-500 mb-3">
+                    Access Denied
+                  </h1>
+                  <p className="text-gray-600 mb-6">
+                    You don't have permission to access this resource. Please
+                    contact your administrator if you believe this is a mistake.
+                  </p>
+                  <div className="space-y-3">
+                    <Button
+                      onClick={() => window.history.go(-2)}
+                      className="w-full cursor-pointer"
+                    >
+                      Go Back
+                    </Button>
+                    <Button className="w-full cursor-pointer" asChild>
+                      <Link to="/">Go to Dashboard</Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        />
       </CustomRoutes>
-      <Resource name="scheduler" list={SchedulerList} icon={Calendar} />
+      <Resource name="schedulers" list={SchedulerList} icon={Calendar} />
       <Resource
         name="articles"
         list={ArticleList}

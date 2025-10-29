@@ -49,7 +49,7 @@ export function UserMenu({ children }: UserMenuProps) {
           >
             <Avatar className="h-8 w-8">
               <AvatarImage src={identity?.avatar} role="presentation" />
-              <AvatarFallback>{identity?.fullName?.charAt(0)}</AvatarFallback>
+              <AvatarFallback>{identity?.name?.charAt(0)}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
@@ -57,7 +57,7 @@ export function UserMenu({ children }: UserMenuProps) {
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
-                {identity?.fullName}
+                {identity?.name}
               </p>
             </div>
           </DropdownMenuLabel>

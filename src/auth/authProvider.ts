@@ -40,6 +40,8 @@ const authProvider: AuthProvider = {
       method: "GET",
       credentials: "include",
     });
+    // Clear permissions from localStorage
+    localStorage.removeItem("permissions");
     return "/login";
   },
 
@@ -73,31 +75,26 @@ const authProvider: AuthProvider = {
     };
   },
 
-  // Get current permissions
-  // getPermissions: async () => {
-  // const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/permissions`, {
-  //   method: "GET",
-  //   credentials: "include",
-  // });
-  // if (!res.ok) throw new Error("Cannot fetch permissions");
-  // const data = await res.json();
-  // return data.permissions;
-  // return;
-  // },
-
-  // canAccess: async ({ resource, action }) => {
-  //   const res = await fetch(`${BACKEND_URL}/api/v1/cms/authors/can-access`, {
-  //     method: "POST",
-  //     credentials: "include",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ resource, action }),
-  //   });
-  //   if (!res.ok) {
-  //     return { canAccess: false, reason: "Cannot fetch permissions" };
-  //   }
-  //   const data = await res.json();
-  //   return data;
-  // },
+  // Access Control: Check if user can access a resource/action
+  canAccess: async ({ action, resource }) => {
+    try {
+      const res = await fetch(
+        `${BACKEND_URL}/api/v1/cms/authors/check-permission`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action, resource }),
+        }
+      );
+      if (!res.ok) return false;
+      const data = await res.json();
+      return data.hasPermission;
+    } catch (error) {
+      console.error("Error checking access:", error);
+      return false;
+    }
+  },
 };
 
 export default authProvider;

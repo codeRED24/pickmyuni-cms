@@ -8,9 +8,16 @@ import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
-import { Create, SelectInput } from "../admin";
+import {
+  AutocompleteInput,
+  Create,
+  ReferenceField,
+  ReferenceInput,
+  SelectInput,
+} from "../admin";
 import { required, useDataProvider } from "ra-core";
 import { useQuery } from "@tanstack/react-query";
+import { humanize } from "inflection";
 
 export const AuthorList = () => (
   <List>
@@ -51,6 +58,9 @@ export const AuthorShow = () => (
       <RecordField source="bg_url" />
       <RecordField source="designation" />
       <RecordField source="role" />
+      <RecordField source="reports_to_id">
+        <ReferenceField source="reports_to_id" reference="authors" />
+      </RecordField>
     </div>
   </Show>
 );
@@ -62,10 +72,11 @@ const AuthorForm = ({ isCreate = false }) => {
     queryFn: () => dataProvider.getRoles(),
   });
 
-  const formattedChoices = ((roles as any)?.data || []).map((role: any) => ({
-    id: role.name,
-    name: role.name,
-  }));
+  if (isLoading) return null;
+
+  const formattedChoices = ((roles as any)?.data ?? []).map((role: any) => {
+    return { id: role, name: humanize(role) };
+  });
 
   return (
     <SimpleForm>
@@ -84,6 +95,9 @@ const AuthorForm = ({ isCreate = false }) => {
         isLoading={isLoading}
         validate={required()}
       />
+      <ReferenceInput source="reports_to_id" reference="authors">
+        <AutocompleteInput />
+      </ReferenceInput>
     </SimpleForm>
   );
 };

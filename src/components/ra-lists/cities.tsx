@@ -17,7 +17,6 @@ import {
   NumberInput,
   RecordField,
   SearchInput,
-  SelectInput,
   Show,
   TextField,
 } from "../../components/admin";
@@ -26,6 +25,7 @@ import JoditInput from "../admin/JoditInput";
 import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
 import { PreviewButton } from "../shared/PreviewButton";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
+import StatusSelect from "../shared/ArticleSTatusSelect";
 
 const cityFilters = [
   <SearchInput source="q" alwaysOn />,
@@ -36,6 +36,7 @@ const cityFilters = [
   <ReferenceInput source="state_id" reference="states">
     <AutocompleteInput />
   </ReferenceInput>,
+  <StatusSelect />,
 ];
 
 const CityListActions = () => (
@@ -93,15 +94,7 @@ export const CityEdit = () => (
           <TextInput source="keywords" multiline />
           <TextInput source="canonical_url" multiline />
           <BooleanInput source="is_active" />
-          <SelectInput
-            source="status"
-            choices={[
-              { id: "DRAFT", name: "Draft" },
-              { id: "Deleted", name: "Deleted" },
-              { id: "SCHEDULED", name: "Scheduled" },
-              { id: "PUBLISHED", name: "Published" },
-            ]}
-          />
+          <StatusSelect />
           <TextInput source="createdAt" disabled />
           <TextInput source="updatedAt" disabled />
         </div>
@@ -137,15 +130,7 @@ export const CityCreate = () => (
           <TextInput source="keywords" multiline />
           <TextInput source="canonical_url" multiline />
           <BooleanInput source="is_active" />
-          <SelectInput
-            source="status"
-            choices={[
-              { id: "DRAFT", name: "Draft" },
-              { id: "Deleted", name: "Deleted" },
-              { id: "SCHEDULED", name: "Scheduled" },
-              { id: "PUBLISHED", name: "Published" },
-            ]}
-          />
+          <StatusSelect />
         </div>
         <div className="w-1/2 flex flex-col sticky top-24 self-start">
           <h2 className="text-xl font-bold mb-4">Preview</h2>

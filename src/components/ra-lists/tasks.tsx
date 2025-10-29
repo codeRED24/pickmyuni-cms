@@ -44,11 +44,10 @@ const contentTypeOptions = [
 ];
 
 const taskStatuses = [
-  { id: "pending", name: "pending" },
-  { id: "rejected", name: "rejected" },
-  { id: "approved", name: "approved" },
-  { id: "ask_for_approval", name: "ask for approval" },
-  { id: "improvise", name: "improvise" },
+  { id: "DRAFT", name: "DRAFT" },
+  { id: "PENDING_APPROVAL", name: "PENDING_APPROVAL" },
+  { id: "REJECTED", name: "REJECTED" },
+  { id: "COMPLETED", name: "COMPLETED" },
 ];
 
 const DynamicContentField = (props: any) => {
