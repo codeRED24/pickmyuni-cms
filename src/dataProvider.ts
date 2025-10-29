@@ -1,5 +1,6 @@
 import simpleRestProvider from "ra-data-simple-rest";
 import { fetchUtils } from "ra-core";
+import authProvider from "./auth/authProvider";
 
 const API_URL = import.meta.env.VITE_APP_API_URL + "/api/v1/cms";
 
@@ -15,9 +16,21 @@ const baseDataProvider = simpleRestProvider(API_URL, httpClient);
 
 export const dataProvider = {
   ...baseDataProvider,
+  getList: async (resource: string, params: any) => {
+    if (authProvider.getIdentity) {
+      const { id, role } = await authProvider.getIdentity();
+      if (
+        role === "content_writer" &&
+        !["media", "authors", "colleges"].includes(resource)
+      ) {
+        params.filter = { ...params.filter, author_id: id };
+      }
+    }
+    return baseDataProvider.getList(resource, params);
+  },
   getRoles: () => {
     return httpClient(`${API_URL}/roles`).then(({ json }) => ({
-      data: json.map((role: any) => ({ id: role.name, name: role.name })),
+      data: json,
     }));
   },
   verifyPin: (pin: string) => {

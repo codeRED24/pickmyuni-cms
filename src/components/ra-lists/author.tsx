@@ -17,6 +17,7 @@ import {
 } from "../admin";
 import { required, useDataProvider } from "ra-core";
 import { useQuery } from "@tanstack/react-query";
+import { humanize } from "inflection";
 
 export const AuthorList = () => (
   <List>
@@ -71,10 +72,11 @@ const AuthorForm = ({ isCreate = false }) => {
     queryFn: () => dataProvider.getRoles(),
   });
 
-  const formattedChoices = ((roles as any)?.data || []).map((role: any) => ({
-    id: role.name,
-    name: role.name,
-  }));
+  if (isLoading) return null;
+
+  const formattedChoices = (roles as any).data.map((role: any) => {
+    return { id: role, name: humanize(role) };
+  });
 
   return (
     <SimpleForm>
