@@ -1,6 +1,6 @@
 import { SelectInput } from "../admin";
 
-export default function StatusSelect({ role }: { role?: string }) {
+export default function StatusSelect() {
   return (
     <SelectInput
       source="status"
