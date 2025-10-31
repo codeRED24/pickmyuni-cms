@@ -57,12 +57,10 @@ export const ApprovalButtons = ({
         status: "DRAFT",
       };
 
-      console.log("Saving draft with data:", dataToSave);
-
       // Call save and wait for it to complete
-      const result = await save(dataToSave);
+      await save(dataToSave);
 
-      console.log("Save result:", result);
+      notify("Saved as draft", { type: "success" });
       notify("Saved as draft", { type: "success" });
       refresh();
     } catch (error: any) {
