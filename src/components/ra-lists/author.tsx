@@ -74,7 +74,7 @@ const AuthorForm = ({ isCreate = false }) => {
 
   if (isLoading) return null;
 
-  const formattedChoices = ((roles as any)?.data ?? []).map((role: any) => {
+  const formattedChoices = (roles as any).data.map((role: any) => {
     return { id: role, name: humanize(role) };
   });
 

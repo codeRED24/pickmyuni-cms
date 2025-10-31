@@ -22,7 +22,7 @@ import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
 import JoditInput from "../admin/JoditInput";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
-import { required } from "ra-core";
+import { required, useGetIdentity } from "ra-core";
 import { LiveCityPreview, StaticCityPreview } from "../cities/CityPreview";
 import { PreviewButton } from "../shared/PreviewButton";
 import StatusSelect from "../shared/ArticleSTatusSelect";
@@ -123,61 +123,91 @@ export const StreamShow = () => (
   </Show>
 );
 
-export const StreamEdit = () => (
-  <Edit>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="id" disabled />
-          <TextInput source="name" validate={required()} />
-          <TextInput source="slug" validate={required()} />
-          <JoditInput source="content" />
-          <TextInput source="createdAt" disabled />
-          <TextInput source="updatedAt" disabled />
-          <NumberInput source="score" />
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          <BooleanInput source="is_active" />
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
-            <LiveCityPreview />
-          </div>
-        </div>
-      </div>
-    </SimpleForm>
-  </Edit>
-);
+export const StreamEdit = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
 
-export const StreamCreate = () => (
-  <Create>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="name" validate={required()} />
-          <TextInput source="slug" validate={required()} />
-          <JoditInput source="content" />
-          <NumberInput source="score" />
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          <BooleanInput source="is_active" />
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
-            <LiveCityPreview />
+  return (
+    <Edit>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="id" disabled />
+            <TextInput source="name" validate={required()} />
+            <TextInput source="slug" validate={required()} />
+            <JoditInput source="content" />
+            <TextInput source="createdAt" disabled />
+            <TextInput source="updatedAt" disabled />
+            <NumberInput source="score" />
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+          </div>
+          <div className="w-1/2 flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
+              <LiveCityPreview />
+            </div>
           </div>
         </div>
-      </div>
-    </SimpleForm>
-  </Create>
-);
+      </SimpleForm>
+    </Edit>
+  );
+};
+
+export const StreamCreate = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
+
+  return (
+    <Create>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="name" validate={required()} />
+            <TextInput source="slug" validate={required()} />
+            <JoditInput source="content" />
+            <NumberInput source="score" />
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+          </div>
+          <div className="w-1/2 flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
+              <LiveCityPreview />
+            </div>
+          </div>
+        </div>
+      </SimpleForm>
+    </Create>
+  );
+};

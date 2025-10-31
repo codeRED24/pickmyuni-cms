@@ -11,7 +11,7 @@ import {
   ExportButton,
   SearchInput,
 } from "@/components/admin";
-import { required } from "ra-core";
+import { required, useGetIdentity } from "ra-core";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";
 import { BooleanInput } from "@/components/admin/boolean-input";
 import { Edit } from "@/components/admin/edit";
@@ -140,83 +140,116 @@ export const ArticleShow = () => (
   </Show>
 );
 
-export const ArticleEdit = () => (
-  <Edit>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput disabled source="id" />
-          <TextInput multiline source="title" />
-          <JoditInput source="content" />
-          <SelectInput source="silos" choices={articleSilos} />
-          <TextInput multiline source="slug" />
-          <TextInput source="canonical_url" />
-          <TextInput multiline source="meta_desc" />
-          <ImageSelectorInput source="og_img" />
-          <TextInput disabled source="createdAt" />
-          <TextInput disabled source="updatedAt" />
-          <NumberInput source="score" />
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          <BooleanInput source="is_active" />
-          <DateTimeInput source="publishedAt" />
-          <StatusSelect />
-          <TextInput multiline source="keywords" />
-          <TextInput multiline source="metatitle" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-        </div>
-        <div className="w-1/2 flex flex-col sticky top-24 self-start">
-          <div className="flex items-center justify-between mb-4 flex-shrink-0">
-            <h2 className="text-xl font-bold">Preview</h2>
-          </div>
-          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
-            <LiveArticlePreview />
-          </div>
-        </div>
-      </div>
-    </SimpleForm>
-  </Edit>
-);
+export const ArticleEdit = () => {
+  const { identity, isLoading } = useGetIdentity();
 
-export const ArticleCreate = () => (
-  <Create>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="title" validate={required()} multiline />
-          <JoditInput source="content" />
-          <SelectInput
-            source="silos"
-            choices={articleSilos}
-            validate={required()}
-          />
-          <TextInput source="slug" validate={required()} multiline />
-          <TextInput source="canonical_url" />
-          <TextInput source="meta_desc" multiline />
-          <TextInput source="metatitle" multiline />
-          <TextInput source="keywords" multiline />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput optionText="name" validate={required()} />
-          </ReferenceInput> */}
-          <NumberInput source="score" />
-          <ImageSelectorInput source="og_img" />
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          <DateTimeInput source="publishedAt" />
-          <BooleanInput source="is_active" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
-            <LiveArticlePreview />
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const isContentWriter = identity?.role === "content_writer";
+
+  return (
+    <Edit>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput disabled source="id" />
+            <TextInput multiline source="title" />
+            <JoditInput source="content" />
+            <SelectInput source="silos" choices={articleSilos} />
+            <TextInput multiline source="slug" />
+            <TextInput source="canonical_url" />
+            <TextInput multiline source="meta_desc" />
+            <ImageSelectorInput source="og_img" />
+            <TextInput disabled source="createdAt" />
+            <TextInput disabled source="updatedAt" />
+            <NumberInput source="score" />
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <DateTimeInput source="publishedAt" />
+                <StatusSelect />
+              </>
+            )}
+
+            <TextInput multiline source="keywords" />
+            <TextInput multiline source="metatitle" />
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+          </div>
+          <div className="w-1/2 flex flex-col sticky top-24 self-start">
+            <div className="flex items-center justify-between mb-4 flex-shrink-0">
+              <h2 className="text-xl font-bold">Preview</h2>
+            </div>
+            <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
+              <LiveArticlePreview />
+            </div>
           </div>
         </div>
-      </div>
-    </SimpleForm>
-  </Create>
-);
+      </SimpleForm>
+    </Edit>
+  );
+};
+
+export const ArticleCreate = () => {
+  const { identity, isLoading } = useGetIdentity();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const isContentWriter = identity?.role === "content_writer";
+
+  return (
+    <Create>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="title" validate={required()} multiline />
+            <JoditInput source="content" />
+            <SelectInput
+              source="silos"
+              choices={articleSilos}
+              validate={required()}
+            />
+            <TextInput source="slug" validate={required()} multiline />
+            <TextInput source="canonical_url" />
+            <TextInput source="meta_desc" multiline />
+            <TextInput source="metatitle" multiline />
+            <TextInput source="keywords" multiline />
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput optionText="name" validate={required()} />
+            </ReferenceInput> */}
+            <NumberInput source="score" />
+            <ImageSelectorInput source="og_img" />
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <DateTimeInput source="publishedAt" />
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+          </div>
+          <div className="w-1/2 flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
+              <LiveArticlePreview />
+            </div>
+          </div>
+        </div>
+      </SimpleForm>
+    </Create>
+  );
+};

@@ -9,7 +9,7 @@ import { ReferenceInput } from "@/components/admin/reference-input";
 import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
 import JoditInput from "../admin/JoditInput";
-import { required } from "ra-core";
+import { required, useGetIdentity } from "ra-core";
 import {
   CollegeCoursePreview,
   LiveCollegeCoursePreview,
@@ -72,132 +72,160 @@ export const CollegesCourseList = () => (
   </List>
 );
 
-export const CollegesCourseEdit = () => (
-  <Edit>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="id" disabled />
-          <TextInput source="name" validate={required()} />
-          <JoditInput source="content" />
-          <NumberInput
-            source="duration_in_months"
-            label="Duration (in weeks)"
-          />
-          <NumberInput source="tution_fees" />
-          <NumberInput source="hostel_fees" />
-          <NumberInput source="one_time_fees" />
-          <NumberInput source="other_fees" />
-          <TextInput source="meta_desc" />
-          <ImageSelectorInput source="og_img" />
-          {/* <TextInput source="createdAt" />
-      <TextInput source="updatedAt" /> */}
-          <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput />
-          </ReferenceInput>
-          <ReferenceInput source="course_id" reference="courses">
-            <AutocompleteInput optionText={"course_name"} />
-          </ReferenceInput>
-          <ReferenceInput source="streamId" reference="streams">
-            <AutocompleteInput />
-          </ReferenceInput>
-          <NumberInput source="score" />
-          <SelectInput
-            source="level"
-            choices={collegeCourseLevel}
-            validate={required()}
-          />
-          <NumberInput source="domestic_fees_in_aud" />
-          <NumberInput source="domestic_non_tution_fees" />
-          <NumberInput source="domestic_total_fees" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-          {/* <TextInput source="last_date" /> */}
-          {/* <NumberInput source="offered_domestic_fees" />
-          <NumberInput source="offered_int_fees" /> */}
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          {/* <BooleanInput source="is_promoted" />
-          <BooleanInput source="pmu_exclusive" /> */}
-          <BooleanInput source="is_active" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
-            <LiveCollegeCoursePreview />
+export const CollegesCourseEdit = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
+
+  return (
+    <Edit>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="id" disabled />
+            <TextInput source="name" validate={required()} />
+            <JoditInput source="content" />
+            <NumberInput
+              source="duration_in_months"
+              label="Duration (in weeks)"
+            />
+            <NumberInput source="tution_fees" />
+            <NumberInput source="hostel_fees" />
+            <NumberInput source="one_time_fees" />
+            <NumberInput source="other_fees" />
+            <TextInput source="meta_desc" />
+            <ImageSelectorInput source="og_img" />
+            {/* <TextInput source="createdAt" />
+        <TextInput source="updatedAt" /> */}
+            <ReferenceInput source="college_id" reference="colleges">
+              <AutocompleteInput />
+            </ReferenceInput>
+            <ReferenceInput source="course_id" reference="courses">
+              <AutocompleteInput optionText={"course_name"} />
+            </ReferenceInput>
+            <ReferenceInput source="streamId" reference="streams">
+              <AutocompleteInput />
+            </ReferenceInput>
+            <NumberInput source="score" />
+            <SelectInput
+              source="level"
+              choices={collegeCourseLevel}
+              validate={required()}
+            />
+            <NumberInput source="domestic_fees_in_aud" />
+            <NumberInput source="domestic_non_tution_fees" />
+            <NumberInput source="domestic_total_fees" />
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+            {/* <TextInput source="last_date" /> */}
+            {/* <NumberInput source="offered_domestic_fees" />
+            <NumberInput source="offered_int_fees" /> */}
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+            {/* <BooleanInput source="is_promoted" />
+            <BooleanInput source="pmu_exclusive" /> */}
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+          </div>
+          <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
+              <LiveCollegeCoursePreview />
+            </div>
           </div>
         </div>
-      </div>
-    </SimpleForm>
-  </Edit>
-);
+      </SimpleForm>
+    </Edit>
+  );
+};
 
-export const CollegesCourseCreate = () => (
-  <Create>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          {/* <TextInput source="id" disabled /> */}
-          <TextInput source="name" validate={[required()]} />
-          <JoditInput source="content" />
-          <NumberInput
-            source="duration_in_months"
-            label="Duration (in weeks)"
-          />
-          <NumberInput source="tution_fees" />
-          <NumberInput source="hostel_fees" />
-          <NumberInput source="one_time_fees" />
-          <NumberInput source="other_fees" />
-          <TextInput source="meta_desc" />
-          <ImageSelectorInput source="og_img" />
-          {/* <TextInput source="createdAt" />
-      <TextInput source="updatedAt" /> */}
-          <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput validate={[required()]} />
-          </ReferenceInput>
-          <ReferenceInput source="course_id" reference="courses">
-            <AutocompleteInput
-              optionText={"course_name"}
+export const CollegesCourseCreate = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
+
+  return (
+    <Create>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            {/* <TextInput source="id" disabled /> */}
+            <TextInput source="name" validate={[required()]} />
+            <JoditInput source="content" />
+            <NumberInput
+              source="duration_in_months"
+              label="Duration (in weeks)"
+            />
+            <NumberInput source="tution_fees" />
+            <NumberInput source="hostel_fees" />
+            <NumberInput source="one_time_fees" />
+            <NumberInput source="other_fees" />
+            <TextInput source="meta_desc" />
+            <ImageSelectorInput source="og_img" />
+            {/* <TextInput source="createdAt" />
+        <TextInput source="updatedAt" /> */}
+            <ReferenceInput source="college_id" reference="colleges">
+              <AutocompleteInput validate={[required()]} />
+            </ReferenceInput>
+            <ReferenceInput source="course_id" reference="courses">
+              <AutocompleteInput
+                optionText={"course_name"}
+                validate={[required()]}
+              />
+            </ReferenceInput>
+            <ReferenceInput source="streamId" reference="streams">
+              <AutocompleteInput validate={[required()]} />
+            </ReferenceInput>
+            <NumberInput source="score" />
+            <SelectInput
+              source="level"
+              choices={collegeCourseLevel}
               validate={[required()]}
             />
-          </ReferenceInput>
-          <ReferenceInput source="streamId" reference="streams">
-            <AutocompleteInput validate={[required()]} />
-          </ReferenceInput>
-          <NumberInput source="score" />
-          <SelectInput
-            source="level"
-            choices={collegeCourseLevel}
-            validate={[required()]}
-          />
-          <NumberInput source="domestic_fees_in_aud" />
-          <NumberInput source="domestic_non_tution_fees" />
-          <NumberInput source="domestic_total_fees" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-          {/* <TextInput source="last_date" /> */}
-          {/* <NumberInput source="offered_domestic_fees" />
-          <NumberInput source="offered_int_fees" /> */}
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          {/* <BooleanInput source="is_promoted" />
-          <BooleanInput source="pmu_exclusive" /> */}
-          <BooleanInput source="is_active" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
-            <LiveCollegeCoursePreview />
+            <NumberInput source="domestic_fees_in_aud" />
+            <NumberInput source="domestic_non_tution_fees" />
+            <NumberInput source="domestic_total_fees" />
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+            {/* <TextInput source="last_date" /> */}
+            {/* <NumberInput source="offered_domestic_fees" />
+            <NumberInput source="offered_int_fees" /> */}
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+            {/* <BooleanInput source="is_promoted" />
+            <BooleanInput source="pmu_exclusive" /> */}
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+          </div>
+          <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
+              <LiveCollegeCoursePreview />
+            </div>
           </div>
         </div>
-      </div>
-    </SimpleForm>
-  </Create>
-);
+      </SimpleForm>
+    </Create>
+  );
+};
 
 export const CollegesCourseShow = () => (
   <Show>

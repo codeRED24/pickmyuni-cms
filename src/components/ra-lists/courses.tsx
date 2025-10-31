@@ -14,7 +14,7 @@ import { Edit } from "@/components/admin/edit";
 import { ReferenceInput } from "@/components/admin/reference-input";
 import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
-import { required } from "ra-core";
+import { required, useGetIdentity } from "ra-core";
 import JoditInput from "../admin/JoditInput";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
 import StatusSelect from "../shared/ArticleSTatusSelect";
@@ -118,82 +118,110 @@ export const CourseShow = () => (
   </Show>
 );
 
-export const CourseEdit = () => (
-  <Edit>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="id" disabled />
-          <TextInput source="course_name" validate={required()} />
-          <NumberInput source="duration_in_months" />
-          <JoditInput source="content" />
-          <NumberInput source="rating" />
-          <NumberInput source="score" validate={required()} />
-          <TextInput source="meta_desc" />
-          <ImageSelectorInput source="og_img" />
-          <ReferenceInput source="streamId" reference="streams">
-            <AutocompleteInput validate={required()} />
-          </ReferenceInput>
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          <TextInput source="slug" />
-          <TextInput source="type" />
-          <BooleanInput source="is_active" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
-            <LiveCityPreview />
-          </div>
-        </div>
-      </div>
-    </SimpleForm>
-  </Edit>
-);
+export const CourseEdit = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
 
-export const CourseCreate = () => (
-  <Create>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="id" disabled />
-          <TextInput source="course_name" validate={required()} />{" "}
-          <JoditInput source="content" />
-          <NumberInput source="duration_in_months" />
-          <NumberInput source="rating" />
-          <NumberInput source="score" validate={required()} />
-          <TextInput source="meta_desc" />
-          <ImageSelectorInput source="og_img" />
-          <ReferenceInput source="streamId" reference="streams">
-            <AutocompleteInput validate={required()} />
-          </ReferenceInput>
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          <TextInput source="slug" />
-          <TextInput source="type" />
-          <BooleanInput source="is_active" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
-            <LiveCityPreview />
+  return (
+    <Edit>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="id" disabled />
+            <TextInput source="course_name" validate={required()} />
+            <NumberInput source="duration_in_months" />
+            <JoditInput source="content" />
+            <NumberInput source="rating" />
+            <NumberInput source="score" validate={required()} />
+            <TextInput source="meta_desc" />
+            <ImageSelectorInput source="og_img" />
+            <ReferenceInput source="streamId" reference="streams">
+              <AutocompleteInput validate={required()} />
+            </ReferenceInput>
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+            <TextInput source="slug" />
+            <TextInput source="type" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+          </div>
+          <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
+              <LiveCityPreview />
+            </div>
           </div>
         </div>
-      </div>
-    </SimpleForm>
-  </Create>
-);
+      </SimpleForm>
+    </Edit>
+  );
+};
+
+export const CourseCreate = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
+
+  return (
+    <Create>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="id" disabled />
+            <TextInput source="course_name" validate={required()} />{" "}
+            <JoditInput source="content" />
+            <NumberInput source="duration_in_months" />
+            <NumberInput source="rating" />
+            <NumberInput source="score" validate={required()} />
+            <TextInput source="meta_desc" />
+            <ImageSelectorInput source="og_img" />
+            <ReferenceInput source="streamId" reference="streams">
+              <AutocompleteInput validate={required()} />
+            </ReferenceInput>
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+            <TextInput source="slug" />
+            <TextInput source="type" />
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+          </div>
+          <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
+              <LiveCityPreview />
+            </div>
+          </div>
+        </div>
+      </SimpleForm>
+    </Create>
+  );
+};

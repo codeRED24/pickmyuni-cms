@@ -14,7 +14,7 @@ import { SimpleForm } from "@/components/admin/simple-form";
 import { TextInput } from "@/components/admin/text-input";
 import JoditInput from "../admin/JoditInput";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
-import { required } from "ra-core";
+import { required, useGetIdentity } from "ra-core";
 import StatusSelect from "../shared/ArticleSTatusSelect";
 
 export const StateList = () => (
@@ -105,65 +105,93 @@ export const StateShow = () => (
   </Show>
 );
 
-export const StateEdit = () => (
-  <Edit>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="id" disabled />
-          <TextInput source="name" validate={required()} />
-          <TextInput source="slug" validate={required()} />
-          <JoditInput source="content" />
-          <NumberInput source="score" />
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          <BooleanInput source="is_active" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
-            <LiveStatePreview />
-          </div>
-        </div>
-      </div>
-    </SimpleForm>
-  </Edit>
-);
+export const StateEdit = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
 
-export const StateCreate = () => (
-  <Create>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="name" validate={required()} />
-          <TextInput source="slug" validate={required()} />
-          <JoditInput source="content" />
-          <NumberInput source="score" />
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          <BooleanInput source="is_active" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
-            <LiveStatePreview />
+  return (
+    <Edit>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="id" disabled />
+            <TextInput source="name" validate={required()} />
+            <TextInput source="slug" validate={required()} />
+            <JoditInput source="content" />
+            <NumberInput source="score" />
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+          </div>
+          <div className="w-1/2 flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
+              <LiveStatePreview />
+            </div>
           </div>
         </div>
-      </div>
-    </SimpleForm>
-  </Create>
-);
+      </SimpleForm>
+    </Edit>
+  );
+};
+
+export const StateCreate = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
+
+  return (
+    <Create>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="name" validate={required()} />
+            <TextInput source="slug" validate={required()} />
+            <JoditInput source="content" />
+            <NumberInput source="score" />
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+          </div>
+          <div className="w-1/2 flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 bg-white overflow-auto max-h-[72vh]">
+              <LiveStatePreview />
+            </div>
+          </div>
+        </div>
+      </SimpleForm>
+    </Create>
+  );
+};
