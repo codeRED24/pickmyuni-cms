@@ -21,19 +21,29 @@ export const dataProvider = {
       const { id, role } = await authProvider.getIdentity();
       if (
         role === "content_writer" &&
-        !["media", "authors", "colleges"].includes(resource)
+        !["media", "authors", "colleges", "tasks"].includes(resource)
       ) {
         params.filter = { ...params.filter, author_id: id };
+      } else if (
+        role === "team_lead" &&
+        !["media", "authors", "colleges", "tasks"].includes(resource)
+      ) {
+        const { data: reportingAuthors } = await baseDataProvider.getList(
+          "authors",
+          { filter: { reports_to_id: id } }
+        );
+        const authorIds = reportingAuthors.map((author: any) => author.id);
+        params.filter = { ...params.filter, author_id: authorIds };
       }
     }
     return baseDataProvider.getList(resource, params);
   },
-  getRoles: () => {
+  getRoles: async () => {
     return httpClient(`${API_URL}/roles`).then(({ json }) => ({
       data: json,
     }));
   },
-  verifyPin: (pin: string) => {
+  verifyPin: async (pin: string) => {
     return httpClient(`${API_URL}/delete-pin`, {
       method: "POST",
       headers: new Headers({

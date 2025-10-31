@@ -91,6 +91,7 @@ import { SchedulerList } from "./components/scheduler/Scheduler";
 import { dataProvider } from "./dataProvider";
 import { StatePreviewPage } from "./components/states/StatePreviewPage";
 import { Button } from "./components/ui/button";
+import { LoginPageNew } from "./components/admin/login-page-new";
 
 const queryClient = new QueryClient();
 
@@ -103,6 +104,7 @@ export default function App() {
       authProvider={authProvider}
       dataProvider={dataProvider}
       queryClient={queryClient}
+      loginPage={LoginPageNew}
     >
       <CustomRoutes>
         <Route path="/articles/:id/preview" element={<ArticlePreviewPage />} />

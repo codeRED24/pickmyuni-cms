@@ -20,23 +20,30 @@ const configureFaqPlugin = (jodit: any) => {
   };
 };
 
+const configureClearCssPlugin = (jodit: any) => {
+  jodit.options.controls.clearCss = {
+    icon: "🧹",
+    tooltip: "Clear CSS & Styles",
+    exec: (editor: any) => {
+      const currentHtml = editor.getEditorValue();
+      let cleanedHtml = currentHtml
+        .replace(/ style="[^"]*"/gi, "")
+        .replace(/ class="[^"]*"/gi, "");
+      cleanedHtml = cleanedHtml.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "");
+      editor.setEditorValue(cleanedHtml);
+    },
+  };
+};
+
 // Register the plugin
 if (typeof Jodit !== "undefined") {
   Jodit.plugins.add("faq", configureFaqPlugin);
+  Jodit.plugins.add("clearCss", configureClearCssPlugin);
 }
 
 const JoditInput = (props: any) => {
   const { field } = useInput(props);
   const { identity, isLoading } = useGetIdentity();
-
-  // allowed roles who can see/edit the content field
-  const allowed = ["admin", "content_writer", "team_lead"];
-
-  // while identity is loading, don't render the editor to avoid flicker
-  if (isLoading) return null;
-
-  // hide the editor for roles not in the allowed list
-  if (!identity || !allowed.includes(identity?.role)) return null;
   const editor = useRef(null);
 
   // Memoize config to prevent unnecessary re-renders
@@ -59,7 +66,7 @@ const JoditInput = (props: any) => {
     const defaultButtons = normalizeButtons(defaultButtonsRaw);
 
     // Merge default buttons and our custom insertFAQ, avoiding duplicates
-    const buttons = Array.from(new Set([...defaultButtons, "faq"]));
+    const buttons = Array.from(new Set([...defaultButtons, "faq", "clearCss"]));
 
     // Preserve any default extraPlugins
     const defaultExtra = defaultOptions.extraPlugins || [];
@@ -67,6 +74,7 @@ const JoditInput = (props: any) => {
       new Set([
         ...(Array.isArray(defaultExtra) ? defaultExtra : [defaultExtra]),
         "faq",
+        "clearCss",
       ])
     );
 
@@ -80,6 +88,15 @@ const JoditInput = (props: any) => {
       extraPlugins,
     };
   }, []);
+
+  // allowed roles who can see/edit the content field
+  const allowed = ["admin", "content_writer", "team_lead"];
+
+  // while identity is loading, don't render the editor to avoid flicker
+  if (isLoading) return null;
+
+  // hide the editor for roles not in the allowed list
+  if (!identity || !allowed.includes(identity?.role)) return null;
 
   return (
     <JoditEditor

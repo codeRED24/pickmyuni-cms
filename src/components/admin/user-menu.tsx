@@ -49,7 +49,9 @@ export function UserMenu({ children }: UserMenuProps) {
           >
             <Avatar className="h-8 w-8">
               <AvatarImage src={identity?.avatar} role="presentation" />
-              <AvatarFallback>{identity?.name?.charAt(0)}</AvatarFallback>
+              <AvatarFallback>
+                {identity?.name?.charAt(0).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>

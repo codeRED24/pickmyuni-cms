@@ -1,8 +1,12 @@
 import { SelectInput } from "../admin";
 
-export default function StatusSelect() {
+export default function StatusSelect({ role }: { role?: string }) {
   return (
     <SelectInput
+      // provide a string (matching the choice id) when role indicates draft, otherwise undefined
+      defaultValue={role === "content_writer" ? "DRAFT" : "DRAFT"}
+      disabled={role === "content_writer"}
+      disableValue="DRAFT"
       source="status"
       choices={[
         { id: "DRAFT", name: "DRAFT" },

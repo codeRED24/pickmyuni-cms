@@ -28,7 +28,7 @@ import {
 import JoditInput from "../admin/JoditInput";
 import { PreviewButton } from "../shared/PreviewButton";
 import { ImageSelectorInput } from "@/components/admin/ImageSelectorInput";
-import { required } from "ra-core";
+import { required, useGetIdentity } from "ra-core";
 import StatusSelect from "../shared/ArticleSTatusSelect";
 
 const silosChoices = [
@@ -95,89 +95,121 @@ export const CollegeswiseContentList = () => (
   </List>
 );
 
-export const CollegeswiseContentEdit = () => (
-  <Edit>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="id" disabled />
-          <TextInput source="title" validate={required()} />
-          <JoditInput source="content" />
-          <SelectInput
-            source="silos"
-            choices={silosChoices}
-            validate={required()}
-          />
-          <TextInput source="meta_desc" />
-          <ImageSelectorInput source="og_img" />
-          <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput validate={required()} />
-          </ReferenceInput>
-          <NumberInput source="score" />
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          <BooleanInput source="is_active" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
-            <LiveCollegeContentPreview />
-          </div>
-        </div>
-      </div>
-    </SimpleForm>
-  </Edit>
-);
+export const CollegeswiseContentEdit = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
 
-export const CollegeswiseContentCreate = () => (
-  <Create>
-    <SimpleForm className="max-w-full">
-      <div className="flex gap-4">
-        <div className="w-1/2 space-y-4">
-          <TextInput source="title" validate={required()} />
-          <JoditInput source="content" />
-          <SelectInput
-            source="silos"
-            choices={silosChoices}
-            validate={required()}
-          />
-          <TextInput source="meta_desc" />
-          <ImageSelectorInput source="og_img" />
-          <ReferenceInput source="college_id" reference="colleges">
-            <AutocompleteInput
-              optionText={"college_name"}
+  return (
+    <Edit>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="id" disabled />
+            <TextInput source="title" validate={required()} />
+            <JoditInput source="content" />
+            <SelectInput
+              source="silos"
+              choices={silosChoices}
               validate={required()}
             />
-          </ReferenceInput>
-          <NumberInput source="score" />
-          <ImageSelectorInput source="banner_img" />
-          <ImageSelectorInput source="img1" />
-          <ImageSelectorInput source="img2" />
-          <BooleanInput source="is_active" />
-          {/* <ReferenceInput source="author_id" reference="authors">
-            <AutocompleteInput />
-          </ReferenceInput> */}
-          <TextInput source="keywords" />
-          <TextInput source="canonical_url" />
-          <StatusSelect />
-        </div>
-        <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
-          <h2 className="text-xl font-bold mb-4">Preview</h2>
-          <div className="border rounded-lg p-4 bg-white h-full overflow-auto max-h-[72vh]">
-            <LiveCollegeContentPreview />
+            <TextInput source="meta_desc" />
+            <ImageSelectorInput source="og_img" />
+            <ReferenceInput source="college_id" reference="colleges">
+              <AutocompleteInput validate={required()} />
+            </ReferenceInput>
+            <NumberInput source="score" />
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+          </div>
+          <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 h-full bg-white overflow-auto max-h-[72vh]">
+              <LiveCollegeContentPreview />
+            </div>
           </div>
         </div>
-      </div>
-    </SimpleForm>
-  </Create>
-);
+      </SimpleForm>
+    </Edit>
+  );
+};
+
+export const CollegeswiseContentCreate = () => {
+  const { identity, isLoading } = useGetIdentity();
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const isContentWriter = identity?.role === "content_writer";
+
+  return (
+    <Create>
+      <SimpleForm className="max-w-full">
+        <div className="flex gap-4">
+          <div className="w-1/2 space-y-4">
+            <TextInput source="title" validate={required()} />
+            <JoditInput source="content" />
+            <SelectInput
+              source="silos"
+              choices={silosChoices}
+              validate={required()}
+            />
+            <TextInput source="meta_desc" />
+            <ImageSelectorInput source="og_img" />
+            <ReferenceInput source="college_id" reference="colleges">
+              <AutocompleteInput
+                optionText={"college_name"}
+                validate={required()}
+              />
+            </ReferenceInput>
+            <NumberInput source="score" />
+            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" />
+            <ImageSelectorInput source="img2" />
+
+            {/* Only show is_active and status for admin and team_lead */}
+
+            {!isContentWriter && (
+              <>
+                <BooleanInput source="is_active" />
+                <StatusSelect />
+              </>
+            )}
+
+            {/* <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput> */}
+            <TextInput source="keywords" />
+            <TextInput source="canonical_url" />
+          </div>
+          <div className="w-1/2 h-[75vh] flex flex-col sticky top-24 self-start">
+            <h2 className="text-xl font-bold mb-4">Preview</h2>
+            <div className="border rounded-lg p-4 bg-white h-full overflow-auto max-h-[72vh]">
+              <LiveCollegeContentPreview />
+            </div>
+          </div>
+        </div>
+      </SimpleForm>
+    </Create>
+  );
+};
 
 export const CollegeswiseContentShow = () => (
   <Show>
