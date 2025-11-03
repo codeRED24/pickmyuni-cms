@@ -7,7 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { useNotificationSSE } from "@/hooks/useNotificationSSE";
+import { useNotifications } from "@/hooks/useNotifications";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -26,12 +26,11 @@ export const NotificationBell = () => {
   const {
     notifications,
     unreadCount,
-    isConnected,
     markAsRead,
     markAllAsRead,
     deleteNotification,
     clearAll,
-  } = useNotificationSSE();
+  } = useNotifications();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenChange = (open: boolean) => {
@@ -54,9 +53,6 @@ export const NotificationBell = () => {
               {unreadCount > 99 ? "99+" : unreadCount}
             </Badge>
           )}
-          {!isConnected && (
-            <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-yellow-500" />
-          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-96 p-0" align="end">
@@ -68,7 +64,7 @@ export const NotificationBell = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={markAllAsRead}
+                  onClick={() => markAllAsRead()}
                   className="h-8 text-xs"
                 >
                   <CheckCheck className="h-4 w-4 mr-1" />
@@ -78,7 +74,7 @@ export const NotificationBell = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={clearAll}
+                onClick={() => clearAll()}
                 className="h-8 text-xs text-destructive hover:text-destructive"
               >
                 <Trash2 className="h-4 w-4 mr-1" />
