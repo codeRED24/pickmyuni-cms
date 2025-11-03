@@ -56,6 +56,28 @@ import {
   TaskList,
   TaskShow,
 } from "./components/ra-lists/tasks";
+import {
+  PromotionalCourseList,
+  PromotionalCourseEdit,
+  PromotionalCourseCreate,
+  PromotionalCourseShow,
+} from "./components/ra-lists/promotionalCourses";
+import {
+  ReviewList,
+  ReviewEdit,
+  ReviewShow,
+} from "./components/ra-lists/reviews";
+import {
+  NewsletterList,
+  NewsletterShow,
+} from "./components/ra-lists/newsletters";
+import {
+  SubscriptionList,
+  SubscriptionShow,
+} from "./components/ra-lists/subscriptions";
+import { ContactUsList, ContactUsShow } from "./components/ra-lists/contactUs";
+import { LeadFormList, LeadFormShow } from "./components/ra-lists/leadForms";
+import { UserList, UserShow } from "./components/ra-lists/users";
 import { Link, Route } from "react-router-dom";
 import ArticlePreviewPage from "./components/articles/ArticlePreviewPage";
 import CityPreviewPage from "./components/cities/CityPreviewPage";
@@ -74,6 +96,12 @@ import {
   Image,
   Calendar,
   AlertTriangle,
+  FileBadge,
+  Star,
+  Mail,
+  UserPlus,
+  Phone,
+  FileText,
 } from "lucide-react";
 import {
   CollegeswiseContentCreate,
@@ -237,6 +265,46 @@ export default function App() {
         icon={ListTodo}
       />
       <Resource name="media" list={MediaLibraryList} icon={Image} />
+      <Resource
+        name="promotional-courses"
+        list={PromotionalCourseList}
+        edit={PromotionalCourseEdit}
+        create={PromotionalCourseCreate}
+        show={PromotionalCourseShow}
+        icon={FileBadge}
+      />
+      <Resource
+        name="reviews"
+        list={ReviewList}
+        edit={ReviewEdit}
+        show={ReviewShow}
+        icon={Star}
+      />
+      <Resource
+        name="newsletters"
+        list={NewsletterList}
+        show={NewsletterShow}
+        icon={Mail}
+      />
+      <Resource
+        name="subscriptions"
+        list={SubscriptionList}
+        show={SubscriptionShow}
+        icon={UserPlus}
+      />
+      <Resource
+        name="contact-us"
+        list={ContactUsList}
+        show={ContactUsShow}
+        icon={Phone}
+      />
+      <Resource
+        name="lead-forms"
+        list={LeadFormList}
+        show={LeadFormShow}
+        icon={FileText}
+      />
+      <Resource name="users" list={UserList} show={UserShow} icon={Users} />
     </Admin>
   );
 }
