@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence, type Transition } from "motion/react";
 
 import { cn } from "@/lib/utils";
@@ -56,6 +56,7 @@ type AccordionTriggerProps = React.ComponentPropsWithoutRef<
   typeof AccordionPrimitive.Trigger
 > & {
   transition?: Transition;
+  iconStyle?: "plus-minus" | "chevron";
 };
 
 const AccordionTrigger = React.forwardRef<
@@ -67,6 +68,7 @@ const AccordionTrigger = React.forwardRef<
       className,
       children,
       transition = { type: "spring", stiffness: 150, damping: 17 },
+      iconStyle = "plus-minus",
       ...props
     },
     ref
@@ -111,28 +113,49 @@ const AccordionTrigger = React.forwardRef<
           className={cn(
             "flex flex-1 items-center justify-between py-5 text-xl font-medium",
             isOpen
-              ? "text-brand-secondary border-b-2"
-              : "text-brand-primary border-b-2 border-[#2C5680]",
+              ? "text-brand-secondary border-b-2 text-start"
+              : "text-brand-primary border-b-2 border-[#2C5680] text-start",
             className
           )}
           {...props}
         >
           {children}
           <motion.div className="relative size-5 shrink-0">
-            <motion.span
-              className="absolute inset-0 flex items-center justify-center font-bold"
-              animate={{ opacity: isOpen ? 0 : 1 }}
-              transition={transition}
-            >
-              <Plus />
-            </motion.span>
-            <motion.span
-              className="absolute inset-0 flex items-center justify-center font-bold"
-              animate={{ opacity: isOpen ? 1 : 0 }}
-              transition={transition}
-            >
-              <Minus className="font-bold" />
-            </motion.span>
+            {iconStyle === "chevron" ? (
+              <>
+                <motion.span
+                  className="absolute inset-0 flex items-center justify-center"
+                  animate={{ opacity: isOpen ? 0 : 1 }}
+                  transition={transition}
+                >
+                  <ChevronDown className="h-5 w-5" />
+                </motion.span>
+                <motion.span
+                  className="absolute inset-0 flex items-center justify-center"
+                  animate={{ opacity: isOpen ? 1 : 0 }}
+                  transition={transition}
+                >
+                  <ChevronUp className="h-5 w-5" />
+                </motion.span>
+              </>
+            ) : (
+              <>
+                <motion.span
+                  className="absolute inset-0 flex items-center justify-center font-bold"
+                  animate={{ opacity: isOpen ? 0 : 1 }}
+                  transition={transition}
+                >
+                  <Plus />
+                </motion.span>
+                <motion.span
+                  className="absolute inset-0 flex items-center justify-center font-bold"
+                  animate={{ opacity: isOpen ? 1 : 0 }}
+                  transition={transition}
+                >
+                  <Minus className="font-bold" />
+                </motion.span>
+              </>
+            )}
           </motion.div>
         </AccordionPrimitive.Trigger>
       </AccordionPrimitive.Header>
