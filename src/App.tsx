@@ -120,6 +120,13 @@ import { dataProvider } from "./dataProvider";
 import { StatePreviewPage } from "./components/states/StatePreviewPage";
 import { Button } from "./components/ui/button";
 import { LoginPageNew } from "./components/admin/login-page-new";
+import {
+  ExamCreate,
+  ExamEdit,
+  ExamList,
+  ExamShow,
+} from "./components/ra-lists/exams";
+import ExamPreviewPage from "./components/exams/ExamPreviewPage";
 
 const queryClient = new QueryClient();
 
@@ -148,6 +155,7 @@ export default function App() {
           element={<CollegeCoursePreviewPage />}
         />
         <Route path="/states/:id/preview" element={<StatePreviewPage />} />
+        <Route path="/exams/:id/preview" element={<ExamPreviewPage />} />
         <Route
           path="/access-denied"
           element={
@@ -255,6 +263,14 @@ export default function App() {
         show={StreamShow}
         create={StreamCreate}
         icon={Workflow}
+      />
+      <Resource
+        name="exams"
+        list={ExamList}
+        edit={ExamEdit}
+        show={ExamShow}
+        create={ExamCreate}
+        icon={FileBadge}
       />
       <Resource
         name="tasks"

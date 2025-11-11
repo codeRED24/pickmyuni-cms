@@ -21,12 +21,12 @@ export const dataProvider = {
       const { id, role } = await authProvider.getIdentity();
       if (
         role === "content_writer" &&
-        !["media", "authors", "colleges", "tasks"].includes(resource)
+        !["media", "authors", "colleges", "tasks", "exams"].includes(resource)
       ) {
         params.filter = { ...params.filter, author_id: id };
       } else if (
         role === "team_lead" &&
-        !["media", "authors", "colleges", "tasks"].includes(resource)
+        !["media", "authors", "colleges", "tasks", "exams"].includes(resource)
       ) {
         const { data: reportingAuthors } = await baseDataProvider.getList(
           "authors",
