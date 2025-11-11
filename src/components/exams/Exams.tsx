@@ -1,7 +1,6 @@
 import { RecordContextProvider, useRecordContext } from "ra-core";
 import ArticleContent from "../shared/ArticleContent";
 import { useWatch } from "react-hook-form";
-import dayjs from "dayjs";
 
 export const LiveExamPreview = () => {
   const record = useRecordContext();
