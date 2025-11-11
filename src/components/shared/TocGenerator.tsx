@@ -15,7 +15,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/radix-accordion";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 interface TOCItem {
   id: string;
