@@ -17,7 +17,9 @@ import { InputHelperText } from "./input-helper-text";
 import { cn } from "@/lib/utils";
 import { Eye } from "lucide-react";
 
-export const ImageSelectorInput = (props: InputProps) => {
+export const ImageSelectorInput = (
+  props: InputProps & { folderPath?: string }
+) => {
   const {
     field,
     fieldState: { error, isTouched },
@@ -36,6 +38,7 @@ export const ImageSelectorInput = (props: InputProps) => {
           "POST",
           `${import.meta.env.VITE_APP_API_URL}/api/v1/cms/upload`
         );
+        xhr.withCredentials = true;
 
         xhr.upload.onprogress = (event) => {
           const percent = (event.loaded / event.total) * 100;
@@ -52,11 +55,17 @@ export const ImageSelectorInput = (props: InputProps) => {
 
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("folder", "");
+
+        let folder = props.folderPath;
+        if (!folder) {
+          folder = "uploads";
+        }
+
+        formData.append("folder", folder);
         xhr.send(formData);
       }
     },
-    [field]
+    [field, props.folderPath]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

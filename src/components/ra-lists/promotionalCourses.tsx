@@ -100,7 +100,7 @@ export const PromotionalCourseEdit = () => (
       <TextInput source="total_fees" />
       <TextInput source="offered_fees" />
       <DateTimeInput source="last_date" />
-      <ImageSelectorInput source="img_url" />
+      <ImageSelectorInput source="img_url" folderPath="promotion" />
       <NumberInput source="score" />
       <SelectInput
         source="course_type"
@@ -136,7 +136,7 @@ export const PromotionalCourseCreate = () => (
       <TextInput source="total_fees" />
       <TextInput source="offered_fees" />
       <DateTimeInput source="last_date" />
-      <ImageSelectorInput source="img_url" />
+      <ImageSelectorInput source="img_url" folderPath="promotion" />
       <NumberInput source="score" />
       <SelectInput
         source="course_type"
