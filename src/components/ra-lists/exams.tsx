@@ -168,9 +168,9 @@ export const ExamEdit = () => {
               choices={examLevels.map((l) => ({ id: l, name: l }))}
             />
             <JoditInput source="content" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
-            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" folderPath="exams/img1" />
+            <ImageSelectorInput source="img2" folderPath="exams/img2" />
+            <ImageSelectorInput source="banner_img" folderPath="exams/banner_img" />
             <SelectInput
               source="mode"
               choices={examModes.map((m) => ({ id: m, name: m }))}
@@ -232,9 +232,9 @@ export const ExamCreate = () => {
               choices={examLevels.map((l) => ({ id: l, name: l }))}
             />
             <JoditInput source="content" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
-            <ImageSelectorInput source="banner_img" />
+            <ImageSelectorInput source="img1" folderPath="exams/img1" />
+            <ImageSelectorInput source="img2" folderPath="exams/img2" />
+            <ImageSelectorInput source="banner_img" folderPath="exams/banner_img" />
             <SelectInput
               source="mode"
               choices={examModes.map((m) => ({ id: m, name: m }))}

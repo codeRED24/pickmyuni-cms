@@ -122,9 +122,9 @@ export const StateEdit = () => {
             <TextInput source="slug" validate={required()} />
             <JoditInput source="content" />
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="banner_img" folderPath="states/banner_img" />
+            <ImageSelectorInput source="img1" folderPath="states/img1" />
+            <ImageSelectorInput source="img2" folderPath="states/img2" />
             {/* <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
             </ReferenceInput> */}
@@ -167,9 +167,9 @@ export const StateCreate = () => {
             <TextInput source="slug" validate={required()} />
             <JoditInput source="content" />
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="banner_img" folderPath="states/banner_img" />
+            <ImageSelectorInput source="img1" folderPath="states/img1" />
+            <ImageSelectorInput source="img2" folderPath="states/img2" />
             {/* <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
             </ReferenceInput> */}

@@ -95,9 +95,9 @@ export const CityEdit = () => {
             {/* <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
             </ReferenceInput> */}
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="banner_img" folderPath="cities/banner_img" />
+            <ImageSelectorInput source="img1" folderPath="cities/img1" />
+            <ImageSelectorInput source="img2" folderPath="cities/img2" />
             <TextInput source="keywords" multiline />
             <TextInput source="canonical_url" multiline />
 
@@ -147,9 +147,9 @@ export const CityCreate = () => {
             {/* <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
             </ReferenceInput> */}
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="banner_img" folderPath="cities/banner_img" />
+            <ImageSelectorInput source="img1" folderPath="cities/img1" />
+            <ImageSelectorInput source="img2" folderPath="cities/img2" />
             <TextInput source="keywords" multiline />
             <TextInput source="canonical_url" multiline />
             {/* Only show is_active and status for admin and team_lead */}

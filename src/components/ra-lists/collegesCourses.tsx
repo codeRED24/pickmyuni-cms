@@ -96,7 +96,7 @@ export const CollegesCourseEdit = () => {
             <NumberInput source="one_time_fees" />
             <NumberInput source="other_fees" />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" />
+            <ImageSelectorInput source="og_img" folderPath="colleges-courses/og_img" />
             {/* <TextInput source="createdAt" />
         <TextInput source="updatedAt" /> */}
             <ReferenceInput source="college_id" reference="colleges">
@@ -172,7 +172,7 @@ export const CollegesCourseCreate = () => {
             <NumberInput source="one_time_fees" />
             <NumberInput source="other_fees" />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" />
+            <ImageSelectorInput source="og_img" folderPath="colleges-courses/og_img" />
             {/* <TextInput source="createdAt" />
         <TextInput source="updatedAt" /> */}
             <ReferenceInput source="college_id" reference="colleges">

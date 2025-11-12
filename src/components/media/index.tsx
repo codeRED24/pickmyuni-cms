@@ -82,7 +82,10 @@ export const MediaLibraryList = ({
     setError(null);
     try {
       const response = await fetch(
-        `${API_URL}/api/v1/cms/upload?folder=${currentPath}`
+        `${API_URL}/api/v1/cms/upload?folder=${currentPath}`,
+        {
+          credentials: "include",
+        }
       );
       if (!response.ok) {
         throw new Error("Failed to fetch files.");
@@ -168,6 +171,7 @@ export const MediaLibraryList = ({
         formData.append("folder", currentPath);
 
         xhr.open("POST", `${API_URL}/api/v1/cms/upload`, true);
+        xhr.withCredentials = true;
         xhr.send(formData);
       });
     });
@@ -194,6 +198,7 @@ export const MediaLibraryList = ({
     try {
       const response = await fetch(`${API_URL}/api/v1/cms/upload${endpoint}`, {
         method: "DELETE",
+        credentials: "include",
       });
       if (!response.ok) {
         throw new Error("Delete failed");
@@ -219,6 +224,7 @@ export const MediaLibraryList = ({
     try {
       const response = await fetch(`${API_URL}/api/v1/cms/upload/rename`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -260,6 +266,7 @@ export const MediaLibraryList = ({
     try {
       const response = await fetch(`${API_URL}/api/v1/cms/upload/folder`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

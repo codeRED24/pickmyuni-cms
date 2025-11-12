@@ -137,13 +137,13 @@ export const CourseEdit = () => {
             <NumberInput source="rating" />
             <NumberInput source="score" validate={required()} />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" />
+            <ImageSelectorInput source="og_img" folderPath="courses/og_img" />
             <ReferenceInput source="streamId" reference="streams">
               <AutocompleteInput validate={required()} />
             </ReferenceInput>
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="banner_img" folderPath="courses/banner_img" />
+            <ImageSelectorInput source="img1" folderPath="courses/img1" />
+            <ImageSelectorInput source="img2" folderPath="courses/img2" />
             <TextInput source="slug" />
             <TextInput source="type" />
 
@@ -192,13 +192,13 @@ export const CourseCreate = () => {
             <NumberInput source="rating" />
             <NumberInput source="score" validate={required()} />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" />
+            <ImageSelectorInput source="og_img" folderPath="courses/og_img" />
             <ReferenceInput source="streamId" reference="streams">
               <AutocompleteInput validate={required()} />
             </ReferenceInput>
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="banner_img" folderPath="courses/banner_img" />
+            <ImageSelectorInput source="img1" folderPath="courses/img1" />
+            <ImageSelectorInput source="img2" folderPath="courses/img2" />
             <TextInput source="slug" />
             <TextInput source="type" />
             {/* Only show is_active and status for admin and team_lead */}

@@ -86,8 +86,8 @@ const AuthorForm = ({ isCreate = false }) => {
       <TextInput source="email" disabled={!isCreate} />
       {isCreate && <TextInput source="password" />}
       <TextInput source="description" />
-      <ImageSelectorInput source="image" />
-      <ImageSelectorInput source="bg_url" />
+      <ImageSelectorInput source="image" folderPath="authors/image" />
+      <ImageSelectorInput source="bg_url" folderPath="authors/bg_url" />
       <TextInput source="designation" />
       <SelectInput
         source="role"

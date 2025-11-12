@@ -161,13 +161,16 @@ export const ArticleEdit = () => {
             <TextInput multiline source="slug" />
             <TextInput source="canonical_url" />
             <TextInput multiline source="meta_desc" />
-            <ImageSelectorInput source="og_img" />
+            <ImageSelectorInput source="og_img" folderPath="Article/og_img" />
             <TextInput disabled source="createdAt" />
             <TextInput disabled source="updatedAt" />
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="Article/banner_img"
+            />
+            <ImageSelectorInput source="img1" folderPath="Article/img1" />
+            <ImageSelectorInput source="img2" folderPath="Article/img2" />
 
             {/* Only show is_active and status for admin and team_lead */}
             {!isContentWriter && (
@@ -228,10 +231,13 @@ export const ArticleCreate = () => {
               <AutocompleteInput optionText="name" validate={required()} />
             </ReferenceInput> */}
             <NumberInput source="score" />
-            <ImageSelectorInput source="og_img" />
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="og_img" folderPath="Article/og_img" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="Article/banner_img"
+            />
+            <ImageSelectorInput source="img1" folderPath="Article/img1" />
+            <ImageSelectorInput source="img2" folderPath="Article/img2" />
 
             {/* Only show is_active and status for admin and team_lead */}
             {!isContentWriter && (

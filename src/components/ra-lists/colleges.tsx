@@ -125,9 +125,9 @@ export const CollegeEdit = () => (
       <TextInput source="location" multiline validate={required()} />
       <TextInput source="email" multiline />
       <TextInput source="contact" multiline />
-      <ImageSelectorInput source="logo_url" />
-      <ImageSelectorInput source="bg_url" />
-      <ImageSelectorInput source="media_url" />
+      <ImageSelectorInput source="logo_url" folderPath="colleges/logo_url" />
+      <ImageSelectorInput source="bg_url" folderPath="colleges/bg_url" />
+      <ImageSelectorInput source="media_url" folderPath="colleges/media_url" />
       <NumberInput min={0} max={5} step={"any"} source="rating" />
       <NumberInput min={0} max={999} source="score" />
       <DateTimeInput source="createdAt" disabled />
@@ -172,7 +172,7 @@ export const CollegeEdit = () => (
         ]}
       />
       <NumberInput source="avg_fees_in_aud" />
-      <ImageSelectorInput source="brochure_url" />
+      <ImageSelectorInput source="brochure_url" folderPath="colleges/brochure_url" />
       <TextInput source="search_names" />
       <TextInput source="address" />
       <NumberInput source="established" label="Established (YYYY)" />
@@ -194,7 +194,7 @@ export const CollegeEdit = () => (
       <TextInput source="canonical_url" multiline />
       <TextInput source="slug" multiline validate={required()} />
       <TextInput source="meta_desc" multiline />
-      <ImageSelectorInput source="og_img" />
+      <ImageSelectorInput source="og_img" folderPath="colleges/og_img" />
     </SimpleForm>
   </Edit>
 );
@@ -207,13 +207,13 @@ export const CollegeCreate = () => (
       <TextInput source="slug" multiline validate={required()} />
       <TextInput source="email" multiline />
       <TextInput source="contact" multiline />
-      <ImageSelectorInput source="logo_url" />
-      <ImageSelectorInput source="bg_url" />
-      <ImageSelectorInput source="media_url" />
+      <ImageSelectorInput source="logo_url" folderPath="colleges/logo_url" />
+      <ImageSelectorInput source="bg_url" folderPath="colleges/bg_url" />
+      <ImageSelectorInput source="media_url" folderPath="colleges/media_url" />
       <NumberInput min={0} max={10} source="rating" />
       <NumberInput min={0} max={999} source="score" />
       <TextInput source="meta_desc" multiline />
-      <ImageSelectorInput source="og_img" />
+      <ImageSelectorInput source="og_img" folderPath="colleges/og_img" />
       <NumberInput min={0} max={100} source="acceptance_rate" />
       <DateTimeInput source="intake_start_date" label="Intake start date" />
       <NumberInput step={"any"} source="international_student_rate" />
@@ -233,7 +233,7 @@ export const CollegeCreate = () => (
         validate={required()}
       ></SelectInput>
       <NumberInput source="avg_fees_in_aud" />
-      <ImageSelectorInput source="brochure_url" />
+      <ImageSelectorInput source="brochure_url" folderPath="colleges/brochure_url" />
       <TextInput source="search_names" />
       <TextInput source="address" />
       <ReferenceInput source="parent_college_id" reference="colleges">

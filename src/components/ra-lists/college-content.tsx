@@ -116,14 +116,14 @@ export const CollegeswiseContentEdit = () => {
               validate={required()}
             />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" />
+            <ImageSelectorInput source="og_img" folderPath="collegeswise-content/og_img" />
             <ReferenceInput source="college_id" reference="colleges">
               <AutocompleteInput validate={required()} />
             </ReferenceInput>
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="banner_img" folderPath="collegeswise-content/banner_img" />
+            <ImageSelectorInput source="img1" folderPath="collegeswise-content/img1" />
+            <ImageSelectorInput source="img2" folderPath="collegeswise-content/img2" />
 
             {/* Only show is_active and status for admin and team_lead */}
 
@@ -172,7 +172,7 @@ export const CollegeswiseContentCreate = () => {
               validate={required()}
             />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" />
+            <ImageSelectorInput source="og_img" folderPath="collegeswise-content/og_img" />
             <ReferenceInput source="college_id" reference="colleges">
               <AutocompleteInput
                 optionText={"college_name"}
@@ -180,9 +180,9 @@ export const CollegeswiseContentCreate = () => {
               />
             </ReferenceInput>
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" />
-            <ImageSelectorInput source="img1" />
-            <ImageSelectorInput source="img2" />
+            <ImageSelectorInput source="banner_img" folderPath="collegeswise-content/banner_img" />
+            <ImageSelectorInput source="img1" folderPath="collegeswise-content/img1" />
+            <ImageSelectorInput source="img2" folderPath="collegeswise-content/img2" />
 
             {/* Only show is_active and status for admin and team_lead */}
 
