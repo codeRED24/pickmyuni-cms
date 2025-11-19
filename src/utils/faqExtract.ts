@@ -30,6 +30,18 @@ export const processContent = (htmlContent: string, fromFaq = false) => {
       const headingElement = firstFaqItem.prevAll(subTitleSelector).first();
       heading = headingElement.text().trim();
       headingElement.remove();
+    } else {
+      // Fallback: Check for the first h4.ques followed by a p.ans
+      const allH4 = $("h4.ques");
+      for (let i = 0; i < allH4.length; i++) {
+        const h4 = $(allH4[i]);
+        if (h4.next().is("p.ans")) {
+          const headingElement = h4.prevAll(subTitleSelector).first();
+          heading = headingElement.text().trim();
+          headingElement.remove();
+          break;
+        }
+      }
     }
   }
 
@@ -56,6 +68,25 @@ export const processContent = (htmlContent: string, fromFaq = false) => {
 
   // Remove FAQ items from the document for clean HTML rendering
   faqItems.remove();
+
+  // New logic: Extract FAQs from standalone h4.ques + p.ans pairs
+  $("h4.ques").each((_, element) => {
+    const $h4 = $(element);
+    const $next = $h4.next();
+    if ($next.is("p.ans")) {
+      const question = $h4.text().trim();
+      const answer = $next.text().trim();
+      if (question && answer) {
+        faqs.push({
+          question,
+          answer,
+          id: faqs.length,
+        });
+        $h4.remove();
+        $next.remove();
+      }
+    }
+  });
 
   // Get the cleaned HTML without FAQ items
   const cleanedHTML = $("body").html() || "";
