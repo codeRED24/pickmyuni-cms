@@ -3,19 +3,22 @@ import { useInput, useGetIdentity } from "ra-core";
 import JoditEditor, { Jodit } from "jodit-react";
 import { useRef, useMemo } from "react";
 
-const configureFaqPlugin = (jodit: any) => {
-  // Add control definition for the FAQ button
-  jodit.options.controls.faq = {
-    icon: "📝", // Simple icon
-    tooltip: "Insert FAQ Item",
+const configureQuestionPlugin = (jodit: any) => {
+  jodit.options.controls.question = {
+    icon: "❓",
+    tooltip: "Insert Question",
     exec: (editor: any) => {
-      // HTML to insert at cursor position
-      const faqHTML = `<div class="faq-item">
-        <h4>What's your question?</h4>
-        <p>Your answer goes here.</p>
-      </div>
-      <br />`;
-      editor.s.insertHTML(faqHTML);
+      editor.s.insertHTML('<h4 class="ques">Question</h4>');
+    },
+  };
+};
+
+const configureAnswerPlugin = (jodit: any) => {
+  jodit.options.controls.answer = {
+    icon: "💡",
+    tooltip: "Insert Answer",
+    exec: (editor: any) => {
+      editor.s.insertHTML('<p class="ans">Answer</p>');
     },
   };
 };
@@ -37,7 +40,8 @@ const configureClearCssPlugin = (jodit: any) => {
 
 // Register the plugin
 if (typeof Jodit !== "undefined") {
-  Jodit.plugins.add("faq", configureFaqPlugin);
+  Jodit.plugins.add("question", configureQuestionPlugin);
+  Jodit.plugins.add("answer", configureAnswerPlugin);
   Jodit.plugins.add("clearCss", configureClearCssPlugin);
 }
 
@@ -66,14 +70,17 @@ const JoditInput = (props: any) => {
     const defaultButtons = normalizeButtons(defaultButtonsRaw);
 
     // Merge default buttons and our custom insertFAQ, avoiding duplicates
-    const buttons = Array.from(new Set([...defaultButtons, "faq", "clearCss"]));
+    const buttons = Array.from(
+      new Set([...defaultButtons, "question", "answer", "clearCss"])
+    );
 
     // Preserve any default extraPlugins
     const defaultExtra = defaultOptions.extraPlugins || [];
     const extraPlugins = Array.from(
       new Set([
         ...(Array.isArray(defaultExtra) ? defaultExtra : [defaultExtra]),
-        "faq",
+        "question",
+        "answer",
         "clearCss",
       ])
     );
@@ -103,7 +110,7 @@ const JoditInput = (props: any) => {
       ref={editor}
       value={field.value}
       config={config}
-      onBlur={() => {}}
+      onBlur={() => { }}
       onChange={(newContent) => field.onChange(newContent)}
     />
   );
