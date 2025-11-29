@@ -50,10 +50,8 @@ const silosChoices = [
 
 const collegeContentFilters = [
   <SearchInput source="q" alwaysOn />,
+  <NumberInput source="college_id" />,
   <BooleanInput source="is_active" />,
-  <ReferenceInput source="college_id" reference="colleges" label="College">
-    <AutocompleteInput optionText={"college_name"} />
-  </ReferenceInput>,
   <SelectInput source="silos" choices={silosChoices} />,
   <StatusSelect />,
 ];
@@ -116,14 +114,29 @@ export const CollegeswiseContentEdit = () => {
               validate={required()}
             />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" folderPath="collegeswise-content/og_img" />
+            <ImageSelectorInput
+              source="og_img"
+              folderPath="collegeswise-content/og_img"
+            />
             <ReferenceInput source="college_id" reference="colleges">
-              <AutocompleteInput validate={required()} />
+              <AutocompleteInput
+                optionText={(record) => `${record.id} - ${record.college_name}`}
+                validate={required()}
+              />
             </ReferenceInput>
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" folderPath="collegeswise-content/banner_img" />
-            <ImageSelectorInput source="img1" folderPath="collegeswise-content/img1" />
-            <ImageSelectorInput source="img2" folderPath="collegeswise-content/img2" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="collegeswise-content/banner_img"
+            />
+            <ImageSelectorInput
+              source="img1"
+              folderPath="collegeswise-content/img1"
+            />
+            <ImageSelectorInput
+              source="img2"
+              folderPath="collegeswise-content/img2"
+            />
 
             {/* Only show is_active and status for admin and team_lead */}
 
@@ -134,9 +147,9 @@ export const CollegeswiseContentEdit = () => {
               </>
             )}
 
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
             <TextInput source="keywords" />
             <TextInput source="canonical_url" />
           </div>
@@ -172,17 +185,29 @@ export const CollegeswiseContentCreate = () => {
               validate={required()}
             />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" folderPath="collegeswise-content/og_img" />
+            <ImageSelectorInput
+              source="og_img"
+              folderPath="collegeswise-content/og_img"
+            />
             <ReferenceInput source="college_id" reference="colleges">
               <AutocompleteInput
-                optionText={"college_name"}
+                optionText={(record) => `${record.id} - ${record.college_name}`}
                 validate={required()}
               />
             </ReferenceInput>
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" folderPath="collegeswise-content/banner_img" />
-            <ImageSelectorInput source="img1" folderPath="collegeswise-content/img1" />
-            <ImageSelectorInput source="img2" folderPath="collegeswise-content/img2" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="collegeswise-content/banner_img"
+            />
+            <ImageSelectorInput
+              source="img1"
+              folderPath="collegeswise-content/img1"
+            />
+            <ImageSelectorInput
+              source="img2"
+              folderPath="collegeswise-content/img2"
+            />
 
             {/* Only show is_active and status for admin and team_lead */}
 
@@ -193,9 +218,9 @@ export const CollegeswiseContentCreate = () => {
               </>
             )}
 
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
             <TextInput source="keywords" />
             <TextInput source="canonical_url" />
           </div>

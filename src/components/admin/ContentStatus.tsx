@@ -24,6 +24,7 @@ import {
   CheckCircle,
   Calendar,
   Trash2,
+  ClipboardList,
 } from "lucide-react";
 import { NumberTicker } from "../ui/number-ticker";
 import { JSX } from "react";
@@ -53,6 +54,7 @@ const resourceMap: { [key: string]: string } = {
   collegesCourses: "colleges-courses",
   collegewiseContent: "collegeswise-content",
   courses: "courses",
+  exams: "exams",
   city: "cities",
   state: "states",
   stream: "streams",
@@ -63,6 +65,7 @@ const ICONS_MAP: Record<string, JSX.Element> = {
   collegesCourses: <BookMarked />,
   collegewiseContent: <FileStack />,
   courses: <GraduationCap />,
+  exams: <ClipboardList />,
   city: <Building2 />,
   state: <Map />,
   stream: <Workflow />,
@@ -210,7 +213,7 @@ const ContentStatus = () => {
                     <YAxis />
                     <ChartTooltip
                       cursor={false}
-                      content={<ChartTooltipContent hideLabel />}
+                      content={<ChartTooltipContent />}
                     />
                     <ChartLegend content={<ChartLegendContent />} />
 

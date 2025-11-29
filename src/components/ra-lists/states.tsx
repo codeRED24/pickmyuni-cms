@@ -5,7 +5,13 @@ import { DateField } from "@/components/admin/date-field";
 import { NumberField } from "@/components/admin/number-field";
 import { RecordField } from "@/components/admin/record-field";
 import { Show } from "@/components/admin/show";
-import { Create, NumberInput, TextField } from "../admin";
+import {
+  AutocompleteInput,
+  Create,
+  NumberInput,
+  ReferenceInput,
+  TextField,
+} from "../admin";
 import { LiveStatePreview, StaticStatePreview } from "../states/StatePreview";
 import { PreviewButton } from "../shared/PreviewButton";
 import { BooleanInput } from "@/components/admin/boolean-input";
@@ -122,12 +128,15 @@ export const StateEdit = () => {
             <TextInput source="slug" validate={required()} />
             <JoditInput source="content" />
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" folderPath="states/banner_img" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="states/banner_img"
+            />
             <ImageSelectorInput source="img1" folderPath="states/img1" />
             <ImageSelectorInput source="img2" folderPath="states/img2" />
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
             <TextInput source="keywords" />
             <TextInput source="canonical_url" />
 
@@ -167,12 +176,15 @@ export const StateCreate = () => {
             <TextInput source="slug" validate={required()} />
             <JoditInput source="content" />
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" folderPath="states/banner_img" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="states/banner_img"
+            />
             <ImageSelectorInput source="img1" folderPath="states/img1" />
             <ImageSelectorInput source="img2" folderPath="states/img2" />
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
             <TextInput source="keywords" />
             <TextInput source="canonical_url" />
 

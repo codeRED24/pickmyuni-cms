@@ -31,7 +31,9 @@ const promotionalCourseFilters = [
   <BooleanInput source="higher_education" />,
   <BooleanInput source="trade_courses" />,
   <ReferenceInput source="college_id" reference="colleges">
-    <AutocompleteInput optionText={"college_name"} />
+    <AutocompleteInput
+      optionText={(record) => `${record.id} - ${record.college_name}`}
+    />
   </ReferenceInput>,
   <SelectInput
     source="course_type"
@@ -93,7 +95,9 @@ export const PromotionalCourseEdit = () => (
       <TextInput disabled source="id" />
       <TextInput source="course_name" validate={required()} />
       <ReferenceInput source="college_id" reference="colleges">
-        <AutocompleteInput optionText={"college_name"} />
+        <AutocompleteInput
+          optionText={(record) => `${record.id} - ${record.college_name}`}
+        />
       </ReferenceInput>
       <TextInput source="level" />
       <TextInput source="duration" />
@@ -129,7 +133,9 @@ export const PromotionalCourseCreate = () => (
     <SimpleForm>
       <TextInput source="course_name" validate={required()} />
       <ReferenceInput source="college_id" reference="colleges">
-        <AutocompleteInput optionText={"college_name"} />
+        <AutocompleteInput
+          optionText={(record) => `${record.id} - ${record.college_name}`}
+        />
       </ReferenceInput>
       <TextInput source="level" />
       <TextInput source="duration" />

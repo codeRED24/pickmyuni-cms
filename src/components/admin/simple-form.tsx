@@ -48,6 +48,7 @@ export const FormToolbar = ({
     "cities",
     "states",
     "streams",
+    "exams",
   ];
 
   // Map resource names to content types for the API
@@ -59,6 +60,7 @@ export const FormToolbar = ({
     cities: "city",
     states: "state",
     streams: "stream",
+    exams: "exams",
   };
 
   // Check if resource supports approval workflow

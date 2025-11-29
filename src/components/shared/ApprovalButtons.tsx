@@ -21,7 +21,8 @@ interface ApprovalButtonsProps {
     | "city"
     | "state"
     | "stream"
-    | "specialization";
+    | "specialization"
+    | "exam";
   disabled?: boolean;
 }
 

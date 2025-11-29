@@ -183,9 +183,9 @@ export const ArticleEdit = () => {
 
             <TextInput multiline source="keywords" />
             <TextInput multiline source="metatitle" />
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
           </div>
           <div className="w-1/2 flex flex-col sticky top-24 self-start">
             <div className="flex items-center justify-between mb-4 flex-shrink-0">
@@ -227,9 +227,9 @@ export const ArticleCreate = () => {
             <TextInput source="meta_desc" multiline />
             <TextInput source="metatitle" multiline />
             <TextInput source="keywords" multiline />
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput optionText="name" validate={required()} />
-            </ReferenceInput> */}
+            </ReferenceInput>
             <NumberInput source="score" />
             <ImageSelectorInput source="og_img" folderPath="Article/og_img" />
             <ImageSelectorInput

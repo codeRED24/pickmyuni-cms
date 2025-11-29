@@ -141,7 +141,10 @@ export const CourseEdit = () => {
             <ReferenceInput source="streamId" reference="streams">
               <AutocompleteInput validate={required()} />
             </ReferenceInput>
-            <ImageSelectorInput source="banner_img" folderPath="courses/banner_img" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="courses/banner_img"
+            />
             <ImageSelectorInput source="img1" folderPath="courses/img1" />
             <ImageSelectorInput source="img2" folderPath="courses/img2" />
             <TextInput source="slug" />
@@ -155,9 +158,9 @@ export const CourseEdit = () => {
               </>
             )}
 
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
             <TextInput source="keywords" />
             <TextInput source="canonical_url" />
           </div>
@@ -196,7 +199,10 @@ export const CourseCreate = () => {
             <ReferenceInput source="streamId" reference="streams">
               <AutocompleteInput validate={required()} />
             </ReferenceInput>
-            <ImageSelectorInput source="banner_img" folderPath="courses/banner_img" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="courses/banner_img"
+            />
             <ImageSelectorInput source="img1" folderPath="courses/img1" />
             <ImageSelectorInput source="img2" folderPath="courses/img2" />
             <TextInput source="slug" />
@@ -208,9 +214,9 @@ export const CourseCreate = () => {
                 <StatusSelect />
               </>
             )}
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
             <TextInput source="keywords" />
             <TextInput source="canonical_url" />
           </div>

@@ -29,6 +29,7 @@ import StatusSelect from "../shared/ArticleSTatusSelect";
 
 const collegeFilters = [
   <SearchInput source="q" alwaysOn />,
+  <NumberInput source="id" />,
   <BooleanInput source="is_active" />,
   <BooleanInput source="is_parent" />,
   <BooleanInput source="pr_pathway" />,
@@ -45,7 +46,9 @@ const collegeFilters = [
     <AutocompleteInput />
   </ReferenceInput>,
   <ReferenceInput source="parent_college_id" reference="colleges">
-    <AutocompleteInput optionText={"college_name"} />
+    <AutocompleteInput
+      optionText={(record) => `${record.id} - ${record.college_name}`}
+    />
   </ReferenceInput>,
   <SelectInput
     source="type"
@@ -151,7 +154,9 @@ export const CollegeEdit = () => (
         validate={required()}
       ></SelectInput>
       <ReferenceInput source="parent_college_id" reference="colleges">
-        <AutocompleteInput optionText={"college_name"} />
+        <AutocompleteInput
+          optionText={(record) => `${record.id} - ${record.college_name}`}
+        />
       </ReferenceInput>
       <SelectInput
         source="type"
@@ -172,7 +177,10 @@ export const CollegeEdit = () => (
         ]}
       />
       <NumberInput source="avg_fees_in_aud" />
-      <ImageSelectorInput source="brochure_url" folderPath="colleges/brochure_url" />
+      <ImageSelectorInput
+        source="brochure_url"
+        folderPath="colleges/brochure_url"
+      />
       <TextInput source="search_names" />
       <TextInput source="address" />
       <NumberInput source="established" label="Established (YYYY)" />
@@ -233,11 +241,16 @@ export const CollegeCreate = () => (
         validate={required()}
       ></SelectInput>
       <NumberInput source="avg_fees_in_aud" />
-      <ImageSelectorInput source="brochure_url" folderPath="colleges/brochure_url" />
+      <ImageSelectorInput
+        source="brochure_url"
+        folderPath="colleges/brochure_url"
+      />
       <TextInput source="search_names" />
       <TextInput source="address" />
       <ReferenceInput source="parent_college_id" reference="colleges">
-        <AutocompleteInput optionText={"college_name"} />
+        <AutocompleteInput
+          optionText={(record) => `${record.id} - ${record.college_name}`}
+        />
       </ReferenceInput>
       <NumberInput source="established" label="Established (YYYY)" />
       <TextInput source="intake" />
