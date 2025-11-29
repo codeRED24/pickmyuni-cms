@@ -1,7 +1,16 @@
 import { DataTable } from "@/components/admin/data-table";
 import { List } from "@/components/admin/list";
 import { ReferenceField } from "@/components/admin/reference-field";
-import { Create, NumberInput, SelectInput, TextField } from "../admin";
+import {
+  Create,
+  NumberInput,
+  SelectInput,
+  TextField,
+  SearchInput,
+  FilterButton,
+  ExportButton,
+  CreateButton,
+} from "../admin";
 import { AutocompleteInput } from "@/components/admin/autocomplete-input";
 import { BooleanInput } from "@/components/admin/boolean-input";
 import { Edit } from "@/components/admin/edit";
@@ -38,8 +47,24 @@ const collegeCourseLevel = [
   { id: "advanced_diploma", name: "advanced_diploma" },
 ];
 
+const collegeCourseFilters = [
+  <SearchInput source="q" alwaysOn />,
+  <NumberInput source="college_id" />,
+  <BooleanInput source="is_active" />,
+  <SelectInput source="level" choices={collegeCourseLevel} />,
+  <StatusSelect />,
+];
+
+const CollegesCourseListActions = () => (
+  <div className="flex items-center gap-2">
+    <FilterButton />
+    <ExportButton />
+    <CreateButton />
+  </div>
+);
+
 export const CollegesCourseList = () => (
-  <List>
+  <List filters={collegeCourseFilters} actions={<CollegesCourseListActions />}>
     <DataTable>
       <DataTable.Col source="id" />
       <DataTable.Col source="name" />
@@ -96,11 +121,17 @@ export const CollegesCourseEdit = () => {
             <NumberInput source="one_time_fees" />
             <NumberInput source="other_fees" />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" folderPath="colleges-courses/og_img" />
+            <ImageSelectorInput
+              source="og_img"
+              folderPath="colleges-courses/og_img"
+            />
             {/* <TextInput source="createdAt" />
         <TextInput source="updatedAt" /> */}
             <ReferenceInput source="college_id" reference="colleges">
-              <AutocompleteInput />
+              <AutocompleteInput
+                optionText={(record) => `${record.id} - ${record.college_name}`}
+                validate={required()}
+              />
             </ReferenceInput>
             <ReferenceInput source="course_id" reference="courses">
               <AutocompleteInput optionText={"course_name"} />
@@ -117,9 +148,9 @@ export const CollegesCourseEdit = () => {
             <NumberInput source="domestic_fees_in_aud" />
             <NumberInput source="domestic_non_tution_fees" />
             <NumberInput source="domestic_total_fees" />
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
             {/* <TextInput source="last_date" /> */}
             {/* <NumberInput source="offered_domestic_fees" />
             <NumberInput source="offered_int_fees" /> */}
@@ -172,11 +203,17 @@ export const CollegesCourseCreate = () => {
             <NumberInput source="one_time_fees" />
             <NumberInput source="other_fees" />
             <TextInput source="meta_desc" />
-            <ImageSelectorInput source="og_img" folderPath="colleges-courses/og_img" />
+            <ImageSelectorInput
+              source="og_img"
+              folderPath="colleges-courses/og_img"
+            />
             {/* <TextInput source="createdAt" />
         <TextInput source="updatedAt" /> */}
             <ReferenceInput source="college_id" reference="colleges">
-              <AutocompleteInput validate={[required()]} />
+              <AutocompleteInput
+                optionText={(record) => `${record.id} - ${record.college_name}`}
+                validate={required()}
+              />
             </ReferenceInput>
             <ReferenceInput source="course_id" reference="courses">
               <AutocompleteInput
@@ -196,9 +233,9 @@ export const CollegesCourseCreate = () => {
             <NumberInput source="domestic_fees_in_aud" />
             <NumberInput source="domestic_non_tution_fees" />
             <NumberInput source="domestic_total_fees" />
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
+            </ReferenceInput>
             {/* <TextInput source="last_date" /> */}
             {/* <NumberInput source="offered_domestic_fees" />
             <NumberInput source="offered_int_fees" /> */}

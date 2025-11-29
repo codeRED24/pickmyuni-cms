@@ -28,7 +28,10 @@ const reviewFilters = [
     <AutocompleteInput optionText={"name"} />
   </ReferenceInput>,
   <ReferenceInput source="college_id" reference="colleges">
-    <AutocompleteInput optionText={"college_name"} />
+    <AutocompleteInput
+      optionText={(record) => `${record.id} - ${record.college_name}`}
+      validate={required()}
+    />
   </ReferenceInput>,
   <SelectInput
     source="status"
@@ -79,7 +82,10 @@ export const ReviewEdit = () => (
         <AutocompleteInput optionText={"name"} validate={required()} />
       </ReferenceInput>
       <ReferenceInput source="college_id" reference="colleges">
-        <AutocompleteInput optionText={"college_name"} validate={required()} />
+        <AutocompleteInput
+          optionText={(record) => `${record.id} - ${record.college_name}`}
+          validate={required()}
+        />
       </ReferenceInput>
       <TextInput source="review_title" />
       <NumberInput source="overall_satisfaction_rating" min={1} max={5} />

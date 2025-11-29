@@ -142,7 +142,10 @@ export const StreamEdit = () => {
             <TextInput source="createdAt" disabled />
             <TextInput source="updatedAt" disabled />
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" folderPath="streams/banner_img" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="streams/banner_img"
+            />
             <ImageSelectorInput source="img1" folderPath="streams/img1" />
             <ImageSelectorInput source="img2" folderPath="streams/img2" />
 
@@ -153,6 +156,9 @@ export const StreamEdit = () => {
                 <StatusSelect />
               </>
             )}
+            <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput>
 
             <TextInput source="keywords" />
             <TextInput source="canonical_url" />
@@ -185,7 +191,10 @@ export const StreamCreate = () => {
             <TextInput source="slug" validate={required()} />
             <JoditInput source="content" />
             <NumberInput source="score" />
-            <ImageSelectorInput source="banner_img" folderPath="streams/banner_img" />
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="streams/banner_img"
+            />
             <ImageSelectorInput source="img1" folderPath="streams/img1" />
             <ImageSelectorInput source="img2" folderPath="streams/img2" />
 
@@ -196,6 +205,9 @@ export const StreamCreate = () => {
                 <StatusSelect />
               </>
             )}
+            <ReferenceInput source="author_id" reference="authors">
+              <AutocompleteInput />
+            </ReferenceInput>
 
             <TextInput source="keywords" />
             <TextInput source="canonical_url" />

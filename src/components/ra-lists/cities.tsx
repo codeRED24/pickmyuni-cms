@@ -92,10 +92,13 @@ export const CityEdit = () => {
             <ReferenceInput source="state_id" reference="states">
               <AutocompleteInput />
             </ReferenceInput>
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
-            <ImageSelectorInput source="banner_img" folderPath="cities/banner_img" />
+            </ReferenceInput>
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="cities/banner_img"
+            />
             <ImageSelectorInput source="img1" folderPath="cities/img1" />
             <ImageSelectorInput source="img2" folderPath="cities/img2" />
             <TextInput source="keywords" multiline />
@@ -144,10 +147,13 @@ export const CityCreate = () => {
             <ReferenceInput source="state_id" reference="states">
               <AutocompleteInput />
             </ReferenceInput>
-            {/* <ReferenceInput source="author_id" reference="authors">
+            <ReferenceInput source="author_id" reference="authors">
               <AutocompleteInput />
-            </ReferenceInput> */}
-            <ImageSelectorInput source="banner_img" folderPath="cities/banner_img" />
+            </ReferenceInput>
+            <ImageSelectorInput
+              source="banner_img"
+              folderPath="cities/banner_img"
+            />
             <ImageSelectorInput source="img1" folderPath="cities/img1" />
             <ImageSelectorInput source="img2" folderPath="cities/img2" />
             <TextInput source="keywords" multiline />

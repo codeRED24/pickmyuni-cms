@@ -1,4 +1,6 @@
-import { Admin } from "@/components/admin";
+import {
+  Admin,
+} from "@/components/admin";
 import authProvider from "./auth/authProvider";
 import { Resource, CustomRoutes } from "ra-core";
 import { Dashboard } from "@/components/admin/Dashboard";
@@ -127,6 +129,12 @@ import {
   ExamShow,
 } from "./components/ra-lists/exams";
 import ExamPreviewPage from "./components/exams/ExamPreviewPage";
+import {
+  CollegeMediaCreate,
+  CollegeMediaEdit,
+  CollegeMediaList,
+  CollegeMediaShow,
+} from "./components/ra-lists/collegeMedia";
 
 const queryClient = new QueryClient();
 
@@ -319,6 +327,14 @@ export default function App() {
         list={LeadFormList}
         show={LeadFormShow}
         icon={FileText}
+      />
+      <Resource
+        name="college-media"
+        list={CollegeMediaList}
+        edit={CollegeMediaEdit}
+        create={CollegeMediaCreate}
+        show={CollegeMediaShow}
+        icon={FileBadge}
       />
       <Resource name="users" list={UserList} show={UserShow} icon={Users} />
     </Admin>
